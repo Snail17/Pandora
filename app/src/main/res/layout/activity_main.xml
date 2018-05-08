@@ -17,9 +17,10 @@
     <com.pandora.model.main.widget.BottomBarLayout
         android:id="@+id/main_bottom_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         app:text_color="#000"
-        app:text_select_color="#E90615"
+        android:background="#ebebeb"
+        app:text_select_color="#00AAEE"
         />
 
 
