@@ -1,10 +1,10 @@
 package com.pandora.model.main.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
+import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.FragmentUtil;
 import com.pandora.model.main.bean.TabEntity;
 import com.pandora.model.main.fragment.HomeFragment;
@@ -34,6 +34,8 @@ public class MainActivity extends BaseActivity {
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
 
+    private BaseFragment oldFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +52,8 @@ public class MainActivity extends BaseActivity {
 
     public void initData() {
         initBottomBar();
+        homeFragment = new HomeFragment();
+        oldFragment = homeFragment;
         switchFragment(HOME_INDEX);
     }
 
@@ -80,25 +84,35 @@ public class MainActivity extends BaseActivity {
                 if (homeFragment == null) {
                     homeFragment = new HomeFragment();
                 }
-                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, homeFragment);
+//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, homeFragment);
+                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, homeFragment);
+                oldFragment = homeFragment;
                 break;
             case WELFARE_INDEX:
                 if (welfareFragment == null) {
                     welfareFragment = new WelfareFragment();
                 }
-                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, welfareFragment);
+//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, welfareFragment);
+                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, welfareFragment);
+
+                oldFragment = welfareFragment;
                 break;
             case PURCHSE_INDEX:
                 if (purchaseFragment == null) {
                     purchaseFragment = new PurchaseFragment();
                 }
-                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, purchaseFragment);
+//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, purchaseFragment);
+                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, purchaseFragment);
+
+                oldFragment = purchaseFragment;
                 break;
             case MY_INDEX:
                 if (myFragment == null) {
                     myFragment = new MyFragment();
                 }
-                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, myFragment);
+//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, myFragment);
+                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, myFragment);
+                oldFragment = myFragment;
                 break;
             default:
                 break;

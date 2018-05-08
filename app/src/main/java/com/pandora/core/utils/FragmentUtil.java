@@ -62,9 +62,11 @@ public class FragmentUtil {
                     .show(fragment)
                     .commit();
         } else {
-            fragmentManager.beginTransaction()
-//                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .hide(oldFragment)
+            FragmentTransaction transaction = fragmentManager.beginTransaction();
+            if (oldFragment != fragment) {
+                transaction.hide(oldFragment);
+            }
+            transaction
                     .add(containerViewId, fragment, fragment.getClass().getName())
                     .commit();
         }
@@ -126,12 +128,11 @@ public class FragmentUtil {
     }
 
     /**
-     *
      * @param fragmentManager s
-     * @param tag a
+     * @param tag             a
      * @return a
      */
-    public static boolean isVisibleFragment(FragmentManager fragmentManager, String tag){
+    public static boolean isVisibleFragment(FragmentManager fragmentManager, String tag) {
         return fragmentManager.findFragmentByTag("test01").isVisible();
     }
 
@@ -149,10 +150,9 @@ public class FragmentUtil {
     }*/
 
     /**
-     *
      * @return s
      */
-    public static Fragment currentFragment (){
-        return  FragManager.getAppManager().currentFragment();
+    public static Fragment currentFragment() {
+        return FragManager.getAppManager().currentFragment();
     }
 }
