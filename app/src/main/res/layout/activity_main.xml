@@ -5,11 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pandora.model.main.MainActivity">
+    tools:context="com.pandora.model.main.activity.MainActivity">
 
-    <Bottom
+
+    <FrameLayout
+        android:id="@+id/main_container_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.pandora.model.main.widget.BottomBarLayout
+        android:id="@+id/main_bottom_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:text_color="#000"
+        app:text_select_color="#E90615"
+        />
 
 
 </LinearLayout>

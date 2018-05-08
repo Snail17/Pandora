@@ -3,8 +3,19 @@
 1. 底部使用自定义的BottomLayout
 2. 首页切换四个Fragment
 3. 页面展示统一使用RecyclerView 之后统一使用一个库
-4. 注解使用Dragger2
+4. 注解使用Dagger2
 5. 数据库 先暂定 本地SP保存
 6. 视频 采用第三方视频播放， 快进 播放 暂停
 7. 统一的弹出框提示  自定义Toolbar
 8. 统一先不加动画
+
+
+1. base 底部按钮选择
+
+2. MVP 设计模式  联网框架  Dagger2 使用
+
+3.  自定义弹出框  自定义TitleBar RecyclerView 选型
+
+4. 界面搞定
+
+5. 视频播放 选用框架
