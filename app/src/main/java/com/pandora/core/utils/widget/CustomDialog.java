@@ -3,10 +3,13 @@ package com.pandora.core.utils.widget;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +36,15 @@ public class CustomDialog extends Dialog {
         super(context, cancelable, cancelListener);
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.gravity = Gravity.CENTER;
+        getWindow().setAttributes(params);
+    }
 
     public static class Builder {
         private Context context;
@@ -120,7 +132,7 @@ public class CustomDialog extends Dialog {
                     cancelBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            negativeButtonClickListener.onClick(mCustomDialog,  DialogInterface.BUTTON_NEGATIVE);
+                            negativeButtonClickListener.onClick(mCustomDialog, DialogInterface.BUTTON_NEGATIVE);
                         }
                     });
                 }
@@ -134,7 +146,7 @@ public class CustomDialog extends Dialog {
                     cancelBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            positiveButtonClickListener.onClick(mCustomDialog,  DialogInterface.BUTTON_POSITIVE);
+                            positiveButtonClickListener.onClick(mCustomDialog, DialogInterface.BUTTON_POSITIVE);
                         }
                     });
                 }

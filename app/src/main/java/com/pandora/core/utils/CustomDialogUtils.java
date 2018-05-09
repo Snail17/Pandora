@@ -9,7 +9,7 @@ import com.pandora.model.PandoraApplication;
  * Created by Administrator on 2018/5/9.
  */
 
-public class DialogUtils {
+public class CustomDialogUtils {
     /**
      * 使用 默认取消 确认按钮的 弹出框
      *
