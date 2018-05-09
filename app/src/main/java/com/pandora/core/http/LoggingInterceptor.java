@@ -1,7 +1,8 @@
 package com.pandora.core.http;
 
 
-import com.boc.gmsa.core.utils.LogUtils;
+
+import com.pandora.core.utils.LogUtils;
 
 import java.io.IOException;
 import java.nio.charset.Charset;

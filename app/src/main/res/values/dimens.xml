@@ -1,0 +1,40 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--default dimens-->
+    <dimen name="default_dimen_2">2dp</dimen>
+    <dimen name="default_dimen_4">4dp</dimen>
+    <dimen name="default_dimen_5">5dp</dimen>
+    <dimen name="default_dimen_8">8dp</dimen>
+    <dimen name="default_dimen_10">10dp</dimen>
+    <dimen name="default_dimen_13">13dp</dimen>
+    <dimen name="default_dimen_15">15dp</dimen>
+    <dimen name="default_dimen_20">20dp</dimen>
+    <dimen name="default_dimen_25">25dp</dimen>
+    <dimen name="default_dimen_30">30dp</dimen>
+    <dimen name="default_dimen_45">45dp</dimen>
+    <dimen name="default_dimen_50">50dp</dimen>
+    <dimen name="default_dimen_55">55dp</dimen>
+    <dimen name="default_dimen_60">60dp</dimen>
+    <dimen name="default_dimen_80">80dp</dimen>
+    <dimen name="default_dimen_31">31dp</dimen>
+    <dimen name="default_dimen_100">100dp</dimen>
+
+
+    <dimen name="default_sp_12">12sp</dimen>
+    <dimen name="default_sp_14">14sp</dimen>
+    <dimen name="default_sp_15">15sp</dimen>
+    <dimen name="default_sp_17">17sp</dimen>
+    <dimen name="default_sp_18">18sp</dimen>
+    <dimen name="default_sp_20">20dp</dimen>
+    <dimen name="default_sp_26">26dp</dimen>
+    <dimen name="default_sp_30">30dp</dimen>
+    <dimen name="default_sp_32">32dp</dimen>
+
+    <!--view size-->
+
+    <dimen name="default_view_width">0.5dp</dimen>
+    <dimen name="default_radius">4dp</dimen>
+</resources>
