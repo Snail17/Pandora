@@ -19,3 +19,10 @@
 5. 界面搞定
 
 6. 视频播放 选用框架
+
+后续计划：
+1. 依赖版本统一管理
+2. 动画添加
+
+### RecyclerView 封装 使用
+https://www.jianshu.com/p/b343fcff51b0
