@@ -1,8 +1,87 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white_f6"
+    android:orientation="vertical"
     tools:context="com.pandora.modular.main.fragment.MyFragment">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/default_dimen_150"
+        android:background="@drawable/bg_user_center_top">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/tv_mine_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_dimen_10"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_mine_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/default_dimen_10"
+            android:text="9889626848759285"
+            android:textColor="@color/white_ff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/default_dimen_10"
+            android:padding="@dimen/default_dimen_5"
+            android:text="账户到期时间"
+            android:textColor="@color/white_ff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/default_dimen_10"
+            android:padding="@dimen/default_dimen_5"
+            android:text="普通用户"
+            android:textColor="@color/white_ff" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_open_vip"
+        style="@style/FragmentMyItemStyle"
+        android:drawableLeft="@drawable/mine_icon_invite_friend"
+        android:drawableRight="@drawable/arrow_right"
+        android:text="开通会员" />
+
+
+    <TextView
+        android:id="@+id/tv_invite_friend"
+        style="@style/FragmentMyItemStyle"
+        android:drawableLeft="@drawable/mine_icon_invite_friend"
+        android:drawableRight="@drawable/arrow_right"
+        android:text="推广会员(分享3个不同群)" />
+
+    <TextView
+        android:id="@+id/tv_collect"
+        style="@style/FragmentMyItemStyle"
+        android:drawableLeft="@drawable/mine_icon_invite_friend"
+        android:drawableRight="@drawable/arrow_right"
+        android:text="申请代理" />
+
+    <TextView
+        android:id="@+id/tv_Sideslip"
+        style="@style/FragmentMyItemStyle"
+        android:drawableLeft="@drawable/mine_icon_invite_friend"
+        android:drawableRight="@drawable/arrow_right"
+        android:text="侧滑试试" />
+
+    <TextView
+        android:id="@+id/tv_our"
+        style="@style/FragmentMyItemStyle"
+        android:drawableLeft="@drawable/mine_icon_invite_friend"
+        android:drawableRight="@drawable/arrow_right"
+        android:text="在线客服" />
+
+</LinearLayout>

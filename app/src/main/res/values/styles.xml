@@ -20,4 +20,18 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:backgroundDimEnabled">true</item>
     </style>
+
+    <style name="FragmentMyItemStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/default_dimen_50</item>
+        <item name="android:gravity">center|left</item>
+        <item name="android:drawablePadding">@dimen/default_dimen_10</item>
+        <item name="android:paddingRight">@dimen/default_dimen_10</item>
+        <item name="android:paddingLeft">@dimen/default_dimen_10</item>
+        <item name="android:textColor">@color/black_32</item>
+        <item name="android:textSize">@dimen/default_sp_16</item>
+        <item name="android:layout_marginTop">@dimen/default_dimen_5</item>
+        <item name="android:layout_marginBottom">@dimen/default_dimen_5</item>
+        <item name="android:background">@color/white_ff</item>
+    </style>
 </resources>
