@@ -34,4 +34,13 @@
         <item name="android:layout_marginBottom">@dimen/default_dimen_5</item>
         <item name="android:background">@color/white_ff</item>
     </style>
+
+    <style name="TextViewMarquee">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:marqueeRepeatLimit">marquee_forever</item>
+        <item name="android:background">@color/gray_e6</item>
+    </style>
 </resources>

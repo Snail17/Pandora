@@ -25,7 +25,10 @@ public class HomeFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View ret = inflater.inflate(R.layout.fragment_home, container, false);
+        View tv = ret.findViewById(R.id.tv_home_top_introduce);
+        tv.setSelected(true);
+        return ret;
     }
 
 }

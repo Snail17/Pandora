@@ -85,6 +85,15 @@
             android:layout_marginTop="@dimen/default_dimen_20"
             android:background="@drawable/item_card_forever_button_selector" />
 
+        <TextView
+            android:id="@+id/tv_purchase_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_card_forever"
+            android:layout_marginTop="@dimen/default_dimen_20"
+            android:text="点击要购买的卡密类型，并在支付完成后复制卡密码粘贴到上方的卡密输入框，点击续费即可充值成功！有问题请联系客服哦！"
+            android:textColor="@color/gray_66"
+            android:textSize="@dimen/default_sp_14" />
     </RelativeLayout>
 
 
