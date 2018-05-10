@@ -70,12 +70,6 @@
         android:drawableRight="@drawable/arrow_right"
         android:text="申请代理" />
 
-    <TextView
-        android:id="@+id/tv_Sideslip"
-        style="@style/FragmentMyItemStyle"
-        android:drawableLeft="@drawable/mine_icon_invite_friend"
-        android:drawableRight="@drawable/arrow_right"
-        android:text="侧滑试试" />
 
     <TextView
         android:id="@+id/tv_our"

@@ -26,3 +26,12 @@
 
 ### RecyclerView 封装 使用
 https://www.jianshu.com/p/b343fcff51b0
+
+### 设置statusBar
+android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
+
+在Activity中添加如下code，需要放在setContentView前面。
+//设置statusbar的图标颜色高亮反转
+getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+//设置statusbar的颜色
+getWindow().setStatusBarColor(Color.parseColor("#f8f8f8")

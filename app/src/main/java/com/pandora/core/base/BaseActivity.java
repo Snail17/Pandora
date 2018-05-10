@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.pandora.R;
+
 /**
  * Created by Administrator on 2018/5/8.
  */
