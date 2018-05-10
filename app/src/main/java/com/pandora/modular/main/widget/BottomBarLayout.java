@@ -1,4 +1,4 @@
-package com.pandora.model.main.widget;
+package com.pandora.modular.main.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pandora.R;
-import com.pandora.model.main.bean.TabEntity;
+import com.pandora.modular.main.bean.TabEntity;
 
 import java.util.List;
 

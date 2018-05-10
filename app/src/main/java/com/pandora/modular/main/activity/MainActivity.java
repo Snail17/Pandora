@@ -1,4 +1,4 @@
-package com.pandora.model.main.activity;
+package com.pandora.modular.main.activity;
 
 import android.os.Bundle;
 
@@ -6,12 +6,12 @@ import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.FragmentUtil;
-import com.pandora.model.main.bean.TabEntity;
-import com.pandora.model.main.fragment.HomeFragment;
-import com.pandora.model.main.fragment.MyFragment;
-import com.pandora.model.main.fragment.PurchaseFragment;
-import com.pandora.model.main.fragment.WelfareFragment;
-import com.pandora.model.main.widget.BottomBarLayout;
+import com.pandora.modular.main.bean.TabEntity;
+import com.pandora.modular.main.fragment.HomeFragment;
+import com.pandora.modular.main.fragment.MyFragment;
+import com.pandora.modular.main.fragment.PurchaseFragment;
+import com.pandora.modular.main.fragment.WelfareFragment;
+import com.pandora.modular.main.widget.BottomBarLayout;
 
 import java.util.ArrayList;
 import java.util.List;

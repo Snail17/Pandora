@@ -3,7 +3,7 @@ package com.pandora.core.utils;
 import android.content.DialogInterface;
 
 import com.pandora.core.utils.widget.CustomDialog;
-import com.pandora.model.PandoraApplication;
+import com.pandora.modular.PandoraApplication;
 
 /**
  * Created by Administrator on 2018/5/9.

@@ -1,4 +1,4 @@
-package com.pandora.model.main.fragment;
+package com.pandora.modular.main.fragment;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import com.pandora.core.base.BaseFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyFragment extends BaseFragment {
+public class WelfareFragment extends BaseFragment {
 
 
-    public MyFragment() {
+    public WelfareFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class MyFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my, container, false);
+        return inflater.inflate(R.layout.fragment_welfare, container, false);
     }
 
 }

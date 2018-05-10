@@ -1,6 +1,6 @@
 package com.pandora.core.utils;
 
-import com.pandora.model.PandoraApplication;
+import com.pandora.modular.PandoraApplication;
 
 /**
  *

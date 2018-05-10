@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
-import com.pandora.model.PandoraApplication;
+import com.pandora.modular.PandoraApplication;
 
 import java.util.ArrayList;
 import java.util.List;

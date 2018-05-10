@@ -1,4 +1,4 @@
-package com.pandora.model.main.bean;
+package com.pandora.modular.main.bean;
 
 /**
  * Created by Administrator on 2018/5/8.

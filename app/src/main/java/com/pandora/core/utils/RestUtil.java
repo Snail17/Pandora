@@ -3,7 +3,7 @@ package com.pandora.core.utils;
 import android.text.TextUtils;
 
 import com.pandora.core.globle.SPConstants;
-import com.pandora.model.PandoraApplication;
+import com.pandora.modular.PandoraApplication;
 
 import okhttp3.Request;
 

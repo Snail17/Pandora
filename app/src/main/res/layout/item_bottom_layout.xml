@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.pandora.model.main.widget.TabItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.pandora.modular.main.widget.TabItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
@@ -20,4 +20,4 @@
         android:text="Home"
         android:textSize="12sp" />
 
-</com.pandora.model.main.widget.TabItemLayout>
+</com.pandora.modular.main.widget.TabItemLayout>

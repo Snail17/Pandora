@@ -1,4 +1,4 @@
-package com.pandora.model;
+package com.pandora.modular;
 
 import android.app.Application;
 

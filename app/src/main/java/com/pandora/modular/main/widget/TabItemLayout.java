@@ -1,4 +1,4 @@
-package com.pandora.model.main.widget;
+package com.pandora.modular.main.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
