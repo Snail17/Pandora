@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.pandora.modular.live.LiveBroadcastActivity">
+    tools:context="com.pandora.modular.live.activity.LiveBroadcastActivity">
 
     <com.pandora.core.utils.widget.CustomTitlebar
         android:id="@+id/title_bar_live"

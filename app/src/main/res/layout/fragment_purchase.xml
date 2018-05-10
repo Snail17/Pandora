@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:paddingLeft="@dimen/default_dimen_10"
     android:paddingRight="@dimen/default_dimen_10"
-    tools:context="com.pandora.modular.main.fragment.PurchaseFragment">
+    tools:context="com.pandora.modular.purchase.fragment.PurchaseFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -10,7 +10,6 @@ public class PandoraApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-
     }
 
     public static PandoraApplication getInstance() {

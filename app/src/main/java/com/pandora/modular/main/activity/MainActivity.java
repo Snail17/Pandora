@@ -7,10 +7,10 @@ import com.pandora.core.base.BaseActivity;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.FragmentUtil;
 import com.pandora.modular.main.bean.TabEntity;
-import com.pandora.modular.main.fragment.HomeFragment;
-import com.pandora.modular.main.fragment.MyFragment;
-import com.pandora.modular.main.fragment.PurchaseFragment;
-import com.pandora.modular.main.fragment.WelfareFragment;
+import com.pandora.modular.home.fragment.HomeFragment;
+import com.pandora.modular.mine.fragment.MyFragment;
+import com.pandora.modular.purchase.fragment.PurchaseFragment;
+import com.pandora.modular.Welfare.fragment.WelfareFragment;
 import com.pandora.modular.main.widget.BottomBarLayout;
 
 import java.util.ArrayList;

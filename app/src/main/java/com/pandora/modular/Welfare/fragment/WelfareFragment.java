@@ -1,7 +1,6 @@
-package com.pandora.modular.main.fragment;
+package com.pandora.modular.Welfare.fragment;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -14,10 +13,10 @@ import com.pandora.core.base.BaseFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment{
+public class WelfareFragment extends BaseFragment {
 
 
-    public HomeFragment() {
+    public WelfareFragment() {
         // Required empty public constructor
     }
 
@@ -26,10 +25,7 @@ public class HomeFragment extends BaseFragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View ret = inflater.inflate(R.layout.fragment_home, container, false);
-        View tv = ret.findViewById(R.id.tv_home_top_introduce);
-        tv.setSelected(true);
-        return ret;
+        return inflater.inflate(R.layout.fragment_welfare, container, false);
     }
 
 }

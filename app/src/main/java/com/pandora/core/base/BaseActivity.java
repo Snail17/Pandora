@@ -1,6 +1,7 @@
 package com.pandora.core.base;
 
 import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,7 +29,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         AppManager.getAppManager().addActivity(this);
         tid = Process.myTid();
         handler = new Handler();

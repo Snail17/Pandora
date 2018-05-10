@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/white_f6"
     android:orientation="vertical"
-    tools:context="com.pandora.modular.main.fragment.MyFragment">
+    tools:context="com.pandora.modular.mine.fragment.MyFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"

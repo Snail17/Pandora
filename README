@@ -35,3 +35,8 @@ android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
 getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 //设置statusbar的颜色
 getWindow().setStatusBarColor(Color.parseColor("#f8f8f8")
+
+
+### 所有的页面只能竖屏
+
+### annotationProcessor https://blog.csdn.net/u011315960/article/details/64441120

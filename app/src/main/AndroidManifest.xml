@@ -10,14 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme">
-        <activity
-            android:name=".modular.main.activity.MainActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".modular.main.activity.MainActivity">
 
         </activity>
-        <activity
-            android:name=".modular.live.LiveBroadcastActivity"
-            android:screenOrientation="portrait" >
+        <activity android:name=".modular.live.activity.LiveBroadcastActivity" />
+        <activity android:name=".modular.login.activity.LoginActivity" />
+        <activity android:name=".modular.splash.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

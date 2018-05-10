@@ -1,4 +1,4 @@
-package com.pandora.modular.live;
+package com.pandora.modular.live.activity;
 
 import android.os.Bundle;
 
