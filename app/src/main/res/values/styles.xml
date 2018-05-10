@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <!--<item name="colorPrimary">@color/colorPrimary</item>-->
         <item name="colorPrimaryDark">@color/blue_00</item>
@@ -21,6 +21,7 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
+    <!--我的 每个item的样式-->
     <style name="FragmentMyItemStyle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/default_dimen_50</item>
@@ -34,7 +35,7 @@
         <item name="android:layout_marginBottom">@dimen/default_dimen_5</item>
         <item name="android:background">@color/white_ff</item>
     </style>
-
+    <!--跑马灯样式-->
     <style name="TextViewMarquee">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -43,4 +44,12 @@
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
         <item name="android:background">@color/gray_e6</item>
     </style>
+
+    <!--横线-->
+    <style name="horizontal_line">
+        <item name="android:layout_height">0.5dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/gray_e6</item>
+    </style>
+
 </resources>
