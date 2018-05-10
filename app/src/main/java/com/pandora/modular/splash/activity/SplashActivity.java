@@ -42,6 +42,7 @@ public class SplashActivity extends BaseActivity {
             }
         }
     };
+    private Runnable mRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
         ButterKnife.bind(this);
         secondCount = SECOND;
-        Runnable r = new Runnable() {
+        mRunnable = new Runnable() {
             @Override
             public void run() {
                 Message message = Message.obtain();
@@ -62,7 +63,7 @@ public class SplashActivity extends BaseActivity {
                 mHandler.postDelayed(this, 1000);
             }
         };
-        mHandler.post(r);
+        mHandler.post(mRunnable);
     }
 
     @OnClick(R.id.tv_splash_time)
@@ -71,6 +72,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void goToMain() {
+        mHandler.removeCallbacks(mRunnable);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
