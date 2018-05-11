@@ -100,6 +100,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void setData(HomeBean data) {
         mHomeBean = data;
+        introduceText.setText(mHomeBean.getOnlineService());
         mHomeData.addAll(data.getData());
         mAdapter.notifyDataSetChanged();
     }

@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity {
     private List<TabEntity> mTabs;
     private int[] smallIcon = {R.drawable.icon_home_normal, R.drawable.icon_home_task_normal, R.drawable.icon_home_invite_normal, R.drawable.icon_home_person_normal};
     private int[] smallSelectIcon = {R.drawable.icon_home_pressed, R.drawable.icon_home_task_pressed, R.drawable.icon_home_invite_pressed, R.drawable.icon_home_person_pressed};
-    private String[] textList = {"首页", "福利", "购卡", "我的"};
+    private String[] textList = {"首页", "电影", "购卡", "我的"};
 
     private HomeFragment homeFragment;
     private WelfareFragment welfareFragment;

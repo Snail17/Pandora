@@ -43,6 +43,7 @@ public class HomeAPIPModel {
                 observable = sHomeService.getHomeData(params);
             } else {
                 HomeBean homeBean = new HomeBean();
+                homeBean.setOnlineService("有问题可以联系客服，联系客服，联系客服，联系客服，本软件无需注册即可登录");
                 List<HomeBean.HomeData> data = new ArrayList<>();
                 for (int i = 0; i < 36; i++) {
                     HomeBean.HomeData homeData = homeBean.new HomeData();

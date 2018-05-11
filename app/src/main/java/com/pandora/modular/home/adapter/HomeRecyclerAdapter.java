@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
+import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.fragment.HomeFragment;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
@@ -22,5 +24,7 @@ public class HomeRecyclerAdapter extends BaseQuickAdapter<HomeBean.HomeData, Hom
     protected void convert(HomeViewHolder helper, HomeBean.HomeData item) {
         helper.cardItemName.setText(item.getName());
         helper.cardItemCount.setText(item.getAnchor());
+        ImageLoaderUtils.displayRound(PandoraApplication.getInstance().getApplicationContext(),
+                helper.cardItemImage, item.getImage());
     }
 }

@@ -40,3 +40,7 @@ getWindow().setStatusBarColor(Color.parseColor("#f8f8f8")
 ### 所有的页面只能竖屏
 
 ### annotationProcessor https://blog.csdn.net/u011315960/article/details/64441120
+
+### 透明效果处理  https://blog.csdn.net/Memories_Code/article/details/72821775
+
+### Glide 引入包重复问题 以及 使用自定义的Modeule问题

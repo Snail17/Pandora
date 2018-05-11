@@ -3,6 +3,8 @@ package com.pandora.modular.live.adapter;
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
+import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.live.bean.LiveBean;
 
 import java.util.List;
@@ -21,5 +23,7 @@ public class LiveRecyclerAdapter extends BaseQuickAdapter<LiveBean.LiveData, Liv
     protected void convert(LiveViewHolder helper, LiveBean.LiveData item) {
         helper.cardItemCount.setText(item.getRtmp());
         helper.cardItemContent.setText(item.getName());
+        ImageLoaderUtils.display(PandoraApplication.getInstance().getApplicationContext(),
+                helper.cardItemImage, item.getImage());
     }
 }
