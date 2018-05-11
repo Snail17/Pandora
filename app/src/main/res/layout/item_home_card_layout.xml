@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="0.1dp"
+    android:background="@color/white_ff"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/default_dimen_5"
+    android:paddingTop="@dimen/default_dimen_5">
+
+    <ImageView
+        android:id="@+id/iv_home_card_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/tv_home_card_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="平台名字"
+        android:padding="@dimen/default_dimen_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/default_sp_12" />
+
+    <TextView
+        android:id="@+id/tv_home_card_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/item_home_count_bg"
+        android:drawableLeft="@drawable/home_play_count"
+        android:drawablePadding="@dimen/default_dimen_5"
+        android:padding="@dimen/default_dimen_5"
+        android:text="200"
+        android:textColor="@color/white_ff"
+        android:textSize="@dimen/default_sp_8" />
+
+</LinearLayout>

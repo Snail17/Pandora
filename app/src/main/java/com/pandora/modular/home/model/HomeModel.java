@@ -6,6 +6,9 @@ import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observable;
 
 /**
@@ -16,19 +19,30 @@ import io.reactivex.Observable;
 
 public class HomeModel {
 
-    public void getData(HomeVO params) {
-        Observable<HomeBean> observable = HomeAPIPModel.getInstance().getModelHomeData(params);
-        observable.subscribe(new BaseObserver<HomeBean>() {
-            @Override
-            public void onError(ExceptionHandle.ResponeThrowable e) {
+    public HomeBean getData(HomeVO params) {
+//        Observable<HomeBean> observable = HomeAPIPModel.getInstance().getModelHomeData(params);
+//        observable.subscribe(new BaseObserver<HomeBean>() {
+//            @Override
+//            public void onError(ExceptionHandle.ResponeThrowable e) {
+//                return;
+//            }
+//
+//            @Override
+//            public void onNext(HomeBean homeBean) {
+//
+//            }
+//        });
 
-            }
-
-            @Override
-            public void onNext(HomeBean homeBean) {
-
-            }
-        });
+        HomeBean homeBean = new HomeBean();
+        List<HomeBean.HomeData> data = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            HomeBean.HomeData homeData = homeBean.new HomeData();
+            homeData.setAnchor(2 * i + "");
+            homeData.setName("item" + i);
+            data.add(homeData);
+        }
+        homeBean.setData(data);
+        return homeBean;
     }
 
 }

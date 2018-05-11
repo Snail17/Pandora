@@ -51,7 +51,7 @@ public class HomeBean {
     private String price_forever;
     private String total; //   直播平台数量
 
-    class HomeData {
+    public  class HomeData {
         private String anchor; // 平台主播个数;
         private String bh;  // 平台编号
         private String image;// 平台图片路径
