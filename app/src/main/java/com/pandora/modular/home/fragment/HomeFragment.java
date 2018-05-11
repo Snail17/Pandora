@@ -44,6 +44,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @BindView(R.id.tv_home_top_introduce)
     TextView introduceText;
+    @BindView(R.id.tv_home_ad_notice)
+    TextView adNoticeTV;
 
 
     @BindView(R.id.recycler_home_view)
@@ -139,6 +141,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     public void setData(HomeBean data) {
         mHomeBean = data;
         introduceText.setText(mHomeBean.getOnlineService());
+        adNoticeTV.setText(mHomeBean.getaWords().get(0));
         mHomeData.addAll(data.getData());
         mAdapter.notifyDataSetChanged();
         update();

@@ -44,7 +44,7 @@
         <item name="android:singleLine">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
-        <item name="android:background">@color/gray_e6</item>
+        <item name="android:background">@color/transparent_gray_80</item>
     </style>
 
     <!--横线-->
