@@ -1,5 +1,4 @@
 package com.pandora.modular.home.bean;
-//初始化请求格式
 
 import java.util.List;
 

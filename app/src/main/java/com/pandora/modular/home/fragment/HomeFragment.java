@@ -1,7 +1,6 @@
 package com.pandora.modular.home.fragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,16 +12,20 @@ import android.widget.TextView;
 
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
-import com.pandora.modular.live.activity.LiveBroadcastActivity;
+import com.pandora.modular.home.prenster.HomeModule;
+import com.pandora.modular.home.prenster.DaggerHomeComponent;
+import com.pandora.modular.home.prenster.HomeContract;
+import com.pandora.modular.home.prenster.HomePresenter;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnItemClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements HomeContract.View {
 
 
     @BindView(R.id.tv_home_top_introduce)
@@ -34,6 +37,9 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.recycler_home_view)
     RecyclerView mRecyclerView;
 
+    @Inject
+    HomePresenter mHomePresenter;
+
     public HomeFragment() {
     }
 
@@ -43,8 +49,13 @@ public class HomeFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        initData();
         initClick();
         return view;
+    }
+
+    private void initData() {
+        DaggerHomeComponent.builder().homeModule(new HomeModule(this)).build().inject(this);
     }
 
     private void initClick() {

@@ -2,6 +2,7 @@ package com.pandora.modular.home.prenster;
 
 import com.pandora.core.base.BasePresenter;
 import com.pandora.core.base.BaseView;
+import com.pandora.modular.home.bean.HomeBean;
 
 /**
  * Created by XIAOHONG
@@ -15,6 +16,8 @@ public interface HomeContract {
     }
 
     interface Presenter extends BasePresenter<View> {
+        HomeBean getData();
 
+        void setData(HomeBean bean);
     }
 }
