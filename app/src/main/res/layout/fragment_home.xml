@@ -25,10 +25,14 @@
                 android:textColor="@color/white_ff"
                 android:textSize="@dimen/default_sp_12" />
 
-            <android.support.v4.view.ViewPager
-                android:id="@+id/pager_home_top"
+            <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/pager_home_top"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="100dp" />-->
+            <com.pandora.modular.home.widght.RecyclerBanner
+                android:id="@+id/banner_home"
                 android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                android:layout_height="150dp" />
 
         </FrameLayout>
 
