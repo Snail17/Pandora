@@ -20,7 +20,7 @@ public class LiveBean {
     private String utime;
     private List<LiveData> data;
 
-    class LiveData {
+    public class LiveData {
         private String name;
         private String image;
         private String rtmp;

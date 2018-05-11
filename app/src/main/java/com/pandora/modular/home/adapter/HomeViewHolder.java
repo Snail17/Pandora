@@ -29,7 +29,7 @@ public class HomeViewHolder extends BaseViewHolder {
 
     public HomeViewHolder(View view) {
         super(view);
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, view);
     }
 
 }

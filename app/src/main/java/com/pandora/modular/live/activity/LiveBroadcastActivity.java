@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.modular.live.bean.LiveBean;
+import com.pandora.modular.live.presenter.DaggerLiveComponent;
 import com.pandora.modular.live.presenter.LiveContract;
+import com.pandora.modular.live.presenter.LiveModule;
 import com.pandora.modular.live.presenter.LivePresenter;
 
 import javax.inject.Inject;
@@ -31,6 +33,8 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     }
 
     private void initData() {
+        DaggerLiveComponent.builder().liveModule(new LiveModule(this)).build().inject(this);
+
     }
 
     @Override
