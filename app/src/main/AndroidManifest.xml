@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.pandora">
+
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:name=".modular.PandoraApplication"
         android:allowBackup="true"
@@ -10,10 +13,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/BaseAppTheme">
-        <activity android:name=".modular.main.activity.MainActivity">
-
-        </activity>
+        android:theme="@style/BaseAppTheme"
+        tools:replace="label,allowBackup,icon">
+        <activity android:name=".modular.main.activity.MainActivity"></activity>
         <activity android:name=".modular.live.activity.LiveBroadcastActivity" />
         <activity android:name=".modular.login.activity.LoginActivity" />
         <activity android:name=".modular.splash.activity.SplashActivity">
@@ -24,8 +26,18 @@
             </intent-filter>
         </activity>
 
-        <!--<meta-data android:name="com.pandora.core.glide.OkHttpGlideModule"-->
-            <!--android:value="GlideModule"/>-->
+        <!-- <meta-data android:name="com.pandora.core.glide.OkHttpGlideModule" -->
+        <!-- android:value="GlideModule"/> -->
+
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".modular.live.activity.LiveActivity"
+            android:theme="@style/CustomAppTheme"></activity>
     </application>
 
 </manifest>

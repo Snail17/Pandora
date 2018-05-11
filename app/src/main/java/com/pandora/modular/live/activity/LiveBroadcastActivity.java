@@ -1,9 +1,12 @@
 package com.pandora.modular.live.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
@@ -54,6 +57,13 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mLiveView.setNestedScrollingEnabled(false);
         mLiveView.setLayoutManager(manager);
         mLiveView.setAdapter(mAdapter);
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
+                LiveBroadcastActivity.this.startActivity(intent);
+            }
+        });
         mLivePresenter.getData();
     }
 
