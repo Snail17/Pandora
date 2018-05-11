@@ -71,7 +71,12 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         mHomePresenter.setModel(new HomeModel());
         List<HomeBean.HomeData> data = mHomePresenter.getData().getData();
         mAdapter = new HomeRecyclerAdapter(R.layout.item_home_card_layout, data);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this.getContext(), 3));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
+        gridLayoutManager.setSmoothScrollbarEnabled(true);
+        gridLayoutManager.setAutoMeasureEnabled(true);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setNestedScrollingEnabled(false);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -84,6 +89,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
 
     private void initClick() {
+
         introduceText.setSelected(true);
     }
 

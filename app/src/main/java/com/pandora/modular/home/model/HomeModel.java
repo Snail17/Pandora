@@ -35,7 +35,7 @@ public class HomeModel {
 
         HomeBean homeBean = new HomeBean();
         List<HomeBean.HomeData> data = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 36; i++) {
             HomeBean.HomeData homeData = homeBean.new HomeData();
             homeData.setAnchor(2 * i + "");
             homeData.setName("item" + i);
