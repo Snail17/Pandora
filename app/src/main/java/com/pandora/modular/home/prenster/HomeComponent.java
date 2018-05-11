@@ -10,5 +10,5 @@ import dagger.Component;
 
 @Component(modules = HomeModule.class)
 public interface HomeComponent {
-    public void inject(HomeFragment fragment);
+    void inject(HomeFragment fragment);
 }

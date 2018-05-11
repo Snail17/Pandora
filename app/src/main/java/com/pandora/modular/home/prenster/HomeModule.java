@@ -1,6 +1,5 @@
 package com.pandora.modular.home.prenster;
 
-import com.pandora.modular.home.prenster.HomeContract;
 
 import dagger.Module;
 import dagger.Provides;
