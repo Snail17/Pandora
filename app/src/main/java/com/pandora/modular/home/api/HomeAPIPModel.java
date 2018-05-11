@@ -6,6 +6,9 @@ import com.pandora.core.utils.RxUtils;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.reactivex.Observable;
 
 /**
@@ -36,11 +39,19 @@ public class HomeAPIPModel {
     public Observable<HomeBean> getModelHomeData(HomeVO params) {
         Observable<HomeBean> observable = null;
         if (observable == null) {
-            if (!isDebugger) {
+            if (isDebugger) {
                 observable = sHomeService.getHomeData(params);
             } else {
-                HomeBean bean = new HomeBean();
-                observable = RxUtils.demo(bean);
+                HomeBean homeBean = new HomeBean();
+                List<HomeBean.HomeData> data = new ArrayList<>();
+                for (int i = 0; i < 36; i++) {
+                    HomeBean.HomeData homeData = homeBean.new HomeData();
+                    homeData.setAnchor(2 * i + "");
+                    homeData.setName("item" + i);
+                    data.add(homeData);
+                }
+                homeBean.setData(data);
+                observable = RxUtils.demo(homeBean);
             }
         }
         return observable.compose(RxUtils.<HomeBean>io_main())

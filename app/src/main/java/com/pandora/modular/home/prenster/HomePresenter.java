@@ -14,25 +14,30 @@ import javax.inject.Inject;
  * Date: 2018/5/11.
  */
 
-public class HomePresenter implements HomeContract.Presenter {
+public class HomePresenter implements HomeContract.Presenter, OnHomeFinishListener {
 
     private HomeContract.View mView;
     private HomeModel mModel;
 
-    public void setModel(HomeModel model) {
-        mModel = model;
-    }
-
     @Inject
     public HomePresenter(HomeContract.View view) {
         mView = view;
+        mModel = new HomeModel();
     }
 
 
     @Override
     public void getData() {
-        HomeBean data = mModel.getData(new HomeVO());
-        mView.setData(data);
+        mModel.getData(new HomeVO(), this);
     }
 
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onSuccess(HomeBean homeBean) {
+        mView.setData(homeBean);
+    }
 }

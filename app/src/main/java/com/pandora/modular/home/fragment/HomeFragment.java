@@ -73,7 +73,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         mHomeBean = new HomeBean();
         mHomeData = new ArrayList<>();
         DaggerHomeComponent.builder().homeModule(new HomeModule(this)).build().inject(this);
-        mHomePresenter.setModel(new HomeModel());
         mAdapter = new HomeRecyclerAdapter(R.layout.item_home_card_layout, mHomeData);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
         gridLayoutManager.setSmoothScrollbarEnabled(true);

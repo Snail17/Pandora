@@ -10,23 +10,31 @@ import javax.inject.Inject;
  * Created by Administrator on 2018/5/11.
  */
 
-public class LivePresenter implements LiveContract.Presenter {
+public class LivePresenter implements LiveContract.Presenter, OnLiveFinishListener {
 
     private LiveContract.View mView;
     private LiveModel mModel;
 
-    public void setModel(LiveModel model) {
-        mModel = model;
-    }
 
     @Inject
     public LivePresenter(LiveContract.View view) {
         mView = view;
+        mModel = new LiveModel();
     }
 
     @Override
     public void getData() {
-        LiveBean liveBean = mModel.getLiveData(new LiveVO());
-        mView.setData(liveBean);
+        mModel.getLiveData(new LiveVO(), this);
+    }
+
+
+    @Override
+    public void onError() {
+
+    }
+
+    @Override
+    public void onSuccess(LiveBean homeBean) {
+        mView.setData(homeBean);
     }
 }

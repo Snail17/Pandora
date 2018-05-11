@@ -1,10 +1,14 @@
 package com.pandora.modular.live.model;
 
+import com.pandora.core.exception.ExceptionHandle;
+import com.pandora.core.http.BaseObserver;
+import com.pandora.modular.live.api.LiveAPIModel;
 import com.pandora.modular.live.bean.LiveBean;
 import com.pandora.modular.live.bean.LiveVO;
+import com.pandora.modular.live.presenter.OnLiveFinishListener;
 
-import java.util.ArrayList;
-import java.util.List;
+import io.reactivex.Observable;
+
 
 /**
  * Created by Administrator on 2018/5/11.
@@ -12,16 +16,18 @@ import java.util.List;
 
 public class LiveModel {
 
-    public LiveBean getLiveData(LiveVO params) {
-        LiveBean liveBean = new LiveBean();
-        List<LiveBean.LiveData> liveData = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            LiveBean.LiveData data = liveBean.new LiveData();
-            data.setName("item" + i);
-            data.setRtmp(3 * i + "999");
-            liveData.add(data);
-        }
-        liveBean.setData(liveData);
-        return liveBean;
+    public void getLiveData(LiveVO params, final OnLiveFinishListener listener) {
+        Observable<LiveBean> observable = LiveAPIModel.getInstance().getLiveData(params);
+        observable.subscribe(new BaseObserver<LiveBean>() {
+            @Override
+            public void onError(ExceptionHandle.ResponeThrowable e) {
+                listener.onError();
+            }
+
+            @Override
+            public void onNext(LiveBean liveBean) {
+                listener.onSuccess(liveBean);
+            }
+        });
     }
 }

@@ -6,6 +6,7 @@ import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
+import com.pandora.modular.home.prenster.OnHomeFinishListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,30 +21,19 @@ import io.reactivex.Observable;
 
 public class HomeModel {
 
-    public HomeBean getData(HomeVO params) {
-//        Observable<HomeBean> observable = HomeAPIPModel.getInstance().getModelHomeData(params);
-//        observable.subscribe(new BaseObserver<HomeBean>() {
-//            @Override
-//            public void onError(ExceptionHandle.ResponeThrowable e) {
-//                return;
-//            }
-//
-//            @Override
-//            public void onNext(HomeBean homeBean) {
-//
-//            }
-//        });
+    public void getData(HomeVO params, final OnHomeFinishListener listener) {
+        Observable<HomeBean> observable = HomeAPIPModel.getInstance().getModelHomeData(params);
+        observable.subscribe(new BaseObserver<HomeBean>() {
+            @Override
+            public void onError(ExceptionHandle.ResponeThrowable e) {
+                listener.onError();
+            }
 
-        HomeBean homeBean = new HomeBean();
-        List<HomeBean.HomeData> data = new ArrayList<>();
-        for (int i = 0; i < 36; i++) {
-            HomeBean.HomeData homeData = homeBean.new HomeData();
-            homeData.setAnchor(2 * i + "");
-            homeData.setName("item" + i);
-            data.add(homeData);
-        }
-        homeBean.setData(data);
-        return homeBean;
+            @Override
+            public void onNext(HomeBean homeBean) {
+                listener.onSuccess(homeBean);
+            }
+        });
     }
 
 }

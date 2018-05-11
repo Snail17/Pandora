@@ -46,7 +46,6 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mLiveBean = new LiveBean();
         mLiveData = new ArrayList<>();
         DaggerLiveComponent.builder().liveModule(new LiveModule(this)).build().inject(this);
-        mLivePresenter.setModel(new LiveModel());
         mAdapter = new LiveRecyclerAdapter(R.layout.item_card_live_layout, mLiveData);
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         manager.setSmoothScrollbarEnabled(true);

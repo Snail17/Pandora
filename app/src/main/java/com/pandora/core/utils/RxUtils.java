@@ -127,7 +127,7 @@ public class RxUtils {
         return Observable.just(value).flatMap(new Function<T, ObservableSource<T>>() {
             @Override
             public ObservableSource<T> apply(@NonNull T t) throws Exception {
-                Thread.sleep(3000);
+//                Thread.sleep(3000);
                 return Observable.just(t);
             }
         });
