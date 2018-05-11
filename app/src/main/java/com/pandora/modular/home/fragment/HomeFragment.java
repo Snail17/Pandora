@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
+import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.model.HomeModel;
@@ -24,6 +25,7 @@ import com.pandora.modular.home.prenster.HomeModule;
 import com.pandora.modular.home.prenster.HomePresenter;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +53,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private HomeRecyclerAdapter mAdapter;
 
     private HomeBean mHomeBean;
+    private List<HomeBean.HomeData> mHomeData;
 
     public HomeFragment() {
     }
@@ -67,10 +70,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     private void initData() {
+        mHomeBean = new HomeBean();
+        mHomeData = new ArrayList<>();
         DaggerHomeComponent.builder().homeModule(new HomeModule(this)).build().inject(this);
         mHomePresenter.setModel(new HomeModel());
-        List<HomeBean.HomeData> data = mHomePresenter.getData().getData();
-        mAdapter = new HomeRecyclerAdapter(R.layout.item_home_card_layout, data);
+        mAdapter = new HomeRecyclerAdapter(R.layout.item_home_card_layout, mHomeData);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         gridLayoutManager.setAutoMeasureEnabled(true);
@@ -85,6 +89,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+        mHomePresenter.getData();
     }
 
 
@@ -96,6 +101,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void setData(HomeBean data) {
         mHomeBean = data;
+        mHomeData.addAll(data.getData());
+        mAdapter.notifyDataSetChanged();
     }
 
 

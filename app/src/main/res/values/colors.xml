@@ -29,6 +29,7 @@
 
     <!---->
     <color name="transparent_color">#e0000000</color>
+    <color name="transparent_gray_80">#80000000</color>
     <color name="transparent">#00000000</color>
 
 

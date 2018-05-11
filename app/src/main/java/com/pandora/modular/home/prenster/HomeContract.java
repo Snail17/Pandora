@@ -16,8 +16,7 @@ public interface HomeContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        HomeBean getData();
+        void getData();
 
-        void setData(HomeBean bean);
     }
 }

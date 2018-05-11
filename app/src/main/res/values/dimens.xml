@@ -26,6 +26,7 @@
 
 
     <dimen name="default_sp_8">8sp</dimen>
+    <dimen name="default_sp_10">10sp</dimen>
     <dimen name="default_sp_12">12sp</dimen>
     <dimen name="default_sp_14">14sp</dimen>
     <dimen name="default_sp_15">15sp</dimen>

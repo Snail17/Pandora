@@ -2,6 +2,7 @@ package com.pandora.modular.home.model;
 
 import com.pandora.core.exception.ExceptionHandle;
 import com.pandora.core.http.BaseObserver;
+import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;

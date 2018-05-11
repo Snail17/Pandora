@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_dimen_4">
+
+    <ImageView
+        android:id="@+id/iv_live_card_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/bingbing" />
+
+
+    <TextView
+        android:id="@+id/tv_live_card_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="@dimen/default_dimen_10"
+        android:background="@drawable/item_live_count_bg"
+        android:drawableLeft="@drawable/xllive_online_user_flag_white"
+        android:drawablePadding="@dimen/default_dimen_2"
+        android:padding="@dimen/default_dimen_2"
+        android:textColor="@color/white_ff"
+        android:textSize="@dimen/default_sp_8" />
+
+    <TextView
+        android:id="@+id/tv_live_card_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/transparent_gray_80"
+        android:padding="@dimen/default_dimen_4"
+        android:text="平台名字"
+        android:textColor="@color/white_ff"
+        android:textSize="@dimen/default_sp_10" />
+
+</FrameLayout>

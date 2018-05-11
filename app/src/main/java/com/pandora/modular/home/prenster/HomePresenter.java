@@ -1,6 +1,7 @@
 package com.pandora.modular.home.prenster;
 
 import com.pandora.core.base.BasePresenter;
+import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
 import com.pandora.modular.home.model.HomeModel;
@@ -29,14 +30,9 @@ public class HomePresenter implements HomeContract.Presenter {
 
 
     @Override
-    public HomeBean getData() {
+    public void getData() {
         HomeBean data = mModel.getData(new HomeVO());
         mView.setData(data);
-        return data;
     }
 
-    @Override
-    public void setData(HomeBean bean) {
-
-    }
 }

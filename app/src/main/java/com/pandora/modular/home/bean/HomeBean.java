@@ -1,5 +1,6 @@
 package com.pandora.modular.home.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -124,6 +125,9 @@ public class HomeBean {
     }
 
     public List<HomeData> getData() {
+        if (data == null) {
+            data = new ArrayList<>();
+        }
         return data;
     }
 

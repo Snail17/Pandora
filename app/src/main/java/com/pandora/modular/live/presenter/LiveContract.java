@@ -16,6 +16,6 @@ public interface LiveContract {
     }
 
     interface Presenter extends BasePresenter<LiveContract.View> {
-        LiveBean getData();
+        void getData();
     }
 }
