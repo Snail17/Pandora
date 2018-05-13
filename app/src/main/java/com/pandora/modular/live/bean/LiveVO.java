@@ -6,12 +6,10 @@ package com.pandora.modular.live.bean;
 
 public class LiveVO {
     private String head;
-    private String platform;
     private String platformNo;
 
-    public LiveVO(String head, String platform, String platformNo) {
+    public LiveVO(String head, String platformNo) {
         this.head = head;
-        this.platform = platform;
         this.platformNo = platformNo;
     }
 
@@ -23,13 +21,6 @@ public class LiveVO {
         this.head = head;
     }
 
-    public String getPlatform() {
-        return platform;
-    }
-
-    public void setPlatform(String platform) {
-        this.platform = platform;
-    }
 
     public String getPlatformNo() {
         return platformNo;

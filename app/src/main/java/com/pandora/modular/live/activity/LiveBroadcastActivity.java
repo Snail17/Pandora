@@ -71,14 +71,16 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         });
-        LiveVO liveVO = new LiveVO("INIT", "Android", mPlatformNo);
+        LiveVO liveVO = new LiveVO("PLATFORM", mPlatformNo);
         mLivePresenter.getData(liveVO);
     }
 
     @Override
     public void setData(LiveBean data) {
-        mLiveBean = data;
-        mLiveData.addAll(data.getData());
-        mAdapter.notifyDataSetChanged();
+        if (data != null) {
+            mLiveBean = data;
+            mLiveData.addAll(data.getData());
+            mAdapter.notifyDataSetChanged();
+        }
     }
 }
