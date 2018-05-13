@@ -4,6 +4,8 @@ import com.pandora.core.base.BasePresenter;
 import com.pandora.core.base.BaseView;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.live.bean.LiveBean;
+import com.pandora.modular.live.bean.LiveVO;
+import com.pandora.modular.live.model.LiveModel;
 
 /**
  * Created by Administrator on 2018/5/11.
@@ -16,6 +18,6 @@ public interface LiveContract {
     }
 
     interface Presenter extends BasePresenter<LiveContract.View> {
-        void getData();
+        void getData(LiveVO liveVO);
     }
 }

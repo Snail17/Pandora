@@ -27,8 +27,8 @@ public class HomePresenter implements HomeContract.Presenter, OnHomeFinishListen
 
 
     @Override
-    public void getData() {
-        mModel.getData(new HomeVO(), this);
+    public void getData(HomeVO homeVO) {
+        mModel.getData(homeVO, this);
     }
 
     @Override

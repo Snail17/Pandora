@@ -11,6 +11,7 @@ import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
 import com.pandora.modular.live.bean.LiveBean;
+import com.pandora.modular.live.bean.LiveVO;
 import com.pandora.modular.live.model.LiveModel;
 import com.pandora.modular.live.presenter.DaggerLiveComponent;
 import com.pandora.modular.live.presenter.LiveContract;
@@ -36,13 +37,19 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     private LiveBean mLiveBean;
     private List<LiveBean.LiveData> mLiveData;
     private LiveRecyclerAdapter mAdapter;
+    private String mPlatformNo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_broadcast);
         ButterKnife.bind(this);
+        initIntent();
         initData();
+    }
+
+    private void initIntent() {
+        mPlatformNo = getIntent().getStringExtra("platformNo");
     }
 
     private void initData() {
@@ -64,7 +71,8 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         });
-        mLivePresenter.getData();
+        LiveVO liveVO = new LiveVO("INIT", "Android", mPlatformNo);
+        mLivePresenter.getData(liveVO);
     }
 
     @Override

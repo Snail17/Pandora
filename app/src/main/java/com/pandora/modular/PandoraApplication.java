@@ -1,11 +1,10 @@
 package com.pandora.modular;
 
+import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
 
 
-public class PandoraApplication extends MultiDexApplication {
+public class PandoraApplication extends Application {
 
     private static PandoraApplication instance;
 
@@ -18,7 +17,7 @@ public class PandoraApplication extends MultiDexApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this);
+//        MultiDex.install(this);
     }
 
     public static PandoraApplication getInstance() {

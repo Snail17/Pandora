@@ -23,8 +23,8 @@ public class LivePresenter implements LiveContract.Presenter, OnLiveFinishListen
     }
 
     @Override
-    public void getData() {
-        mModel.getLiveData(new LiveVO(), this);
+    public void getData(LiveVO liveVO) {
+        mModel.getLiveData(liveVO, this);
     }
 
 

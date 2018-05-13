@@ -72,7 +72,7 @@ public final class ServiceGenerator {
 
         sOkHttpClient = createOkHttpClient();
         mRetrofitBuilder = new Retrofit.Builder()
-//                .baseUrl(BuildConfig.API_BASE_URL)
+                .baseUrl(BuildConfig.API_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create());
     }

@@ -17,6 +17,7 @@ import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.bean.HomeBean;
+import com.pandora.modular.home.bean.HomeVO;
 import com.pandora.modular.home.prenster.DaggerHomeComponent;
 import com.pandora.modular.home.prenster.HomeContract;
 import com.pandora.modular.home.prenster.HomeModule;
@@ -87,11 +88,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(HomeFragment.this.getContext(), LiveBroadcastActivity.class);
+                intent.putExtra("platformNo", mHomeData.get(position).getAnchor());
                 HomeFragment.this.getContext().startActivity(intent);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        mHomePresenter.getData();
+        HomeVO homeVO = new HomeVO("INIT", "fghjkl", "admin", "1.0");
+
+        mHomePresenter.getData(homeVO);
         initBanner();
     }
 
@@ -103,7 +107,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             }
         });
     }
-
 
     private void initClick() {
 

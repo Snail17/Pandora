@@ -6,6 +6,7 @@ import com.pandora.core.utils.RxUtils;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class HomeAPIPModel {
 
     private static HomeAPI sHomeService;
     private static HomeAPIPModel sHomeModel;
-    private boolean isDebugger = false;
+    private boolean isDebugger;
 
     private HomeAPIPModel() {
     }
