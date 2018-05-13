@@ -68,10 +68,11 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
+                intent.putExtra("videoUrl", mLiveData.get(position).getUrl());
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         });
-        LiveVO liveVO = new LiveVO("PLATFORM", mPlatformNo);
+        LiveVO liveVO = new LiveVO("INIT", "Android", mPlatformNo);
         mLivePresenter.getData(liveVO);
     }
 

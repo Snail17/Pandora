@@ -17,46 +17,24 @@ import java.util.List;
 
 // 直播列表
 public class LiveBean {
-    private String utime;
+    private String msg;
+    private String result;
     private List<LiveData> data;
 
-    public class LiveData {
-        private String name;
-        private String image;
-        private String rtmp;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getImage() {
-            return image;
-        }
-
-        public void setImage(String image) {
-            this.image = image;
-        }
-
-        public String getRtmp() {
-            return rtmp;
-        }
-
-        public void setRtmp(String rtmp) {
-            this.rtmp = rtmp;
-        }
+    public String getMsg() {
+        return msg;
     }
 
-
-    public String getUtime() {
-        return utime;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public void setUtime(String utime) {
-        this.utime = utime;
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public List<LiveData> getData() {
@@ -65,5 +43,44 @@ public class LiveBean {
 
     public void setData(List<LiveData> data) {
         this.data = data;
+    }
+
+    public class LiveData {
+        private String title;
+        private String img;
+        private String url;
+        private String pep;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getImg() {
+            return img;
+        }
+
+        public void setImg(String img) {
+            this.img = img;
+        }
+
+        public String getUrl() {
+            return url;
+        }
+
+        public void setUrl(String url) {
+            this.url = url;
+        }
+
+        public String getPep() {
+            return pep;
+        }
+
+        public void setPep(String pep) {
+            this.pep = pep;
+        }
     }
 }

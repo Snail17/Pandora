@@ -16,6 +16,7 @@ import com.pandora.modular.purchase.bean.PurchaseVO;
 import com.pandora.modular.purchase.model.PurchaseModel;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -30,7 +31,7 @@ public class PurchaseFragment extends BaseFragment {
     Button quarterlyCard;
     @BindView(R.id.btn_card_year)
     Button yearCard;
-    @BindView(R.id.tv_purchase_introduce)
+    @BindView(R.id.btn_card_forever)
     Button introduceCard;
 
     public PurchaseFragment() {
@@ -43,17 +44,20 @@ public class PurchaseFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View ret = inflater.inflate(R.layout.fragment_purchase, container, false);
+        ButterKnife.bind(this, ret);
         return ret;
     }
 
 
-    @OnClick({R.id.btn_card_month, R.id.btn_card_quarterly, R.id.btn_card_year, R.id.tv_purchase_introduce})
+    @OnClick({R.id.btn_card_month, R.id.btn_card_quarterly, R.id.btn_card_year, R.id.btn_card_forever})
     public void btnClick(View view) {
         PurchaseVO purchaseVO = new PurchaseVO("CARD", "", "", "");
         new PurchaseModel().getData(purchaseVO, new OnPurchaseFinishListener() {
             @Override
             public void success(PurchaseBean purchaseBean) {
-                Toast.makeText(PurchaseFragment.this.getContext(), purchaseBean.getIsOk(), Toast.LENGTH_SHORT).show();
+                if (purchaseBean != null) {
+                    Toast.makeText(PurchaseFragment.this.getContext(), purchaseBean.getIsOk(), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

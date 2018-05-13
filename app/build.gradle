@@ -4,9 +4,9 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.pandora"
-        minSdkVersion 26
+        minSdkVersion 15
         targetSdkVersion 26
-        versionCode 100
+        versionCode 1
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

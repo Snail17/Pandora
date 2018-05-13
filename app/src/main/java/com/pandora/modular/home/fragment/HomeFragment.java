@@ -88,7 +88,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(HomeFragment.this.getContext(), LiveBroadcastActivity.class);
-                intent.putExtra("platformNo", mHomeData.get(position).getBh());
+                intent.putExtra("platformNo", mHomeData.get(position).getAnchor());
                 HomeFragment.this.getContext().startActivity(intent);
             }
         });
@@ -138,12 +138,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void setData(HomeBean data) {
-        mHomeBean = data;
-        introduceText.setText(mHomeBean.getOnlineService());
-        adNoticeTV.setText(mHomeBean.getaWords().get(0));
-        mHomeData.addAll(data.getData());
-        mAdapter.notifyDataSetChanged();
-        update();
+        if (data != null) {
+            mHomeBean = data;
+            introduceText.setText(mHomeBean.getOnlineService());
+            adNoticeTV.setText(mHomeBean.getaWords().get(0));
+            mHomeData.addAll(data.getData());
+            mAdapter.notifyDataSetChanged();
+            update();
+        }
     }
 
 

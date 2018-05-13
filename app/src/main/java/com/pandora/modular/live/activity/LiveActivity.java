@@ -12,6 +12,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -48,8 +49,8 @@ public class LiveActivity extends BaseActivity implements Runnable {
     private MyMediaController myMediaController;
 
     private boolean VitamioRun = true;
-    //String path1 =  Environment.getExternalStorageDirectory() + "/"+ "xiaomi.mp4";
-    String path1 = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
+    //String mVideoUrl =  Environment.getExternalStorageDirectory() + "/"+ "xiaomi.mp4";
+    String mVideoUrl = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
     private static final int TIME = 0;
     private static final int BATTERY = 1;
     private Handler mHandler = new Handler() {
@@ -73,13 +74,21 @@ public class LiveActivity extends BaseActivity implements Runnable {
         toggleHideyBar();
         setContentView(R.layout.activity_live);
         ButterKnife.bind(this);
+        initIntent();
         initData();
         initListener();
     }
 
+    private void initIntent() {
+        String path = getIntent().getStringExtra("videoUrl");
+        if (!TextUtils.isEmpty(path)) {
+            mVideoUrl = path;
+        }
+    }
+
 
     private void initData() {
-        mVideoView.setVideoPath(path1);
+        mVideoView.setVideoPath(mVideoUrl);
         mMediaController = new MediaController(this);
         myMediaController = new MyMediaController(this, mVideoView, this);
         mMediaController.show(5000);

@@ -29,19 +29,6 @@ public class PurchaseModel {
         QueryAddressTask queryAddressTask = new QueryAddressTask();
         //启动后台任务
         queryAddressTask.execute(purchaseVO);
-//
-//        Observable<HomeBean> observable = HomeAPIPModel.getInstance().getModelHomeData(new PurchaseVO());
-//        observable.subscribe(new BaseObserver<HomeBean>() {
-//            @Override
-//            public void onError(ExceptionHandle.ResponeThrowable e) {
-//                listener.onError();
-//            }
-//
-//            @Override
-//            public void onNext(HomeBean homeBean) {
-//                listener.onSuccess(homeBean);
-//            }
-//        });
     }
 
     class QueryAddressTask extends AsyncTask<PurchaseVO, Integer, String> {
@@ -61,7 +48,7 @@ public class PurchaseModel {
         //此方法可以在主线程改变UI
         protected void onPostExecute(String result) {
             Gson gson = new Gson();
-            LogUtils.e("home" + result);
+            LogUtils.e("purchase" + result);
             PurchaseBean purchaseBean = gson.fromJson(result, PurchaseBean.class);//对于javabean直接给出class实例
             mListener.success(purchaseBean);
 //            LogUtils.e(result);
