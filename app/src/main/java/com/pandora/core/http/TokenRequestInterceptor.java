@@ -31,7 +31,7 @@ public class TokenRequestInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         try {
-            request = RestUtil.getInstance().addAcceptLanguage(request);
+//            request = RestUtil.getInstance().addAcceptLanguage(request);
             request = RestUtil.getInstance().addPhoneInfo(request);
         } catch (Exception e) {
             e.printStackTrace();

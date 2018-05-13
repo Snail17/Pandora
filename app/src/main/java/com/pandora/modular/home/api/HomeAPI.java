@@ -13,7 +13,7 @@ import retrofit2.http.POST;
  */
 
 public interface HomeAPI {
-    @POST("")
+    @POST("http://mj55.top/pandoraService/PrandoraPort?wsdl")
     Observable<HomeBean> getHomeData(@Body HomeVO params);
 
 }

@@ -1,11 +1,16 @@
 package com.pandora.modular.main.activity;
 
+import android.Manifest;
 import android.os.Bundle;
 
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.core.base.BaseFragment;
+import com.pandora.core.utils.DeviceIdUtils;
 import com.pandora.core.utils.FragmentUtil;
+import com.pandora.core.utils.MPermissionUtils;
+import com.pandora.core.utils.SPUtils;
+import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.main.bean.TabEntity;
 import com.pandora.modular.home.fragment.HomeFragment;
 import com.pandora.modular.mine.fragment.MyFragment;
@@ -34,6 +39,9 @@ public class MainActivity extends BaseActivity {
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
 
+    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE};
+
+
     private BaseFragment oldFragment;
 
     @Override
@@ -55,6 +63,7 @@ public class MainActivity extends BaseActivity {
         homeFragment = new HomeFragment();
         oldFragment = homeFragment;
         switchFragment(HOME_INDEX);
+        MPermissionUtils.requestPermissionsResult(this, 1, needPermissions, permissionListener);
     }
 
     private void initBottomBar() {
@@ -119,5 +128,28 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    public String getDeviceId() {
+        String deviceId = "Pandora";
+        if (MPermissionUtils.checkPermissions(PandoraApplication.getInstance().getApplicationContext(), Manifest.permission.READ_PHONE_STATE)) {
+            deviceId = DeviceIdUtils.getDeviceId();
+        }
+        return deviceId;
+    }
+
+    MPermissionUtils.OnPermissionListener permissionListener = new MPermissionUtils.OnPermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            SPUtils.putString("devicedId", getDeviceId());
+//            SPUtils.putBoolean(SPConstants.REQUEST_PERMISSIONS_SD, true);
+//            SPUtils.putBoolean(SPConstants.APP_FIRST_OPEN, false);
+        }
+
+        @Override
+        public void onPermissionDenied() {
+//            SPUtils.putBoolean(SPConstants.REQUEST_PERMISSIONS_SD, false);
+//            SPUtils.putBoolean(SPConstants.APP_FIRST_OPEN, false);
+        }
+    };
 
 }

@@ -38,7 +38,7 @@ import static android.content.ContentValues.TAG;
  */
 public final class ServiceGenerator {
 
-   // private static final String API_BASE_URI = "http://www.kuaidi100.com/";
+    // private static final String API_BASE_URI = "http://www.kuaidi100.com/";
 
     private static final long TIMEOUT = 60;
 
@@ -72,7 +72,7 @@ public final class ServiceGenerator {
 
         sOkHttpClient = createOkHttpClient();
         mRetrofitBuilder = new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_BASE_URL)
+//                .baseUrl(BuildConfig.API_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create());
     }
@@ -115,7 +115,7 @@ public final class ServiceGenerator {
             };
 
             sslContext.init(null, new TrustManager[]{trustManager}, new SecureRandom());
-            if (!BuildConfig.FLAVOR.equals("product")){
+            if (!BuildConfig.FLAVOR.equals("product")) {
                 httpClientBuilder.sslSocketFactory(sslContext.getSocketFactory());
             }
 
@@ -195,19 +195,19 @@ public final class ServiceGenerator {
     }
 
 
+    private CookieJar cookieJar() {
+        return new CookieJar() {
 
-    private CookieJar cookieJar(){
-        return  new CookieJar() {
+            HashMap<HttpUrl, List<Cookie>> cookieStore = new HashMap<>();
 
-            HashMap<HttpUrl,List<Cookie>> cookieStore = new HashMap<>();
             @Override
             public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                cookieStore.put(url,cookies);
-                cookieStore.put(HttpUrl.parse(BuildConfig.API_BASE_URL),cookies);
-                for (Cookie cookie:cookies){
+                cookieStore.put(url, cookies);
+                cookieStore.put(HttpUrl.parse(BuildConfig.API_BASE_URL), cookies);
+                for (Cookie cookie : cookies) {
 
-                    LogUtils.e("cookie name-------"+cookie.name());
-                    LogUtils.e("cookie Path------" +cookie.path());
+                    LogUtils.e("cookie name-------" + cookie.name());
+                    LogUtils.e("cookie Path------" + cookie.path());
                 }
             }
 
@@ -215,14 +215,13 @@ public final class ServiceGenerator {
             public List<Cookie> loadForRequest(HttpUrl url) {
                 List<Cookie> cookies = cookieStore.get(HttpUrl.parse(BuildConfig.API_BASE_URL));
 
-                if (cookies == null){
+                if (cookies == null) {
                     LogUtils.e("mei you get cookie---------");
                 }
-                return cookies != null ? cookies: new ArrayList<Cookie>();
+                return cookies != null ? cookies : new ArrayList<Cookie>();
             }
         };
     }
-
 
 
 }

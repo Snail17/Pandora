@@ -29,7 +29,6 @@ public final class RestUtil {
     }
 
     /**
-     *
      * @return s
      * @throws Exception s
      */
@@ -47,12 +46,11 @@ public final class RestUtil {
     }
 
     /**
-     *
      * @param request s
      * @return s
      */
     public Request addAcceptLanguage(Request request) {
-        String language = SPUtils.getString(SPConstants.ACCEPT_LANGUAGE,"zh-CN");
+        String language = SPUtils.getString(SPConstants.ACCEPT_LANGUAGE, "zh-CN");
         if (TextUtils.isEmpty(language)) {
             return request;
         }
@@ -60,7 +58,6 @@ public final class RestUtil {
     }
 
     /**
-     *
      * @param request s
      * @return s
      */
@@ -69,7 +66,8 @@ public final class RestUtil {
         String model = PhoneInformationUtil.getModel();
         String release = PhoneInformationUtil.getRelease();
         String platform = "Android";
-        String DeviceInfo = versionName+"|"+model+"|"+release+"|"+platform;
+        String deviceId = SPUtils.getString("devicedId", "Pandora");
+        String DeviceInfo = versionName + "|" + model + "|" + release + "|" + platform + "|" + deviceId;
         return request.newBuilder().addHeader("DeviceInfo", DeviceInfo).build();
     }
 
