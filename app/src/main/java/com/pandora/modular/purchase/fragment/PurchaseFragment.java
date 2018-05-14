@@ -65,7 +65,7 @@ public class PurchaseFragment extends BaseFragment {
                 if (!TextUtils.isEmpty(resultJson)) {
                     Gson gson = new Gson();
                     mPurchaseBean = gson.fromJson(resultJson, PurchaseBean.class);
-                    Toast.makeText(PurchaseFragment.this.getContext(), mPurchaseBean.getIsOk(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(PurchaseFragment.this.getContext(), mPurchaseBean.getIsOk(), Toast.LENGTH_SHORT).show();
                 }
             }
 

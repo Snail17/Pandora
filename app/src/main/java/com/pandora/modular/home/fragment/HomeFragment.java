@@ -25,7 +25,6 @@ import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
-import com.pandora.modular.home.api.HomeAPI;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
@@ -37,11 +36,8 @@ import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.widght.RecyclerBanner;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +45,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -178,15 +170,29 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         File file = new File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
                         + File.separator + "Android" + File.separator + "Pandora.apk");
-
+        String storagePath;
+        File storageDir;
+//                mPathname = Environment.getExternalStorageDirectory().getAbsolutePath() + DOWNLOADPATH + "Pandora.apk";
+        storagePath =
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
+                        + File.separator + "Android";
+        storageDir = new File(storagePath);
+        File photoFile = null;
+        try {
+            photoFile = File.createTempFile("Pandora", ".apk", storageDir);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Intent intent = new Intent(Intent.ACTION_VIEW);
         // 由于没有在Activity环境下启动Activity,设置下面的标签
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //判读版本是否在7.0以上
             //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-            Uri apkUri =
-                    FileProvider.getUriForFile(PandoraApplication.getInstance().getApplicationContext(),
-                            "com.pandora.fileprovider", file);
+            Uri apkUri
+//                    FileProvider.getUriForFile(PandoraApplication.getInstance().getApplicationContext(),
+//                            "com.pandora.fileprovider", file);
+                    = FileProvider.getUriForFile(HomeFragment.this.getContext(), "com.pandora.fileprovider", photoFile);
+
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
@@ -222,10 +228,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
-            updateBanner();
         }
-        appUpdate();
+        updateBanner();
+//        appUpdate();
     }
-
-
 }

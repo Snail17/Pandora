@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 android {
+    signingConfigs {
+        Pandora {
+            keyAlias 'Pandora'
+            keyPassword '123456'
+            storeFile file('C:/MySelf/MyCodoGit/Pandora/Pandora.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.pandora"
@@ -12,11 +20,14 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Pandora
+        }
+        debug {
+            signingConfig signingConfigs.Pandora
         }
     }
     flavorDimensions "personal", "dev", "product"
@@ -67,6 +78,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
     //    implementation 'com.github.bumptech.glide:glide:4.7.1'
     //    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-//    implementation 'com.android.support:multidex:1.0.1'
+    //    implementation 'com.android.support:multidex:1.0.1'
     compile project(path: ':vitamio')
 }

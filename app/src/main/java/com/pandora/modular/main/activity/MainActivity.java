@@ -39,11 +39,10 @@ public class MainActivity extends BaseActivity {
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
 
-    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE};
+    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
 
     private BaseFragment oldFragment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

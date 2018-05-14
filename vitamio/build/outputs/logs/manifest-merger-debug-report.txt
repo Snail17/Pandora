@@ -1,69 +1,69 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:1-26:12
 	package
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:3:5-29
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:3:5-29
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
 	android:versionName
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:5:5-30
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:5:5-30
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
 	xmlns:tools
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:2:5-51
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:2:5-51
 	xmlns:android
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:1:11-69
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:1:11-69
 	android:versionCode
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:4:5-30
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:4:5-30
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
 uses-sdk
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
-INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
+INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:9:9-38
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:9:9-38
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:8:9-35
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
-		INJECTED from E:\Application2\Pandora\vitamio\AndroidManifest.xml
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:8:9-35
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
+		INJECTED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml
 uses-permission#android.permission.WAKE_LOCK
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:11:5-68
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:11:5-68
 	android:name
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:11:22-65
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:11:22-65
 uses-permission#android.permission.INTERNET
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:12:5-67
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:12:5-67
 	android:name
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:12:22-64
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:12:22-64
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:13:5-79
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:13:5-79
 	android:name
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:13:22-76
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:13:22-76
 application
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:15:5-24:19
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:15:5-24:19
 	android:label
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:17:9-32
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:17:9-32
 	android:icon
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:16:9-45
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:16:9-45
 activity#io.vov.vitamio.activity.InitActivity
-ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:18:9-23:63
+ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:18:9-23:63
 	android:launchMode
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:21:13-43
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:21:13-43
 	android:windowSoftInputMode
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:23:13-60
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:23:13-60
 	android:configChanges
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:20:13-113
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:20:13-113
 	android:theme
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:22:13-60
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:22:13-60
 	android:name
-		ADDED from E:\Application2\Pandora\vitamio\AndroidManifest.xml:19:13-64
+		ADDED from C:\MySelf\MyCodoGit\Pandora\vitamio\AndroidManifest.xml:19:13-64

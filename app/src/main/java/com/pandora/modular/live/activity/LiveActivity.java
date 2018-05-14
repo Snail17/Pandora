@@ -1,7 +1,6 @@
 package com.pandora.modular.live.activity;
 
 
-//import io.vov.mVideoView.widget.VideoView;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,6 +30,7 @@ import java.util.Date;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.vov.vitamio.MediaPlayer;
+import io.vov.vitamio.Vitamio;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
 
@@ -50,7 +50,8 @@ public class LiveActivity extends BaseActivity implements Runnable {
 
     private boolean VitamioRun = true;
     //String mVideoUrl =  Environment.getExternalStorageDirectory() + "/"+ "xiaomi.mp4";
-    String mVideoUrl = "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8";
+//    String mVideoUrl = "http://23509.liveplay.myqcloud.com/live/23509_130981b100577_bc653827dca7fbed1ee4.flv";
+    String mVideoUrl = "";
     private static final int TIME = 0;
     private static final int BATTERY = 1;
     private Handler mHandler = new Handler() {
@@ -70,6 +71,7 @@ public class LiveActivity extends BaseActivity implements Runnable {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Vitamio.initialize(this);
         requestFullScreen();
         toggleHideyBar();
         setContentView(R.layout.activity_live);
@@ -77,6 +79,7 @@ public class LiveActivity extends BaseActivity implements Runnable {
         initIntent();
         initData();
         initListener();
+        startPlayer();
     }
 
     private void initIntent() {
@@ -106,6 +109,7 @@ public class LiveActivity extends BaseActivity implements Runnable {
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
 
                 mTvProgressBar.setText("正在缓冲" + percent + "%");
+                LogUtils.e(percent + "%");
                 if (percent >= 99) {
                     mTvProgressBar.setVisibility(View.GONE);
                 } else {

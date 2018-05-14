@@ -73,7 +73,8 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
-                intent.putExtra("videoUrl", mLiveData.get(position).getUrl());
+//                intent.putExtra("videoUrl", mLiveData.get(position).getUrl());
+                intent.putExtra("videoUrl", "http://23509.liveplay.myqcloud.com/live/23509_130981b100577_bc653827dca7fbed1ee4.flv");
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         });
