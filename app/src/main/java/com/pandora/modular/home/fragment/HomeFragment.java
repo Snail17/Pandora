@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
+import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
@@ -137,12 +140,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     @Override
-    public void setData(HomeBean data) {
-        if (data != null) {
-            mHomeBean = data;
+    public void setData(String homeJson) {
+        if (!TextUtils.isEmpty(homeJson)) {
+            LogUtils.e("home" + homeJson);
+            Gson gson = new Gson();
+            mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
             introduceText.setText(mHomeBean.getOnlineService());
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
-            mHomeData.addAll(data.getData());
+            mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
             update();
         }

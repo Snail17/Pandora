@@ -34,7 +34,7 @@ public class LivePresenter implements LiveContract.Presenter, OnLiveFinishListen
     }
 
     @Override
-    public void onSuccess(LiveBean homeBean) {
-        mView.setData(homeBean);
+    public void onSuccess(String resultJson) {
+        mView.setData(resultJson);
     }
 }

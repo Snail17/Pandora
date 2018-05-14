@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
+import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
 import com.pandora.modular.live.bean.LiveBean;
 import com.pandora.modular.live.bean.LiveVO;
@@ -17,6 +20,8 @@ import com.pandora.modular.live.presenter.DaggerLiveComponent;
 import com.pandora.modular.live.presenter.LiveContract;
 import com.pandora.modular.live.presenter.LiveModule;
 import com.pandora.modular.live.presenter.LivePresenter;
+
+import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,10 +82,12 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     }
 
     @Override
-    public void setData(LiveBean data) {
-        if (data != null) {
-            mLiveBean = data;
-            mLiveData.addAll(data.getData());
+    public void setData(String liveJson) {
+        if (!TextUtils.isEmpty(liveJson)) {
+            Gson gson = new Gson();
+            LogUtils.e("live" + liveJson);
+            mLiveBean = gson.fromJson(liveJson, LiveBean.class);//对于javabean直接给出class实例;
+            mLiveData.addAll(mLiveBean.getData());
             mAdapter.notifyDataSetChanged();
         }
     }

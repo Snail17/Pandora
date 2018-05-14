@@ -37,7 +37,7 @@ public class HomePresenter implements HomeContract.Presenter, OnHomeFinishListen
     }
 
     @Override
-    public void onSuccess(HomeBean homeBean) {
-        mView.setData(homeBean);
+    public void onSuccess(String homeJson) {
+        mView.setData(homeJson);
     }
 }

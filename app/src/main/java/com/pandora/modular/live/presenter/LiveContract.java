@@ -14,7 +14,7 @@ import com.pandora.modular.live.model.LiveModel;
 public interface LiveContract {
 
     interface View extends BaseView<LiveContract.Presenter> {
-        void setData(LiveBean data);
+        void setData(String liveJson);
     }
 
     interface Presenter extends BasePresenter<LiveContract.View> {

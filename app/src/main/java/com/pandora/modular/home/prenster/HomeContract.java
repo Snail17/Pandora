@@ -13,7 +13,7 @@ import com.pandora.modular.home.bean.HomeVO;
 
 public interface HomeContract {
     interface View extends BaseView<Presenter> {
-        void setData(HomeBean data);
+        void setData(String homeJson);
     }
 
     interface Presenter extends BasePresenter<View> {
