@@ -37,6 +37,7 @@ public class HomeBean {
     private List<String> aUrl;
     private List<String> aWords; // 广告文
     private String agent_download_url;
+    private String download_url;
     private String banner;
     private List<HomeData> data;
 
@@ -221,5 +222,13 @@ public class HomeBean {
 
     public void setTotal(String total) {
         this.total = total;
+    }
+
+    public String getDownload_url() {
+        return download_url;
+    }
+
+    public void setDownload_url(String download_url) {
+        this.download_url = download_url;
     }
 }

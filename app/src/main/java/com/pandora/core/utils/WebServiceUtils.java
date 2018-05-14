@@ -1,9 +1,5 @@
 package com.pandora.core.utils;
 
-import android.os.AsyncTask;
-
-import com.pandora.modular.OnFinishListener;
-
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;

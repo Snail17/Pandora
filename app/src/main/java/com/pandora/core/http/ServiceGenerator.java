@@ -1,25 +1,11 @@
 package com.pandora.core.http;
 
-import android.util.Log;
-
 import com.pandora.BuildConfig;
 import com.pandora.core.utils.LogUtils;
 
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
@@ -28,8 +14,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -40,7 +24,6 @@ public final class ServiceGenerator {
 
     // private static final String API_BASE_URI = "http://www.kuaidi100.com/";
 
-    private static final long TIMEOUT = 60;
 
     private static final Object INSTANCE_LOCK = new Object();
 
@@ -70,70 +53,15 @@ public final class ServiceGenerator {
      */
     private ServiceGenerator() {
 
-        sOkHttpClient = createOkHttpClient();
+        sOkHttpClient = MyOkHttpClient.getOkHttpClient();
         mRetrofitBuilder = new Retrofit.Builder()
                 .baseUrl(BuildConfig.API_BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create());
     }
 
-    /**
-     * @return s
-     */
-    private OkHttpClient createOkHttpClient() {
-
-        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-        httpClientBuilder
-                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
-                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
-                .addInterceptor(new TokenRequestInterceptor())
-                .addInterceptor(new ReceivedCookiesInterceptor())
-                .addInterceptor(new AddCookiesInterceptor())
-                .addNetworkInterceptor(new LoggingInterceptor())
-        ;
-
-        //https
-        try {
-
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            X509TrustManager trustManager = new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-
-                }
-
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return new X509Certificate[0];
-                }
-
-            };
-
-            sslContext.init(null, new TrustManager[]{trustManager}, new SecureRandom());
-            if (!BuildConfig.FLAVOR.equals("product")) {
-                httpClientBuilder.sslSocketFactory(sslContext.getSocketFactory());
-            }
-
-        } catch (NoSuchAlgorithmException e) {
-            Log.i(TAG, e.getMessage());
-        } catch (KeyManagementException e) {
-            Log.i(TAG, e.getMessage());
-        }
-
-        httpClientBuilder.hostnameVerifier(new HostnameVerifier() {
-            @Override
-            public boolean verify(String hostname, SSLSession session) {
-                return true;
-            }
-        });
-        OkHttpClient client = httpClientBuilder.build();
-
-        return client;
+    public Retrofit.Builder getRetrofitBuilder() {
+        return mRetrofitBuilder;
     }
 
     /**

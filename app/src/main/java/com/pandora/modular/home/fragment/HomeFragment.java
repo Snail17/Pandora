@@ -1,8 +1,10 @@
 package com.pandora.modular.home.fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,15 +21,23 @@ import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
+import com.pandora.modular.home.api.HomeAPI;
+import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
 import com.pandora.modular.home.prenster.DaggerHomeComponent;
 import com.pandora.modular.home.prenster.HomeContract;
 import com.pandora.modular.home.prenster.HomeModule;
 import com.pandora.modular.home.prenster.HomePresenter;
+import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.widght.RecyclerBanner;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +45,10 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +75,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     private HomeBean mHomeBean;
     private List<HomeBean.HomeData> mHomeData;
     private List<RecyclerBanner.BannerEntity> urls = new ArrayList<>();
+    private List<String> mAWords = new ArrayList<>();
 
     public HomeFragment() {
     }
@@ -117,12 +132,40 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
 
-    public void update() {
-        urls.add(new Entity("http://pic.58pic.com/58pic/12/46/13/03B58PICXxE.jpg"));
-        urls.add(new Entity("http://www.jitu5.com/uploads/allimg/121120/260529-121120232T546.jpg"));
-        urls.add(new Entity("http://pic34.nipic.com/20131025/2531170_132447503000_2.jpg"));
-        urls.add(new Entity("http://img5.imgtn.bdimg.com/it/u=3462610901,3870573928&fm=206&gp=0.jpg"));
+    public void updateBanner() {
+//        urls.add(new Entity("http://pic.58pic.com/58pic/12/46/13/03B58PICXxE.jpg"));
+//        urls.add(new Entity("http://www.jitu5.com/uploads/allimg/121120/260529-121120232T546.jpg"));
+//        urls.add(new Entity("http://pic34.nipic.com/20131025/2531170_132447503000_2.jpg"));
+//        urls.add(new Entity("http://img5.imgtn.bdimg.com/it/u=3462610901,3870573928&fm=206&gp=0.jpg"));
+        for (int i = 0; i < mHomeBean.getaUrl().size(); i++) {
+            urls.add(new Entity(mHomeBean.getaUrl().get(i)));
+        }
         mBanner.setDatas(urls);
+        mAWords.addAll(mHomeBean.getaWords());
+    }
+
+    public void appUpdate() {
+        if ("Y".equals(mHomeBean.getIsUpdate())) {
+            final ProgressDialog dialog = new ProgressDialog(HomeFragment.this.getContext());
+            dialog.setProgressNumberFormat("%1d KB/%2d KB");
+            dialog.setTitle("下载");
+            dialog.setMessage("正在下载，请稍后...");
+            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            dialog.setCancelable(false);
+            dialog.show();
+
+            HomeAPIPModel.getInstance().downloadFileProgress(new ProgressListener() {
+                @Override
+                public void onProgress(long currentBytes, long contentLength, boolean done) {
+                    LogUtils.e(contentLength + "");
+                    dialog.setMax((int) (contentLength / 1024));
+                    dialog.setProgress((int) (currentBytes / 1024));
+                    if (done) {
+                        dialog.dismiss();
+                    }
+                }
+            }, callBack, mHomeBean.getDownload_url());
+        }
     }
 
     private class Entity implements RecyclerBanner.BannerEntity {
@@ -141,17 +184,46 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     @Override
     public void setData(String homeJson) {
+        LogUtils.e("home" + homeJson);
         if (!TextUtils.isEmpty(homeJson)) {
-            LogUtils.e("home" + homeJson);
             Gson gson = new Gson();
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
             introduceText.setText(mHomeBean.getOnlineService());
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
-            update();
+            updateBanner();
+            appUpdate();
         }
     }
+
+    Callback<ResponseBody> callBack = new Callback<ResponseBody>() {
+        @Override
+        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            try {
+                InputStream is = response.body().byteStream();
+                File file = new File(Environment.getExternalStorageDirectory(), "12345.apk");
+                FileOutputStream fos = new FileOutputStream(file);
+                BufferedInputStream bis = new BufferedInputStream(is);
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = bis.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                    fos.flush();
+                }
+                fos.close();
+                bis.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+        }
+    };
 
 
 }

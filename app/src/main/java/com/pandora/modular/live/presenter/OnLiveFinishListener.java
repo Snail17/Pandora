@@ -1,7 +1,6 @@
 package com.pandora.modular.live.presenter;
 
-import com.pandora.modular.OnFinishListener;
-import com.pandora.modular.live.bean.LiveBean;
+import com.pandora.core.base.OnFinishListener;
 
 /**
  * Created by Administrator on 2018/5/12.

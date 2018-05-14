@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.LogUtils;
-import com.pandora.modular.OnFinishListener;
+import com.pandora.core.base.OnFinishListener;
 import com.pandora.modular.purchase.bean.PurchaseBean;
 import com.pandora.modular.purchase.bean.PurchaseVO;
 import com.pandora.modular.purchase.model.PurchaseModel;
@@ -61,8 +61,8 @@ public class PurchaseFragment extends BaseFragment {
         new PurchaseModel().getData(purchaseVO, new OnPurchaseFinishListener() {
             @Override
             public void onSuccess(String resultJson) {
-                if (TextUtils.isEmpty(resultJson)) {
-                    LogUtils.e("purchase" + resultJson);
+                LogUtils.e("purchase" + resultJson);
+                if (!TextUtils.isEmpty(resultJson)) {
                     Gson gson = new Gson();
                     mPurchaseBean = gson.fromJson(resultJson, PurchaseBean.class);
                     Toast.makeText(PurchaseFragment.this.getContext(), mPurchaseBean.getIsOk(), Toast.LENGTH_SHORT).show();

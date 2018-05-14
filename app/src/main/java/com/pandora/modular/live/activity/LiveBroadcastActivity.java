@@ -83,9 +83,9 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
 
     @Override
     public void setData(String liveJson) {
+        LogUtils.e("live" + liveJson);
         if (!TextUtils.isEmpty(liveJson)) {
             Gson gson = new Gson();
-            LogUtils.e("live" + liveJson);
             mLiveBean = gson.fromJson(liveJson, LiveBean.class);//对于javabean直接给出class实例;
             mLiveData.addAll(mLiveBean.getData());
             mAdapter.notifyDataSetChanged();

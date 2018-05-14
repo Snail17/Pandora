@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.WebServiceUtils;
-import com.pandora.modular.OnFinishListener;
+import com.pandora.core.base.OnFinishListener;
 
 /**
  * Created by Administrator on 2018/5/14.
