@@ -3,9 +3,12 @@ package com.pandora.modular.home.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -20,6 +23,7 @@ import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.LogUtils;
+import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.api.HomeAPI;
 import com.pandora.modular.home.api.HomeAPIPModel;
@@ -161,11 +165,37 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                     dialog.setMax((int) (contentLength / 1024));
                     dialog.setProgress((int) (currentBytes / 1024));
                     if (done) {
+                        install();
                         dialog.dismiss();
                     }
                 }
-            }, callBack, mHomeBean.getDownload_url());
+            }, mHomeBean.getDownload_url());
         }
+    }
+
+    private void install() {
+//        String mPathname = Environment.getExternalStorageDirectory().getAbsolutePath() + "/apk/" + "Pandora.apk";
+        File file = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
+                        + File.separator + "Android" + File.separator + "Pandora.apk");
+
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        // 由于没有在Activity环境下启动Activity,设置下面的标签
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //判读版本是否在7.0以上
+            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
+            Uri apkUri =
+                    FileProvider.getUriForFile(PandoraApplication.getInstance().getApplicationContext(),
+                            "com.pandora.fileprovider", file);
+            //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
+        } else {
+            intent.setDataAndType(Uri.fromFile(file),
+                    "application/vnd.android.package-archive");
+        }
+        startActivity(intent);
+
     }
 
     private class Entity implements RecyclerBanner.BannerEntity {
@@ -193,37 +223,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
             updateBanner();
-            appUpdate();
         }
+        appUpdate();
     }
-
-    Callback<ResponseBody> callBack = new Callback<ResponseBody>() {
-        @Override
-        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-            try {
-                InputStream is = response.body().byteStream();
-                File file = new File(Environment.getExternalStorageDirectory(), "12345.apk");
-                FileOutputStream fos = new FileOutputStream(file);
-                BufferedInputStream bis = new BufferedInputStream(is);
-                byte[] buffer = new byte[1024];
-                int len;
-                while ((len = bis.read(buffer)) != -1) {
-                    fos.write(buffer, 0, len);
-                    fos.flush();
-                }
-                fos.close();
-                bis.close();
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        @Override
-        public void onFailure(Call<ResponseBody> call, Throwable t) {
-
-        }
-    };
 
 
 }

@@ -153,7 +153,8 @@ public class HomeBean {
     }
 
     public String getIsUpdate() {
-        return isUpdate;
+//        return isUpdate;
+        return "Y";
     }
 
     public void setIsUpdate(String isUpdate) {
@@ -225,7 +226,8 @@ public class HomeBean {
     }
 
     public String getDownload_url() {
-        return download_url;
+//        return download_url;
+        return "http://a7.pc6.com/lyx6/moliyunosb.apk";
     }
 
     public void setDownload_url(String download_url) {

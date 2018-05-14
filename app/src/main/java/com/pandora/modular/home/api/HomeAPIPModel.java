@@ -1,5 +1,7 @@
 package com.pandora.modular.home.api;
 
+import android.os.Environment;
+
 import com.pandora.BuildConfig;
 import com.pandora.core.http.HttpResponseFunc;
 import com.pandora.core.http.MyOkHttpClient;
@@ -10,7 +12,11 @@ import com.pandora.modular.home.bean.HomeVO;
 import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.util.ProgressResponseBody;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +25,9 @@ import io.reactivex.Observable;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -33,6 +41,9 @@ public class HomeAPIPModel {
     private static HomeAPI sHomeService;
     private static HomeAPIPModel sHomeModel;
     private boolean isDebugger;
+
+    private String DOWNLOADPATH = "/apk/";//下载路径，如果不定义自己的路径，6.0的手机不自动安装
+
 
     private HomeAPIPModel() {
     }
@@ -76,7 +87,7 @@ public class HomeAPIPModel {
 
     }
 
-    public void downloadFileProgress(final ProgressListener listener, Callback<ResponseBody> callback, String url) {
+    public void downloadFileProgress(final ProgressListener listener, String url) {
         //okhttp拦截
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -95,10 +106,47 @@ public class HomeAPIPModel {
         HomeAPI downloadRetrofit = retrofitBuilder.client(client).build().create(HomeAPI.class);
 
 
-        downloadRetrofit.downloadFile(url).enqueue(callback);
-
-
+        downloadRetrofit.downloadFile(url).enqueue(callBack);
     }
+
+    private String mPathname;
+    Callback<ResponseBody> callBack = new Callback<ResponseBody>() {
+        @Override
+        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            try {
+                String storagePath;
+                File storageDir;
+                InputStream is = response.body().byteStream();
+//                mPathname = Environment.getExternalStorageDirectory().getAbsolutePath() + DOWNLOADPATH + "Pandora.apk";
+                storagePath =
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
+                                + File.separator + "Android";
+                storageDir = new File(storagePath);
+                File file = File.createTempFile("Pandora", ".apk", storageDir);
+
+                storageDir.mkdirs();
+//                File file = new File(mPathname);
+                FileOutputStream fos = new FileOutputStream(file);
+                BufferedInputStream bis = new BufferedInputStream(is);
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = bis.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                    fos.flush();
+                }
+                fos.close();
+                bis.close();
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+        }
+    };
 
 
 }
