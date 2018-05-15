@@ -5,7 +5,7 @@ android {
         Pandora {
             keyAlias 'Pandora'
             keyPassword '123456'
-            storeFile file('C:/MySelf/MyCodoGit/Pandora/Pandora.jks')
+            storeFile file('../Pandora.jks')
             storePassword '123456'
         }
     }
