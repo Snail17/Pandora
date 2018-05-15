@@ -101,7 +101,7 @@ public class LoggingInterceptor implements Interceptor {
 
             if (contentLength != 0) {
                 LogUtils.e("");
-                LogUtils.e("Response->json:"+buffer.clone().readString(charset));
+//                LogUtils.e("Response->json:"+buffer.clone().readString(charset));
             }
 
         } else {

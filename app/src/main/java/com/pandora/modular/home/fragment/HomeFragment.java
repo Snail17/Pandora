@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -160,7 +161,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                     if (done) {
                         try {
                             install();
-                            AppManager.getAppManager().AppExit(HomeFragment.this.getContext(), false);
+//                            AppManager.getAppManager().AppExit(HomeFragment.this.getContext(), false);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -179,15 +180,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         // 由于没有在Activity环境下启动Activity,设置下面的标签
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setType("application/vnd.android.package-archive");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //判读版本是否在7.0以上
             //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-            Uri apkUri = FileProvider.getUriForFile(PandoraApplication.getInstance().getApplicationContext(),
+            Uri apkUri = FileProvider.getUriForFile(HomeFragment.this.getContext(),
                     "com.pandora.fileprovider", photoFile);
             //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
         } else {
-//
             intent.setDataAndType(Uri.fromFile(photoFile),
                     "application/vnd.android.package-archive");
         }
@@ -219,7 +220,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
-//            appUpdate();
+            appUpdate();
             updateBanner();
         }
     }

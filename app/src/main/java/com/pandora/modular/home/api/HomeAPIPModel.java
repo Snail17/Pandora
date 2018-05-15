@@ -117,12 +117,7 @@ public class HomeAPIPModel {
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             try {
                 InputStream is = response.body().byteStream();
-//                File storageDir = new File(Environment.getExternalStorageDirectory(), "download/Android");
-//                storageDir.mkdirs();
-//                File file = File.createTempFile("Pandora", ".apk", storageDir);
                 File storageDir = new File(PandoraApplication.getInstance().getApplicationContext().getFilesDir(), "Android");
-//        File photoFile = File.createTempFile("Pandora", ".apk", storageDir);
-//                File photoFile = new File(storageDir, "Pandora.apk ");
                 File file = new File(storageDir, "Pandora.apk ");
                 LogUtils.e(file.getAbsolutePath());
                 FileOutputStream fos = new FileOutputStream(file);

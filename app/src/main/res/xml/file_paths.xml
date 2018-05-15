@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <paths>
-        <external-path path="hm_apk" name="download/Android"/>
         <files-path  name="apk" path="Android" />
 
         <!--<external-path name="cache" path="Cache/" />-->
