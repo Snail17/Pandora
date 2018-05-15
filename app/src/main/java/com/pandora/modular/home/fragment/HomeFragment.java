@@ -130,15 +130,16 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
 
     public void updateBanner() {
-        urls.add(new Entity("http://pic.58pic.com/58pic/12/46/13/03B58PICXxE.jpg"));
-        urls.add(new Entity("http://www.jitu5.com/uploads/allimg/121120/260529-121120232T546.jpg"));
-        urls.add(new Entity("http://pic34.nipic.com/20131025/2531170_132447503000_2.jpg"));
-        urls.add(new Entity("http://img5.imgtn.bdimg.com/it/u=3462610901,3870573928&fm=206&gp=0.jpg"));
-//        for (int i = 0; i < mHomeBean.getaUrl().size(); i++) {
-//            urls.add(new Entity(mHomeBean.getaUrl().get(i)));
-//        }
+//        urls.add(new Entity("http://pic.58pic.com/58pic/12/46/13/03B58PICXxE.jpg"));
+//        urls.add(new Entity("http://www.jitu5.com/uploads/allimg/121120/260529-121120232T546.jpg"));
+//        urls.add(new Entity("http://pic34.nipic.com/20131025/2531170_132447503000_2.jpg"));
+//        urls.add(new Entity("http://img5.imgtn.bdimg.com/it/u=3462610901,3870573928&fm=206&gp=0.jpg"));
+        for (int i = 0; i < mHomeBean.getaUrl().size(); i++) {
+            urls.add(new Entity(mHomeBean.getaUrl().get(i)));
+        }
         mBanner.setDatas(urls);
-//        mAWords.addAll(mHomeBean.getaWords());
+        mAWords.addAll(mHomeBean.getaWords());
+//        mBanner.setWords(mHomeBean.getaWords());
     }
 
     public void appUpdate() {
@@ -154,7 +155,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             HomeAPIPModel.getInstance().downloadFileProgress(new ProgressListener() {
                 @Override
                 public void onProgress(long currentBytes, long contentLength, boolean done) {
-                    LogUtils.e(contentLength + "");
                     dialog.setMax((int) (contentLength / 1024));
                     dialog.setProgress((int) (currentBytes / 1024));
                     if (done) {
@@ -172,9 +172,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     private void install() throws IOException {
-//        File storageDir = new File(Environment.getExternalStorageDirectory(), "download/Android");
         File storageDir = new File(this.getContext().getFilesDir(), "Android");
-//        File photoFile = File.createTempFile("Pandora", ".apk", storageDir);
         File photoFile = new File(storageDir, "Pandora.apk ");
         LogUtils.e(photoFile.getAbsolutePath());
 
@@ -213,6 +211,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void setData(String homeJson) {
         LogUtils.e("home" + homeJson);
+
         if (!TextUtils.isEmpty(homeJson)) {
             Gson gson = new Gson();
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
@@ -220,13 +219,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
-        }
-        updateBanner();
-//        appUpdate();
-        try {
-            install();
-        } catch (Exception e) {
-            e.printStackTrace();
+//            appUpdate();
+            updateBanner();
         }
     }
 

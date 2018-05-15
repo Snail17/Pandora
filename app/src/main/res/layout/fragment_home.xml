@@ -38,7 +38,8 @@
                 android:background="@color/transparent_gray_80"
                 android:padding="@dimen/default_dimen_2"
                 android:textColor="@color/white_ff"
-                android:textSize="@dimen/default_sp_12" />
+                android:textSize="@dimen/default_sp_12"
+                android:visibility="visible" />
 
         </FrameLayout>
 
