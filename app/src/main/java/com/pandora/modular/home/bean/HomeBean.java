@@ -227,7 +227,7 @@ public class HomeBean {
 
     public String getDownload_url() {
 //        return download_url;
-        return "http://a7.pc6.com/lyx6/moliyunosb.apk";
+        return "http://dldir1.qq.com/weixin/android/weixin666android1300.apk";
     }
 
     public void setDownload_url(String download_url) {

@@ -6,7 +6,9 @@ import com.pandora.BuildConfig;
 import com.pandora.core.http.HttpResponseFunc;
 import com.pandora.core.http.MyOkHttpClient;
 import com.pandora.core.http.ServiceGenerator;
+import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.RxUtils;
+import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
 import com.pandora.modular.home.util.ProgressListener;
@@ -114,18 +116,15 @@ public class HomeAPIPModel {
         @Override
         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
             try {
-                String storagePath;
-                File storageDir;
                 InputStream is = response.body().byteStream();
-//                mPathname = Environment.getExternalStorageDirectory().getAbsolutePath() + DOWNLOADPATH + "Pandora.apk";
-                storagePath =
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
-                                + File.separator + "Android";
-                storageDir = new File(storagePath);
-                File file = File.createTempFile("Pandora", ".apk", storageDir);
-
-                storageDir.mkdirs();
-//                File file = new File(mPathname);
+//                File storageDir = new File(Environment.getExternalStorageDirectory(), "download/Android");
+//                storageDir.mkdirs();
+//                File file = File.createTempFile("Pandora", ".apk", storageDir);
+                File storageDir = new File(PandoraApplication.getInstance().getApplicationContext().getFilesDir(), "Android");
+//        File photoFile = File.createTempFile("Pandora", ".apk", storageDir);
+//                File photoFile = new File(storageDir, "Pandora.apk ");
+                File file = new File(storageDir, "Pandora.apk ");
+                LogUtils.e(file.getAbsolutePath());
                 FileOutputStream fos = new FileOutputStream(file);
                 BufferedInputStream bis = new BufferedInputStream(is);
                 byte[] buffer = new byte[1024];

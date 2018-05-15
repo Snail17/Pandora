@@ -15,13 +15,10 @@ import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
 import com.pandora.modular.live.bean.LiveBean;
 import com.pandora.modular.live.bean.LiveVO;
-import com.pandora.modular.live.model.LiveModel;
 import com.pandora.modular.live.presenter.DaggerLiveComponent;
 import com.pandora.modular.live.presenter.LiveContract;
 import com.pandora.modular.live.presenter.LiveModule;
 import com.pandora.modular.live.presenter.LivePresenter;
-
-import org.ksoap2.serialization.SoapObject;
 
 import java.util.ArrayList;
 import java.util.List;

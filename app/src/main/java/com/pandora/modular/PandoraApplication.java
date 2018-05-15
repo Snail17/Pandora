@@ -3,7 +3,6 @@ package com.pandora.modular;
 import android.app.Application;
 import android.content.Context;
 
-import io.vov.vitamio.Vitamio;
 
 
 public class PandoraApplication extends Application {

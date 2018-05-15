@@ -1,67 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.pandora">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.pandora">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- 持iBeancon 需要蓝 权限 -->
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <!-- 持iBeancon 需要 权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
-        android:name="com.pandora.modular.PandoraApplication"
+        android:name=".modular.PandoraApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
-        tools:replace="label,allowBackup,icon">
-        <activity android:name=".modular.main.activity.MainActivity"></activity>
-        <activity android:name=".modular.live.activity.LiveBroadcastActivity"/>
-        <activity android:name=".modular.login.activity.LoginActivity"/>
-        <activity android:name=".modular.splash.activity.SplashActivity">
+        tools:node="replace"
+        tools:replace="allowBackup,icon,theme,label">
+        <activity android:name=".modular.main.activity.MainActivity" />
+        <activity android:name=".modular.live.activity.LiveBroadcastActivity" />
+        <activity android:name=".modular.login.activity.LoginActivity" />
+        <activity
+            android:name=".modular.splash.activity.SplashActivity"
+            android:theme="@style/CustomAppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!-- <meta-data android:name="com.pandora.core.glide.OkHttpGlideModule" -->
-        <!-- android:value="GlideModule"/> -->
-
-        <activity
-            android:name="io.vov.vitamio.activity.InitActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity
-            android:name=".modular.live.activity.LiveActivity"
-            android:process=":vitamio"
-            android:theme="@style/CustomAppTheme"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.pandora.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
-            <!--元数据-->
+
+            <!-- 元数据 -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
+        <activity
+            android:name=".modular.live.activity.LiveActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape">
+
+        </activity>
     </application>
 
 </manifest>
