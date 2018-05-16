@@ -41,6 +41,7 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     private LiveRecyclerAdapter mAdapter;
     private String mPlatformNo;
 
+    private boolean isLiveUrl = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,9 +70,9 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
-                intent.putExtra("videoUrl", mLiveData.get(position).getUrl());
-                LiveBroadcastActivity.this.startActivity(intent);
+                LiveVO liveVO = new LiveVO("INIT", "Android", mLiveData.get(position).getBh());
+                isLiveUrl = true;
+                mLivePresenter.getData(liveVO);
             }
         });
         LiveVO liveVO = new LiveVO("INIT", "Android", mPlatformNo);
@@ -83,9 +84,15 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         LogUtils.e("live" + liveJson);
         if (!TextUtils.isEmpty(liveJson)) {
             Gson gson = new Gson();
-            mLiveBean = gson.fromJson(liveJson, LiveBean.class);//对于javabean直接给出class实例;
-            mLiveData.addAll(mLiveBean.getData());
-            mAdapter.notifyDataSetChanged();
+            if (!isLiveUrl) {
+                mLiveBean = gson.fromJson(liveJson, LiveBean.class);//对于javabean直接给出class实例;
+                mLiveData.addAll(mLiveBean.getData());
+                mAdapter.notifyDataSetChanged();
+            } else {
+                Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
+                intent.putExtra("videoPath", "");
+                LiveBroadcastActivity.this.startActivity(intent);
+            }
         }
     }
 }

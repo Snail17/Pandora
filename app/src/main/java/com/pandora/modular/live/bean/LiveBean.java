@@ -17,9 +17,18 @@ import java.util.List;
 
 // 直播列表
 public class LiveBean {
+    private String count;
     private String msg;
-    private String result;
+    private String total;
     private List<LiveData> data;
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
 
     public String getMsg() {
         return msg;
@@ -29,12 +38,12 @@ public class LiveBean {
         this.msg = msg;
     }
 
-    public String getResult() {
-        return result;
+    public String getTotal() {
+        return total;
     }
 
-    public void setResult(String result) {
-        this.result = result;
+    public void setTotal(String total) {
+        this.total = total;
     }
 
     public List<LiveData> getData() {
@@ -46,41 +55,41 @@ public class LiveBean {
     }
 
     public class LiveData {
-        private String title;
-        private String img;
-        private String url;
-        private String pep;
+        private String anchor;
+        private String bh;
+        private String image;
+        private String name;
 
-        public String getTitle() {
-            return title;
+        public String getAnchor() {
+            return anchor;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
+        public void setAnchor(String anchor) {
+            this.anchor = anchor;
         }
 
-        public String getImg() {
-            return img;
+        public String getBh() {
+            return bh;
         }
 
-        public void setImg(String img) {
-            this.img = img;
+        public void setBh(String bh) {
+            this.bh = bh;
         }
 
-        public String getUrl() {
-            return url;
+        public String getImage() {
+            return image;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setImage(String image) {
+            this.image = image;
         }
 
-        public String getPep() {
-            return pep;
+        public String getName() {
+            return name;
         }
 
-        public void setPep(String pep) {
-            this.pep = pep;
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

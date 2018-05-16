@@ -30,6 +30,7 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         setContentView(R.layout.activity_live_test);
         mSurfaceView = (SurfaceView) findViewById(R.id.play_video);
 
+        path = getIntent().getStringExtra("videoPath");
         mIjkMediaPlayer = new IjkMediaPlayer();
         // 当播放器加载网络的视频资源时,会在内部进行网络访问
         mIjkMediaPlayer.setOnPreparedListener(this);
