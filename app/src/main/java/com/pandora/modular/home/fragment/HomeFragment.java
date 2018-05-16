@@ -21,10 +21,8 @@ import android.widget.Toast;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.pandora.R;
-import com.pandora.core.base.AppManager;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.LogUtils;
-import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
@@ -38,7 +36,6 @@ import com.pandora.modular.home.widght.RecyclerBanner;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +49,7 @@ import butterknife.ButterKnife;
  */
 public class HomeFragment extends BaseFragment implements HomeContract.View {
 
+    public static String downloadUpdateApkFilePath = "";
 
     @BindView(R.id.tv_home_top_introduce)
     TextView introduceText;
@@ -144,6 +142,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
 
     public void appUpdate() {
         if ("Y".equals(mHomeBean.getIsUpdate())) {
+            File storageDir = new File(Environment.getExternalStorageDirectory().toString(), "Android");
+            downloadUpdateApkFilePath = storageDir.getPath()
+                    + File.separator
+                    + HomeFragment.this.getContext().getPackageName()
+                    + "_" + "Pandora" + ".apk";
             final ProgressDialog dialog = new ProgressDialog(HomeFragment.this.getContext());
             dialog.setProgressNumberFormat("%1d KB/%2d KB");
             dialog.setTitle("下载");
@@ -158,40 +161,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
                     dialog.setMax((int) (contentLength / 1024));
                     dialog.setProgress((int) (currentBytes / 1024));
                     if (done) {
-                        try {
-                            install();
-                            AppManager.getAppManager().AppExit(HomeFragment.this.getContext(), false);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
                         dialog.dismiss();
                     }
                 }
             }, mHomeBean.getDownload_url());
         }
-    }
-
-    private void install() throws IOException {
-        File storageDir = new File(this.getContext().getFilesDir(), "Android");
-        File photoFile = new File(storageDir, "Pandora.apk ");
-        LogUtils.e(photoFile.getAbsolutePath());
-
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        // 由于没有在Activity环境下启动Activity,设置下面的标签
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) { //判读版本是否在7.0以上
-            //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件
-            Uri apkUri = FileProvider.getUriForFile(PandoraApplication.getInstance().getApplicationContext(),
-                    "com.pandora.fileprovider", photoFile);
-            //添加这一句表示对目标应用临时授权该Uri所代表的文件
-            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            intent.setDataAndType(apkUri, "application/vnd.android.package-archive");
-        } else {
-//
-            intent.setDataAndType(Uri.fromFile(photoFile),
-                    "application/vnd.android.package-archive");
-        }
-        startActivity(intent);
     }
 
     private class Entity implements RecyclerBanner.BannerEntity {
@@ -219,9 +193,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
-//            appUpdate();
             updateBanner();
+            appUpdate();
         }
+
     }
 
 }

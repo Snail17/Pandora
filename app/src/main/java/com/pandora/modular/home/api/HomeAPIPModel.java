@@ -1,25 +1,28 @@
 package com.pandora.modular.home.api;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 
 import com.pandora.BuildConfig;
+import com.pandora.core.base.AppManager;
 import com.pandora.core.http.HttpResponseFunc;
 import com.pandora.core.http.MyOkHttpClient;
 import com.pandora.core.http.ServiceGenerator;
-import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.RxUtils;
 import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
+import com.pandora.modular.home.fragment.HomeFragment;
 import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.util.ProgressResponseBody;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +31,6 @@ import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -89,7 +90,8 @@ public class HomeAPIPModel {
 
     }
 
-    public void downloadFileProgress(final ProgressListener listener, String url) {
+    @SuppressLint("StaticFieldLeak")
+    public void downloadFileProgress(final ProgressListener listener, final String url) {
         //okhttp拦截
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -105,47 +107,57 @@ public class HomeAPIPModel {
         }).build();
 
 
-        HomeAPI downloadRetrofit = retrofitBuilder.client(client).build().create(HomeAPI.class);
+        final HomeAPI downloadRetrofit = retrofitBuilder.client(client).build().create(HomeAPI.class);
 
-
-        downloadRetrofit.downloadFile(url).enqueue(callBack);
+        final Call<ResponseBody> call = downloadRetrofit.downloadFile(url);
+        startCall(call);
     }
 
-    private String mPathname;
-    Callback<ResponseBody> callBack = new Callback<ResponseBody>() {
-        @Override
-        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-            try {
-                InputStream is = response.body().byteStream();
-//                File storageDir = new File(Environment.getExternalStorageDirectory(), "download/Android");
-//                storageDir.mkdirs();
-//                File file = File.createTempFile("Pandora", ".apk", storageDir);
-                File storageDir = new File(PandoraApplication.getInstance().getApplicationContext().getFilesDir(), "Android");
-//        File photoFile = File.createTempFile("Pandora", ".apk", storageDir);
-//                File photoFile = new File(storageDir, "Pandora.apk ");
-                File file = new File(storageDir, "Pandora.apk ");
-                LogUtils.e(file.getAbsolutePath());
-                FileOutputStream fos = new FileOutputStream(file);
-                BufferedInputStream bis = new BufferedInputStream(is);
-                byte[] buffer = new byte[1024];
-                int len;
-                while ((len = bis.read(buffer)) != -1) {
-                    fos.write(buffer, 0, len);
-                    fos.flush();
-                }
-                fos.close();
-                bis.close();
-                is.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+    private void startCall(Call<ResponseBody> call) {
+        File storageDir = new File(Environment.getExternalStorageDirectory().toString(), "Android");
+        String apkName = PandoraApplication.getInstance().getApplicationContext().getPackageName()
+                + "_" + "Pandora" + ".apk";
+        call.enqueue(new FileCallback(storageDir.getAbsolutePath(), apkName) {
+
+
+            @Override
+            public void onSuccess(File file) {
+                super.onSuccess(file);
+                install(HomeFragment.downloadUpdateApkFilePath);
             }
-        }
 
-        @Override
-        public void onFailure(Call<ResponseBody> call, Throwable t) {
 
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                call.cancel();
+
+
+            }
+
+        });
+    }
+
+    private void install(String path) {
+        if (!TextUtils.isEmpty(path)) {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            File apkFile = new File(path);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(
+                        PandoraApplication.getInstance().getApplicationContext(),
+                        PandoraApplication.getInstance().getApplicationContext().getPackageName() + ".fileprovider",
+                        apkFile);
+                i.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            } else {
+                i.setDataAndType(Uri.fromFile(apkFile),
+                        "application/vnd.android.package-archive");
+            }
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            PandoraApplication.getInstance().getApplicationContext().startActivity(i);
+            AppManager.getAppManager().AppExit(PandoraApplication.getInstance().getApplicationContext(), false);
         }
-    };
+    }
 
 
 }

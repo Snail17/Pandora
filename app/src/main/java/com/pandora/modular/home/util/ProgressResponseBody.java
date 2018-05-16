@@ -84,12 +84,11 @@ public class ProgressResponseBody extends ResponseBody {
             public long read(Buffer sink, long byteCount) throws IOException {
                 long bytesRead = super.read(sink, byteCount);
                 totalBytesRead +=bytesRead!=-1?bytesRead:0;
-
                 Message msg = Message.obtain();
                 msg.what = UPDATE;
                 msg.obj =  new ProgressModel(totalBytesRead,contentLength(),totalBytesRead==contentLength());
                 myHandler.sendMessage(msg);
-                Log.i(TAG,"currentBytes=="+totalBytesRead+"==contentLength=="+contentLength());
+//                Log.i(TAG,"currentBytes=="+totalBytesRead+"==contentLength=="+contentLength());
                 return bytesRead;
             }
         };

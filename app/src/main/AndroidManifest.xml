@@ -47,11 +47,9 @@
             android:authorities="com.pandora.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
-
-            <!-- 元数据 -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/file_paths"/>
         </provider>
 
         <activity

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <paths>
-        <external-path path="hm_apk" name="download/Android"/>
-        <files-path  name="apk" path="Android" />
+        <external-path
+            name="Android"
+            path="hm_apk" />
+        <!--<files-path  name="apk" path="Android" />-->
 
         <!--<external-path name="cache" path="Cache/" />-->
         <!--&lt;!&ndash;代表外部存储区域的根目录下的文件 Environment.getExternalStorageDirectory()/DCIM/camerademo目录&ndash;&gt;-->
@@ -19,5 +21,8 @@
         <!--&lt;!&ndash;代表app 外部存储区域根目录下的文件 Context.getExternalCacheDir目录下的images目录&ndash;&gt;-->
         <!--&lt;!&ndash;/storage/emulated/0/Android/data/com.hm.camerademo/cache/images&ndash;&gt;-->
         <!--<external-cache-path name="hm_external_cache" path="" />-->
+        <root-path
+            name="root_path"
+            path="." />
     </paths>
 </resources>
