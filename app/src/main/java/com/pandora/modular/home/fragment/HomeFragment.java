@@ -1,6 +1,7 @@
 package com.pandora.modular.home.fragment;
 
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
@@ -23,6 +24,7 @@ import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.LogUtils;
+import com.pandora.core.utils.MPermissionUtils;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
@@ -122,7 +124,6 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     private void initClick() {
-
         introduceText.setSelected(true);
     }
 
@@ -141,30 +142,36 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
     public void appUpdate() {
-        if ("Y".equals(mHomeBean.getIsUpdate())) {
-            File storageDir = new File(Environment.getExternalStorageDirectory().toString(), "Android");
-            downloadUpdateApkFilePath = storageDir.getPath()
-                    + File.separator
-                    + HomeFragment.this.getContext().getPackageName()
-                    + "_" + "Pandora" + ".apk";
-            final ProgressDialog dialog = new ProgressDialog(HomeFragment.this.getContext());
-            dialog.setProgressNumberFormat("%1d KB/%2d KB");
-            dialog.setTitle("下载");
-            dialog.setMessage("正在下载，请稍后...");
-            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            dialog.setCancelable(false);
-            dialog.show();
+        // 如果没有权限
+        if (MPermissionUtils.checkPermissions(HomeFragment.this.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            if ("Y".equals(mHomeBean.getIsUpdate())) {
+                File storageDir = new File(Environment.getExternalStorageDirectory().toString(), "Android");
+                downloadUpdateApkFilePath = storageDir.getPath()
+                        + File.separator
+                        + HomeFragment.this.getContext().getPackageName()
+                        + "_" + "Pandora" + ".apk";
+                final ProgressDialog dialog = new ProgressDialog(HomeFragment.this.getContext());
+                dialog.setProgressNumberFormat("%1d KB/%2d KB");
+                dialog.setTitle("下载");
+                dialog.setMessage("正在下载，请稍后...");
+                dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                dialog.setCancelable(false);
+                dialog.show();
 
-            HomeAPIPModel.getInstance().downloadFileProgress(new ProgressListener() {
-                @Override
-                public void onProgress(long currentBytes, long contentLength, boolean done) {
-                    dialog.setMax((int) (contentLength / 1024));
-                    dialog.setProgress((int) (currentBytes / 1024));
-                    if (done) {
-                        dialog.dismiss();
+                HomeAPIPModel.getInstance().downloadFileProgress(new ProgressListener() {
+                    @Override
+                    public void onProgress(long currentBytes, long contentLength, boolean done) {
+                        dialog.setMax((int) (contentLength / 1024));
+                        dialog.setProgress((int) (currentBytes / 1024));
+                        if (done) {
+                            dialog.dismiss();
+                        }
                     }
-                }
-            }, mHomeBean.getDownload_url());
+                }, mHomeBean.getDownload_url());
+
+            } else {
+                Toast.makeText(HomeFragment.this.getContext(), "您没有SD权限", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

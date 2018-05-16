@@ -24,8 +24,7 @@ public class HomeRecyclerAdapter extends BaseQuickAdapter<HomeBean.HomeData, Hom
 
     @Override
     protected void convert(HomeViewHolder helper, HomeBean.HomeData item) {
-        String name = item.getName();
-        helper.cardItemName.setText(unicode2String("\\u82b1\\u4ed9\\u5b50"));
+        helper.cardItemName.setText(item.getName());
         helper.cardItemCount.setText(item.getAnchor());
         ImageLoaderUtils.displayRound(PandoraApplication.getInstance().getApplicationContext(),
                 helper.cardItemImage, item.getImage());

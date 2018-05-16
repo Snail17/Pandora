@@ -1,6 +1,7 @@
 package com.pandora.modular.main.activity;
 
 import android.Manifest;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.pandora.R;
@@ -39,10 +40,13 @@ public class MainActivity extends BaseActivity {
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
 
-    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_SETTINGS,Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    protected String[] needPermissions26 = {Manifest.permission.REQUEST_INSTALL_PACKAGES};
+
 
 
     private BaseFragment oldFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +66,9 @@ public class MainActivity extends BaseActivity {
         homeFragment = new HomeFragment();
         oldFragment = homeFragment;
         switchFragment(HOME_INDEX);
+        if (Build.VERSION.SDK_INT >= 26) {
+            MPermissionUtils.requestPermissionsResult(this, 1, needPermissions26, permissionListener);
+        }
         MPermissionUtils.requestPermissionsResult(this, 1, needPermissions, permissionListener);
     }
 

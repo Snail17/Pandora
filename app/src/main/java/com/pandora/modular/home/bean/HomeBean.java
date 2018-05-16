@@ -153,8 +153,8 @@ public class HomeBean {
     }
 
     public String getIsUpdate() {
-//        return isUpdate;
-        return "Y";
+        return isUpdate;
+//        return "Y";
     }
 
     public void setIsUpdate(String isUpdate) {
@@ -226,8 +226,8 @@ public class HomeBean {
     }
 
     public String getDownload_url() {
-//        return download_url;
-        return "http://dldir1.qq.com/weixin/android/weixin666android1300.apk";
+        return download_url;
+//        return "http://dldir1.qq.com/weixin/android/weixin666android1300.apk";
     }
 
     public void setDownload_url(String download_url) {
