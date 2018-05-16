@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
 
-    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE,Manifest.permission.ACCESS_NETWORK_STATE, Manifest.permission.READ_EXTERNAL_STORAGE};
+    protected String[] needPermissions = {Manifest.permission.READ_PHONE_STATE,Manifest.permission.WRITE_SETTINGS,Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
     private BaseFragment oldFragment;
