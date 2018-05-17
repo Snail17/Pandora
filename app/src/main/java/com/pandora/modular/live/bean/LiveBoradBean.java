@@ -40,6 +40,15 @@ public class LiveBoradBean {
         private String title;
         private String img;
         private String url;
+        private String pep;
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
 
         public String getImg() {
             return img;
@@ -55,6 +64,14 @@ public class LiveBoradBean {
 
         public void setUrl(String url) {
             this.url = url;
+        }
+
+        public String getPep() {
+            return pep;
+        }
+
+        public void setPep(String pep) {
+            this.pep = pep;
         }
     }
 }

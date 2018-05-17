@@ -74,7 +74,7 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                LiveVO liveVO = new LiveVO("PLATFORM", "Android", mLiveData.get(position).getBh());
+                LiveVO liveVO = new LiveVO("PLATFORM", "Android", mFromBH);
                 isLiveUrl = true;
                 clickPosition = position;
                 mLivePresenter.getData(liveVO);

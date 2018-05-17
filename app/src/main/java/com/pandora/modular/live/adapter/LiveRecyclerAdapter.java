@@ -21,9 +21,9 @@ public class LiveRecyclerAdapter extends BaseQuickAdapter<LiveBean.LiveData, Liv
 
     @Override
     protected void convert(LiveViewHolder helper, LiveBean.LiveData item) {
-        helper.cardItemCount.setText(item.getAnchor());
-        helper.cardItemContent.setText(item.getName());
+        helper.cardItemCount.setText(item.getTitle());
+        helper.cardItemContent.setText(item.getPep());
         ImageLoaderUtils.display(PandoraApplication.getInstance().getApplicationContext(),
-                helper.cardItemImage, item.getImage());
+                helper.cardItemImage, item.getImg());
     }
 }

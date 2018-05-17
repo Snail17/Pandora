@@ -2,6 +2,7 @@ package com.pandora.modular.live.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -21,6 +22,7 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     String path = "http://www.modrails.com/videos/passenger_nginx.mov";
     private SurfaceView mSurfaceView;
     private IjkMediaPlayer mIjkMediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +32,10 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         setContentView(R.layout.activity_live_test);
         mSurfaceView = (SurfaceView) findViewById(R.id.play_video);
 
-        path = getIntent().getStringExtra("videoPath");
+        String videoPath = getIntent().getStringExtra("videoPath");
+        if (!TextUtils.isEmpty(videoPath)) {
+            path = videoPath;
+        }
         mIjkMediaPlayer = new IjkMediaPlayer();
         // 当播放器加载网络的视频资源时,会在内部进行网络访问
         mIjkMediaPlayer.setOnPreparedListener(this);

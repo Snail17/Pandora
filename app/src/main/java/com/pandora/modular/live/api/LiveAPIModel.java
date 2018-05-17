@@ -45,8 +45,8 @@ public class LiveAPIModel {
             List<LiveBean.LiveData> liveData = new ArrayList<>();
             for (int i = 0; i < 30; i++) {
                 LiveBean.LiveData data = liveBean.new LiveData();
-                data.setName("item" + i);
-                data.setAnchor(3 * i + "999");
+                data.setTitle("item" + i);
+                data.setPep(3 * i + "999");
                 liveData.add(data);
             }
             liveBean.setData(liveData);
