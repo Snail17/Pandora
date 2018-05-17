@@ -44,3 +44,6 @@ getWindow().setStatusBarColor(Color.parseColor("#f8f8f8")
 ### 透明效果处理  https://blog.csdn.net/Memories_Code/article/details/72821775
 
 ### Glide 引入包重复问题 以及 使用自定义的Modeule问题
+
+### 强制更新下载安装 问题 8.0 适配 https://blog.csdn.net/kac930/article/details/79131671
+Android7.0 以上安装失败 原因： 啊啊啊啊啊

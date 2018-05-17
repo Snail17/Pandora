@@ -14,6 +14,7 @@ import com.pandora.core.base.BaseActivity;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
 import com.pandora.modular.live.bean.LiveBean;
+import com.pandora.modular.live.bean.LiveBoradBean;
 import com.pandora.modular.live.bean.LiveVO;
 import com.pandora.modular.live.presenter.DaggerLiveComponent;
 import com.pandora.modular.live.presenter.LiveContract;
@@ -37,11 +38,14 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     LivePresenter mLivePresenter;
 
     private LiveBean mLiveBean;
+    private LiveBoradBean mLiveBoardBean;
     private List<LiveBean.LiveData> mLiveData;
     private LiveRecyclerAdapter mAdapter;
     private String mPlatformNo;
 
     private boolean isLiveUrl = false;
+    private int clickPosition;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +74,13 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                LiveVO liveVO = new LiveVO("INIT", "Android", mLiveData.get(position).getBh());
+                LiveVO liveVO = new LiveVO("PLATFORM", "Android", mLiveData.get(position).getBh());
                 isLiveUrl = true;
+                clickPosition = position;
                 mLivePresenter.getData(liveVO);
             }
         });
-        LiveVO liveVO = new LiveVO("INIT", "Android", mPlatformNo);
+        LiveVO liveVO = new LiveVO("PLATFORM", "Android", mPlatformNo);
         mLivePresenter.getData(liveVO);
     }
 
@@ -89,8 +94,9 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 mLiveData.addAll(mLiveBean.getData());
                 mAdapter.notifyDataSetChanged();
             } else {
+                mLiveBoardBean = gson.fromJson(liveJson, LiveBoradBean.class);//对于javabean直接给出class实例;
                 Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
-                intent.putExtra("videoPath", "");
+                intent.putExtra("videoPath", mLiveBoardBean.getData().get(clickPosition).getUrl());
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         }
