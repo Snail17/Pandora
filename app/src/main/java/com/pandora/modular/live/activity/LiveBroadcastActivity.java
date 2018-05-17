@@ -41,7 +41,7 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     private LiveBoradBean mLiveBoardBean;
     private List<LiveBean.LiveData> mLiveData;
     private LiveRecyclerAdapter mAdapter;
-    private String mPlatformNo;
+    private String mFromBH;
 
     private boolean isLiveUrl = false;
     private int clickPosition;
@@ -56,7 +56,7 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     }
 
     private void initIntent() {
-        mPlatformNo = getIntent().getStringExtra("platformNo");
+        mFromBH = getIntent().getStringExtra("homeBH");
     }
 
     private void initData() {
@@ -80,7 +80,7 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 mLivePresenter.getData(liveVO);
             }
         });
-        LiveVO liveVO = new LiveVO("PLATFORM", "Android", mPlatformNo);
+        LiveVO liveVO = new LiveVO("PLATFORM", "Android", mFromBH);
         mLivePresenter.getData(liveVO);
     }
 

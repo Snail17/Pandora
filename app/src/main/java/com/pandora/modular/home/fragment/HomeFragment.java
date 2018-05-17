@@ -103,7 +103,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(HomeFragment.this.getContext(), LiveBroadcastActivity.class);
-                intent.putExtra("platformNo", mHomeData.get(position).getAnchor());
+                intent.putExtra("homeBH", mHomeData.get(position).getBh());
                 HomeFragment.this.getContext().startActivity(intent);
             }
         });
