@@ -66,6 +66,7 @@ public class SplashActivity extends BaseActivity {
         mHandler.post(mRunnable);
     }
 
+
     @OnClick(R.id.tv_splash_time)
     public void onclick(View view) {
         goToMain();

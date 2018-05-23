@@ -61,6 +61,7 @@ public class CustomDialog extends Dialog {
 
         public Builder(Context context) {
             this.context = context;
+            mCustomDialog = new CustomDialog(context);
         }
 
         public Builder setImageIcon(int imageIcon) {
@@ -108,13 +109,16 @@ public class CustomDialog extends Dialog {
             ImageView imageIV = (ImageView) layout.findViewById(R.id.iv_image_dialog);
             TextView titleTV = (TextView) layout.findViewById(R.id.tv_title_dialog);
             TextView contentTV = (TextView) layout.findViewById(R.id.tv_content_dialog);
-            Button cancelBtn = (Button) layout.findViewById(R.id.btn_cancel_dialog);
-            Button confirmBtn = (Button) layout.findViewById(R.id.btn_confirm_dialog);
+            TextView cancelBtn = (TextView) layout.findViewById(R.id.btn_cancel_dialog);
+            TextView confirmBtn = (TextView) layout.findViewById(R.id.btn_confirm_dialog);
 
             if (imageIcon != 0) {
                 imageIV.setImageResource(imageIcon);
+                imageIV.setVisibility(View.VISIBLE);
+            } else {
+                imageIV.setVisibility(View.GONE);
             }
-            imageIV.setVisibility(View.VISIBLE);
+
 
             if (titleText != null) {
                 titleTV.setText(titleText);
@@ -143,7 +147,7 @@ public class CustomDialog extends Dialog {
                 confirmBtn.setText(confirmText);
                 confirmBtn.setVisibility(View.VISIBLE);
                 if (positiveButtonClickListener != null) {
-                    cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    confirmBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             positiveButtonClickListener.onClick(mCustomDialog, DialogInterface.BUTTON_POSITIVE);
@@ -151,7 +155,7 @@ public class CustomDialog extends Dialog {
                     });
                 }
             } else {
-                cancelBtn.setVisibility(View.GONE);
+                confirmBtn.setVisibility(View.GONE);
             }
             mCustomDialog.setContentView(layout);
             mCustomDialog.setCanceledOnTouchOutside(false);

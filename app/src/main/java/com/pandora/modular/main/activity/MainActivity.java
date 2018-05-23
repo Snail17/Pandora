@@ -1,12 +1,17 @@
 package com.pandora.modular.main.activity;
 
 import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.core.base.BaseFragment;
+import com.pandora.core.globle.PandoraContants;
+import com.pandora.core.utils.CustomDialogUtils;
 import com.pandora.core.utils.DeviceIdUtils;
 import com.pandora.core.utils.FragmentUtil;
 import com.pandora.core.utils.MPermissionUtils;
@@ -44,7 +49,6 @@ public class MainActivity extends BaseActivity {
     protected String[] needPermissions26 = {Manifest.permission.REQUEST_INSTALL_PACKAGES};
 
 
-
     private BaseFragment oldFragment;
 
     @Override
@@ -54,6 +58,33 @@ public class MainActivity extends BaseActivity {
 
         initView();
         initData();
+        getDeviceId();
+        showDialog();
+    }
+
+    private void showDialog() {
+        CustomDialogUtils.showConfirmDialog(this,
+                0,
+                "是否加入资源更新群",
+                "软件现在永久免费，我资源加群！！！",
+                "取消",
+                "立即加入",
+                new CustomDialogUtils.OnDialogClick() {
+                    @Override
+                    public void cancelClick() {
+
+                    }
+
+                    @Override
+                    public void confirmClick() {
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(PandoraContants.qqUrl)));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(MainActivity.this, "请检查是否安装QQ", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 
@@ -146,7 +177,7 @@ public class MainActivity extends BaseActivity {
     MPermissionUtils.OnPermissionListener permissionListener = new MPermissionUtils.OnPermissionListener() {
         @Override
         public void onPermissionGranted() {
-            SPUtils.putString("devicedId", getDeviceId());
+//            SPUtils.putString("devicedId", getDeviceId());
 //            SPUtils.putBoolean(SPConstants.REQUEST_PERMISSIONS_SD, true);
 //            SPUtils.putBoolean(SPConstants.APP_FIRST_OPEN, false);
         }

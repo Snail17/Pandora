@@ -1,5 +1,6 @@
 package com.pandora.core.utils;
 
+import android.content.Context;
 import android.content.DialogInterface;
 
 import com.pandora.core.utils.widget.CustomDialog;
@@ -58,9 +59,9 @@ public class CustomDialogUtils {
      * @param confirmText
      * @param onDialogClick
      */
-    public static void showConfirmDialog(int imageResource, String title, String content,
+    public static void showConfirmDialog(Context context, int imageResource, String title, String content,
                                          String cancelTet, String confirmText, final OnDialogClick onDialogClick) {
-        new CustomDialog.Builder(PandoraApplication.getInstance().getApplicationContext())
+        new CustomDialog.Builder(context)
                 .setImageIcon(imageResource)
                 .setTitleText(title)
                 .setContentText(content)
@@ -79,7 +80,7 @@ public class CustomDialogUtils {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        if (onDialogClick == null) {
+                        if (onDialogClick != null) {
                             onDialogClick.confirmClick();
                         }
                     }
