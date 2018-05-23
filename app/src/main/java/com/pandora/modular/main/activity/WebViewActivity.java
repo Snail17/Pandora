@@ -8,11 +8,12 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.pandora.R;
+import com.pandora.core.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends BaseActivity {
 
     @BindView(R.id.web_view)
     WebView mWebView;

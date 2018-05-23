@@ -41,6 +41,7 @@
             android:name=".modular.splash.activity.SplashActivity"
             android:theme="@style/CustomAppTheme"></activity>
 
+        <activity android:name=".modular.main.activity.WebViewActivity"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.pandora.fileprovider"

@@ -2,7 +2,9 @@ package com.pandora.modular.home.model;
 
 import com.google.gson.Gson;
 import com.pandora.core.utils.webservices.QueryAddressTask;
+import com.pandora.modular.home.bean.DeviceVO;
 import com.pandora.modular.home.bean.HomeVO;
+import com.pandora.modular.home.prenster.OnDeviceFinishListener;
 import com.pandora.modular.home.prenster.OnHomeFinishListener;
 
 /**
@@ -14,6 +16,11 @@ import com.pandora.modular.home.prenster.OnHomeFinishListener;
 public class HomeModel {
 
 
+    /**
+     * 获取首页 数据接口
+     * @param homeVO 参数
+     * @param listener 回调方法
+     */
     public void getData(HomeVO homeVO, final OnHomeFinishListener listener) {
 
         QueryAddressTask queryAddressTask = new QueryAddressTask();
@@ -36,5 +43,14 @@ public class HomeModel {
 //        });
     }
 
+
+    public void registerDeviceId(DeviceVO deviceVO, final OnDeviceFinishListener listener) {
+        QueryAddressTask queryAddressTask = new QueryAddressTask();
+        queryAddressTask.setListener(listener);
+        String paramValue = new Gson().toJson(deviceVO);
+        //启动后台任务
+        queryAddressTask.execute(paramValue);
+//
+    }
 
 }

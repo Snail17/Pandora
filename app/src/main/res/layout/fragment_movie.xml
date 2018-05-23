@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:padding="@dimen/default_dimen_5">
+        android:focusableInTouchMode="true">
 
         <com.pandora.modular.home.widght.RecyclerBanner
             android:id="@+id/banner_movie"
@@ -26,8 +25,8 @@
             android:drawableLeft="@drawable/info_center_warning"
             android:drawablePadding="@dimen/default_dimen_5"
             android:padding="@dimen/default_dimen_5"
-            android:textColor="@color/white_ff"
             android:text="56789056789567895678956789056789567895678956789456789056789067895678945678905678906789"
+            android:textColor="@color/white_ff"
             android:textSize="@dimen/default_sp_12" />
     </FrameLayout>
 
@@ -35,8 +34,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/gray_e6"
-        android:padding="@dimen/default_dimen_10"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/default_dimen_10">
 
         <TextView
             android:id="@+id/tv_pic_area"
@@ -67,6 +66,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_movie_view"
         android:layout_width="match_parent"
-        android:background="@color/gray_e6"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/gray_e6" />
 </LinearLayout>
