@@ -20,7 +20,7 @@ import com.pandora.modular.main.bean.TabEntity;
 import com.pandora.modular.home.fragment.HomeFragment;
 import com.pandora.modular.mine.fragment.MyFragment;
 import com.pandora.modular.purchase.fragment.PurchaseFragment;
-import com.pandora.modular.Welfare.fragment.WelfareFragment;
+import com.pandora.modular.movie.fragment.MovieFragment;
 import com.pandora.modular.main.widget.BottomBarLayout;
 
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity {
     private String[] textList = {"首页", "电影", "购卡", "我的"};
 
     private HomeFragment mHomeFragment;
-    private WelfareFragment welfareFragment;
+    private MovieFragment mMovieFragment;
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
 
@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity {
         initView();
         initData();
         getDeviceId();
-        showDialog();
+//        showDialog();
     }
 
     private void showDialog() {
@@ -134,13 +134,13 @@ public class MainActivity extends BaseActivity {
                 oldFragment = mHomeFragment;
                 break;
             case WELFARE_INDEX:
-                if (welfareFragment == null) {
-                    welfareFragment = new WelfareFragment();
+                if (mMovieFragment == null) {
+                    mMovieFragment = new MovieFragment();
                 }
-//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, welfareFragment);
-                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, welfareFragment);
+//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, mMovieFragment);
+                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, mMovieFragment);
 
-                oldFragment = welfareFragment;
+                oldFragment = mMovieFragment;
                 break;
             case PURCHSE_INDEX:
                 if (purchaseFragment == null) {

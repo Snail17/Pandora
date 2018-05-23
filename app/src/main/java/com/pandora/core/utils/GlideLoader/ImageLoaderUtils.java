@@ -17,9 +17,9 @@ public class ImageLoaderUtils {
 
     static RequestOptions requestOptions = new RequestOptions()
             .centerCrop()
-            .placeholder(R.mipmap.ic_launcher)
+            .placeholder(R.drawable.bingbing)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .error(R.mipmap.ic_launcher);
+            .error(R.drawable.bingbing);
 
     /**
      * @param context   context
