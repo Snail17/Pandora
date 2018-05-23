@@ -6,12 +6,16 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
+import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
 import com.pandora.core.utils.LogUtils;
+import com.pandora.core.utils.widget.CustomTitlebar;
 import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
 import com.pandora.modular.live.bean.LiveBean;
 import com.pandora.modular.live.bean.LiveBoradBean;
@@ -29,11 +33,17 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LiveBroadcastActivity extends BaseActivity implements LiveContract.View {
+public class LiveBroadcastActivity extends BaseActivity implements LiveContract.View, CustomTitlebar.TitleBarOnClickListener {
 
     @BindView(R.id.recycler_live_view)
     RecyclerView mLiveView;
 
+    @BindView(R.id.title_bar_live)
+    CustomTitlebar mCustomTitlebar;
+    @BindView(R.id.tv_live_text1)
+    TextView tvTitle1;
+    @BindView(R.id.iv_live_icon)
+    ImageView ivLiveIcon;
     @Inject
     LivePresenter mLivePresenter;
 
@@ -41,7 +51,10 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     private LiveBoradBean mLiveBoardBean;
     private List<LiveBean.LiveData> mLiveData;
     private LiveRecyclerAdapter mAdapter;
+
     private String mFromBH;
+    private String mFromImage;
+    private String mFromName;
 
     private boolean isLiveUrl = false;
     private int clickPosition;
@@ -51,12 +64,18 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live_broadcast);
         ButterKnife.bind(this);
+        mCustomTitlebar.setAction(this);
         initIntent();
         initData();
     }
 
     private void initIntent() {
         mFromBH = getIntent().getStringExtra("homeBH");
+        mFromImage = getIntent().getStringExtra("homeImage");
+        mFromName = getIntent().getStringExtra("homeName");
+        ImageLoaderUtils.display(this, ivLiveIcon, mFromImage);
+        mCustomTitlebar.setTilte(mFromName);
+        tvTitle1.setText(mFromName);
     }
 
     private void initData() {
@@ -100,5 +119,10 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         }
+    }
+
+    @Override
+    public void performAction(View view) {
+
     }
 }

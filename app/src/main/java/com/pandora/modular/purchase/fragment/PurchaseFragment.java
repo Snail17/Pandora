@@ -1,6 +1,8 @@
 package com.pandora.modular.purchase.fragment;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -13,8 +15,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
+import com.pandora.core.globle.PandoraContants;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.core.base.OnFinishListener;
+import com.pandora.modular.main.activity.MainActivity;
 import com.pandora.modular.purchase.bean.PurchaseBean;
 import com.pandora.modular.purchase.bean.PurchaseVO;
 import com.pandora.modular.purchase.model.PurchaseModel;
@@ -75,6 +79,17 @@ public class PurchaseFragment extends BaseFragment {
             }
         });
     }
+
+    @OnClick(R.id.tv_contact_customer)
+    public void contactClick(View view) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(PandoraContants.qqUrl)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(PurchaseFragment.this.getContext(), "请检查是否安装QQ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     public interface OnPurchaseFinishListener extends OnFinishListener {
     }

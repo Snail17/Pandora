@@ -15,7 +15,6 @@ import com.pandora.core.utils.CustomDialogUtils;
 import com.pandora.core.utils.DeviceIdUtils;
 import com.pandora.core.utils.FragmentUtil;
 import com.pandora.core.utils.MPermissionUtils;
-import com.pandora.core.utils.SPUtils;
 import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.main.bean.TabEntity;
 import com.pandora.modular.home.fragment.HomeFragment;
@@ -40,7 +39,7 @@ public class MainActivity extends BaseActivity {
     private int[] smallSelectIcon = {R.drawable.icon_home_pressed, R.drawable.icon_home_task_pressed, R.drawable.icon_home_invite_pressed, R.drawable.icon_home_person_pressed};
     private String[] textList = {"首页", "电影", "购卡", "我的"};
 
-    private HomeFragment homeFragment;
+    private HomeFragment mHomeFragment;
     private WelfareFragment welfareFragment;
     private PurchaseFragment purchaseFragment;
     private MyFragment myFragment;
@@ -94,8 +93,8 @@ public class MainActivity extends BaseActivity {
 
     public void initData() {
         initBottomBar();
-        homeFragment = new HomeFragment();
-        oldFragment = homeFragment;
+        mHomeFragment = new HomeFragment();
+        oldFragment = mHomeFragment;
         switchFragment(HOME_INDEX);
         if (Build.VERSION.SDK_INT >= 26) {
             MPermissionUtils.requestPermissionsResult(this, 1, needPermissions26, permissionListener);
@@ -127,12 +126,12 @@ public class MainActivity extends BaseActivity {
         switch (position) {
             case HOME_INDEX:
                 // 切换Fragment 以及 tab
-                if (homeFragment == null) {
-                    homeFragment = new HomeFragment();
+                if (mHomeFragment == null) {
+                    mHomeFragment = new HomeFragment();
                 }
-//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, homeFragment);
-                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, homeFragment);
-                oldFragment = homeFragment;
+//                FragmentUtil.replacePlug(getSupportFragmentManager(), R.id.main_container_layout, mHomeFragment);
+                FragmentUtil.switchPage(getSupportFragmentManager(), R.id.main_container_layout, oldFragment, mHomeFragment);
+                oldFragment = mHomeFragment;
                 break;
             case WELFARE_INDEX:
                 if (welfareFragment == null) {

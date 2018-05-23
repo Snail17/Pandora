@@ -1,0 +1,64 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.pandora.modular.home.fragment.HomeHotFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <com.pandora.modular.home.widght.RecyclerBanner
+                android:id="@+id/banner_home"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+
+            <TextView
+                android:id="@+id/tv_home_top_introduce"
+                style="@style/TextViewMarquee"
+                android:drawableLeft="@drawable/info_center_warning"
+                android:drawablePadding="@dimen/default_dimen_5"
+                android:padding="@dimen/default_dimen_5"
+                android:textColor="@color/white_ff"
+                android:textSize="@dimen/default_sp_12" />
+
+            <TextView
+                android:id="@+id/tv_home_ad_notice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@color/transparent_gray_80"
+                android:padding="@dimen/default_dimen_2"
+                android:textColor="@color/white_ff"
+                android:textSize="@dimen/default_sp_12"
+                android:visibility="visible" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/gray_e6"
+            android:drawableLeft="@drawable/zb_group_line"
+            android:drawablePadding="@dimen/default_dimen_5"
+            android:gravity="center|left"
+            android:padding="@dimen/default_dimen_5"
+            android:text="直播机构"
+            android:textColor="@color/blue_00"
+            android:textSize="@dimen/default_sp_12" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_home_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/gray_e6" />
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

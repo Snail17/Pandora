@@ -1,17 +1,12 @@
 package com.pandora.modular.home.adapter;
 
-import android.content.Intent;
 import android.support.annotation.Nullable;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
 import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.bean.HomeBean;
-import com.pandora.modular.home.fragment.HomeFragment;
-import com.pandora.modular.home.util.ChangeCharset;
-import com.pandora.modular.live.activity.LiveBroadcastActivity;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 

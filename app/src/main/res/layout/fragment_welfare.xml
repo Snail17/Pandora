@@ -1,8 +1,20 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.pandora.modular.Welfare.fragment.WelfareFragment">
+
+    <com.pandora.core.utils.widget.CustomTitlebar
+        android:id="@+id/title_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:right_button_text="看片区"
+        app:right_button_textColor="@color/red_ca"
+        app:title_background="@color/blue_00"
+        app:title_text="@string/app_name"
+        app:title_textSize="@dimen/default_sp_18" />
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -10,4 +22,4 @@
         android:layout_height="match_parent"
         android:text="Welfare" />
 
-</FrameLayout>
+</LinearLayout>

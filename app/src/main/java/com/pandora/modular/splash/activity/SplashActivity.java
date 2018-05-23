@@ -20,7 +20,7 @@ import butterknife.OnClick;
 
 public class SplashActivity extends BaseActivity {
 
-    public static final int SECOND = 3;
+    public static final int SECOND = 2;
     private int secondCount;
     // 该方法必须不能为private或者是static的
     @BindView(R.id.tv_splash_time)

@@ -17,7 +17,7 @@ import com.pandora.core.utils.RxUtils;
 import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeVO;
-import com.pandora.modular.home.fragment.HomeFragment;
+import com.pandora.modular.home.fragment.HomeHotFragment;
 import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.util.ProgressResponseBody;
 
@@ -123,7 +123,7 @@ public class HomeAPIPModel {
             @Override
             public void onSuccess(File file) {
                 super.onSuccess(file);
-                install(HomeFragment.downloadUpdateApkFilePath);
+                install(HomeHotFragment.downloadUpdateApkFilePath);
             }
 
 

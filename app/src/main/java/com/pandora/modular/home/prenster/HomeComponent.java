@@ -1,6 +1,6 @@
 package com.pandora.modular.home.prenster;
 
-import com.pandora.modular.home.fragment.HomeFragment;
+import com.pandora.modular.home.fragment.HomeHotFragment;
 
 import dagger.Component;
 
@@ -10,5 +10,5 @@ import dagger.Component;
 
 @Component(modules = HomeModule.class)
 public interface HomeComponent {
-    void inject(HomeFragment fragment);
+    void inject(HomeHotFragment fragment);
 }

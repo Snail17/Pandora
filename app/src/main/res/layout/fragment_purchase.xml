@@ -1,100 +1,128 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white_f6"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/default_dimen_10"
-    android:paddingRight="@dimen/default_dimen_10"
     tools:context="com.pandora.modular.purchase.fragment.PurchaseFragment">
 
-    <RelativeLayout
+    <com.pandora.core.utils.widget.CustomTitlebar
+        android:id="@+id/title_bar_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_dimen_10"
-        android:background="@color/white_ff"
-        android:padding="@dimen/default_dimen_10">
+        app:right_button_text="看片区"
+        app:right_button_textColor="@color/red_ca"
+        app:title_background="@color/blue_00"
+        app:title_text="@string/app_name"
+        app:title_textSize="@dimen/default_sp_18" />
 
-        <TextView
-            android:id="@+id/tv_input_card_secret"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:paddingRight="@dimen/default_dimen_10"
-            android:text="卡密"
-            android:textColor="@color/black"
-            android:textSize="@dimen/default_sp_16" />
-
-        <EditText
-            android:id="@+id/et_input_card_secret"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_input_card_secret"
-            android:background="@null"
-            android:hint="请输入卡密"
-            android:textColor="@color/black"
-            android:textColorHint="@color/gray_66"
-            android:textSize="@dimen/default_sp_16" />
-
-
-    </RelativeLayout>
-
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_dimen_20"
-        android:background="@drawable/btn_bg"
-        android:text="续费"
-        android:textColor="@color/white_ff"
-        android:textSize="@dimen/default_sp_16" />
+        android:layout_below="@id/title_bar_main"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/default_dimen_10"
+        android:paddingRight="@dimen/default_dimen_10">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/default_dimen_10"
-        android:background="@color/white_ff"
-        android:padding="@dimen/default_dimen_20">
 
-        <Button
-            android:id="@+id/btn_card_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/item_card_month_button_selector" />
-
-        <Button
-            android:id="@+id/btn_card_quarterly"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/item_card_quarterly_button_selector" />
-
-        <Button
-            android:id="@+id/btn_card_year"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_card_month"
-            android:layout_marginTop="@dimen/default_dimen_20"
-            android:background="@drawable/item_card_year_button_selector" />
-
-        <Button
-            android:id="@+id/btn_card_forever"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/btn_card_quarterly"
-            android:layout_marginTop="@dimen/default_dimen_20"
-            android:background="@drawable/item_card_forever_button_selector" />
-
-        <TextView
-            android:id="@+id/tv_purchase_introduce"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btn_card_forever"
+            android:layout_marginTop="@dimen/default_dimen_10"
+            android:background="@color/white_ff"
+
+            android:padding="@dimen/default_dimen_10">
+
+            <TextView
+                android:id="@+id/tv_input_card_secret"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/default_dimen_10"
+                android:text="卡密"
+                android:textColor="@color/black"
+                android:textSize="@dimen/default_sp_16" />
+
+            <EditText
+                android:id="@+id/et_input_card_secret"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/tv_input_card_secret"
+                android:background="@null"
+                android:hint="请输入卡密"
+                android:textColor="@color/black"
+                android:textColorHint="@color/gray_66"
+                android:textSize="@dimen/default_sp_16" />
+
+
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_dimen_20"
-            android:text="点击要购买的卡密类型，并在支付完成后复制卡密码粘贴到上方的卡密输入框，点击续费即可充值成功！有问题请联系客服哦！"
-            android:textColor="@color/gray_66"
-            android:textSize="@dimen/default_sp_14" />
-    </RelativeLayout>
+            android:background="@drawable/btn_bg"
+            android:text="续费"
+            android:textColor="@color/white_ff"
+            android:textSize="@dimen/default_sp_16" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/default_dimen_10"
+            android:background="@color/white_ff"
+            android:padding="@dimen/default_dimen_20">
 
-</LinearLayout>
+            <Button
+                android:id="@+id/btn_card_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_card_month_button_selector" />
+
+            <Button
+                android:id="@+id/btn_card_quarterly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/item_card_quarterly_button_selector" />
+
+            <Button
+                android:id="@+id/btn_card_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_card_month"
+                android:layout_marginTop="@dimen/default_dimen_20"
+                android:background="@drawable/item_card_year_button_selector" />
+
+            <Button
+                android:id="@+id/btn_card_forever"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/btn_card_quarterly"
+                android:layout_marginTop="@dimen/default_dimen_20"
+                android:background="@drawable/item_card_forever_button_selector" />
+
+            <TextView
+                android:id="@+id/tv_purchase_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_card_forever"
+                android:layout_marginTop="@dimen/default_dimen_20"
+                android:text="点击要购买的卡密类型，并在支付完成后复制卡密码粘贴到上方的卡密输入框，点击续费即可充值成功！有问题请联系客服哦！"
+                android:textColor="@color/gray_66"
+                android:textSize="@dimen/default_sp_14" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_contact_customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white_ff"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:padding="@dimen/default_dimen_10"
+            android:text="联系客服" />
+    </LinearLayout>
+
+</RelativeLayout>
