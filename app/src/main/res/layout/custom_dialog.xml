@@ -6,8 +6,10 @@
 
     <ImageView
         android:id="@+id/iv_image_dialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:paddingTop="@dimen/default_dimen_15"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
@@ -24,18 +26,16 @@
         android:id="@+id/tv_content_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/default_dimen_15"
         android:gravity="center"
         android:padding="@dimen/default_dimen_10"
         android:text="content"
         android:textColor="@color/gray_66"
-        android:textSize="@dimen/default_sp_18" />
+        android:textSize="@dimen/default_sp_16" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:layout_marginTop="@dimen/default_dimen_15"
         android:orientation="horizontal"
         android:paddingBottom="@dimen/default_dimen_10">
 
