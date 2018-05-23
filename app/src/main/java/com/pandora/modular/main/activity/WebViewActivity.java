@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 
 public class WebViewActivity extends BaseActivity {
 
+    public static final String WEB_URL = "webViewUrl";
     @BindView(R.id.web_view)
     WebView mWebView;
     private String mWebViewUrl;
@@ -31,7 +32,7 @@ public class WebViewActivity extends BaseActivity {
 
     private void initIntent() {
         if (getIntent() != null) {
-            mWebViewUrl = getIntent().getStringExtra("webViewUrl");
+            mWebViewUrl = getIntent().getStringExtra(WEB_URL);
         }
     }
 

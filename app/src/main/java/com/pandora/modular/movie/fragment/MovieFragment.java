@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.modular.home.widght.RecyclerBanner;
 import com.pandora.modular.main.activity.WebViewActivity;
+import com.pandora.modular.movie.activity.MovieListActivity;
 import com.pandora.modular.movie.adapter.MovieRecyclerAdapter;
 import com.pandora.modular.movie.bean.MovieBean;
 
@@ -86,10 +88,50 @@ public class MovieFragment extends BaseFragment {
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
+                itemClick(position);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    private void itemClick(int position) {
+
+        switch (position) {
+            case 0:
+                goToList("潘多拉");
+                break;
+            case 1:
+                goToList("韩国剧情");
+                break;
+            case 2:
+                goToList("国产");
+                break;
+            case 3:
+                goToList("动漫");
+                break;
+            case 4:
+                goToWenView("https://www.baidu.com/");
+                break;
+            case 5:
+                Toast.makeText(MovieFragment.this.getContext(), " 该区域仅供钻石会员浏览!!", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+
+        }
+
+    }
+
+    private void goToList(String listName) {
+        Intent intent = new Intent(MovieFragment.this.getContext(), MovieListActivity.class);
+        intent.putExtra("listName", listName);
+        startActivity(intent);
+    }
+
+    private void goToWenView(String url) {
+        Intent intent = new Intent(MovieFragment.this.getContext(), WebViewActivity.class);
+        intent.putExtra(WebViewActivity.WEB_URL, url);
+        startActivity(intent);
     }
 
     private void addMovieData(String name) {
@@ -122,10 +164,10 @@ public class MovieFragment extends BaseFragment {
         Intent intent = new Intent(MovieFragment.this.getContext(), WebViewActivity.class);
         switch (view.getId()) {
             case R.id.tv_pic_area:
-                intent.putExtra("webViewUrl", "www.baidu.com");
+                intent.putExtra(WebViewActivity.WEB_URL, "https://www.baidu.com/");
                 break;
             case R.id.tv_novel:
-                intent.putExtra("webViewUrl", "www.baidu.com");
+                intent.putExtra(WebViewActivity.WEB_URL, "https://www.baidu.com/");
                 break;
             default:
                 break;

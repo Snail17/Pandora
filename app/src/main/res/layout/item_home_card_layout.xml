@@ -7,12 +7,13 @@
     android:gravity="center"
     android:orientation="vertical"
     android:paddingBottom="@dimen/default_dimen_5"
-    android:paddingTop="@dimen/default_dimen_5">
+    android:paddingTop="@dimen/default_dimen_10">
 
     <ImageView
         android:id="@+id/iv_home_card_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher_round" />
 
     <TextView
