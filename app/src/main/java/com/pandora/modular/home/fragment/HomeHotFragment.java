@@ -3,9 +3,11 @@ package com.pandora.modular.home.fragment;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,8 @@ import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.FragmentUtil;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.MPermissionUtils;
+import com.pandora.core.utils.widget.CustomLoadingUtil;
+import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
@@ -86,9 +90,14 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         ButterKnife.bind(this, view);
         initData();
         initClick();
+        showWaitLoading();
         return view;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+    }
 
     private void initData() {
         mHomeBean = new HomeBean();
@@ -197,7 +206,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void setData(String homeJson) {
         LogUtils.e("home" + homeJson);
-
+        hideLoading();
         if (!TextUtils.isEmpty(homeJson)) {
             Gson gson = new Gson();
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
@@ -210,5 +219,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         }
 
     }
+
+
 
 }
