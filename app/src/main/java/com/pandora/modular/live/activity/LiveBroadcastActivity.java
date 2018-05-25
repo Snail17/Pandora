@@ -116,6 +116,8 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 mLiveBoardBean = gson.fromJson(liveJson, LiveBoradBean.class);//对于javabean直接给出class实例;
                 Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
                 intent.putExtra("videoPath", mLiveBoardBean.getData().get(clickPosition).getUrl());
+                intent.putExtra("videoAuthorIcon", mLiveBoardBean.getData().get(clickPosition).getImg());
+                intent.putExtra("videoAuthorName", mLiveBoardBean.getData().get(clickPosition).getTitle());
                 LiveBroadcastActivity.this.startActivity(intent);
             }
         }

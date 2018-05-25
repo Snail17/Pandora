@@ -39,7 +39,7 @@
                 android:padding="@dimen/default_dimen_2"
                 android:textColor="@color/white_ff"
                 android:textSize="@dimen/default_sp_12"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -56,7 +56,7 @@
             android:textSize="@dimen/default_sp_12" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_home_view"
+            android:id="@+id/recycler_home_hot_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gray_e6" />

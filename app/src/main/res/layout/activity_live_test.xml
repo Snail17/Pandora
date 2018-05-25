@@ -1,17 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.pandora.modular.live.activity.LiveActivity">
 
 
     <SurfaceView
         android:id="@+id/play_video"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/pb_live"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_dimen_10"
+            android:layout_toRightOf="@id/pb_live"
+            android:text="正在加载..."
+            android:textColor="@color/white_ff"
+            android:textSize="@dimen/default_sp_18" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_close_live_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_margin="@dimen/default_dimen_30"
+        android:src="@drawable/icon_cancel" />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_margin="@dimen/default_dimen_30"
+        android:background="@drawable/transparent_bg">
+
+        <TextView
+            android:id="@+id/tv_list_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/default_dimen_10"
+            android:text="xiaoxianzi"
+            android:textColor="@color/white_ff"
+            android:textSize="@dimen/default_sp_16" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/tv_list_name"
+            android:src="@drawable/icon_cancel" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <ImageView
+            android:id="@+id/iv_close_live_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/default_dimen_10"
+            android:src="@drawable/icon_cancel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|bottom"
+            android:layout_toLeftOf="@id/iv_close_live_bottom"
+            android:padding="@dimen/default_dimen_30"
+            android:src="@drawable/icon_cancel"
+            android:text="系统提示：若直播间出现违法违规，色情低俗，抽烟喝酒等行为请及时举报，管理员24小时在线巡查并接受举报。"
+            android:textColor="@color/white_ff" />
+    </RelativeLayout>
+
+
+</FrameLayout>
 

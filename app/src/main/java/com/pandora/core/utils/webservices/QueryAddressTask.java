@@ -25,6 +25,7 @@ public class QueryAddressTask extends AsyncTask<String, Integer, String> {
         try {
             result = WebServiceUtils.getRemoteInfo(params[0]);
         } catch (Exception e) {
+            mListener.onError();
             e.printStackTrace();
         }
         //将结果返回给onPostExecute方法

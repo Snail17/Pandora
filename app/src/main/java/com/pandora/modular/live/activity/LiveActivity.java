@@ -8,11 +8,17 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.pandora.R;
+import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
 
 import java.io.IOException;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
@@ -20,8 +26,24 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
 
 
     String path = "http://www.modrails.com/videos/passenger_nginx.mov";
-    private SurfaceView mSurfaceView;
     private IjkMediaPlayer mIjkMediaPlayer;
+
+    @BindView(R.id.pb_live)
+    ProgressBar mProgressBar;
+
+    @BindView(R.id.iv_close_live_bottom)
+    ImageView ivBottomClose;
+    @BindView(R.id.iv_close_live_top)
+    ImageView ivTopClose;
+    @BindView(R.id.iv_icon)
+    ImageView icIcon;
+
+    @BindView(R.id.tv_list_name)
+    TextView tvName;
+
+    @BindView(R.id.play_video)
+    SurfaceView mSurfaceView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +52,8 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_live_test);
-        mSurfaceView = (SurfaceView) findViewById(R.id.play_video);
-
-        String videoPath = getIntent().getStringExtra("videoPath");
-        if (!TextUtils.isEmpty(videoPath)) {
-            path = videoPath;
-        }
+        ButterKnife.bind(this);
+        initIntent();
         mIjkMediaPlayer = new IjkMediaPlayer();
         // 当播放器加载网络的视频资源时,会在内部进行网络访问
         mIjkMediaPlayer.setOnPreparedListener(this);
@@ -47,6 +65,21 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
             mSurfaceView.getHolder().addCallback(this);
         }
         startVideoPlay();
+    }
+
+    private void initIntent() {
+        String videoPath = getIntent().getStringExtra("videoPath");
+        String videoAuthorIcon = getIntent().getStringExtra("videoAuthorIcon");
+        String videoAuthorName = getIntent().getStringExtra("videoAuthorName");
+        if (!TextUtils.isEmpty(videoPath)) {
+            path = videoPath;
+        }
+        if (!TextUtils.isEmpty(videoAuthorIcon)) {
+            ImageLoaderUtils.displayRound(this, icIcon, videoAuthorIcon);
+        }
+        if (!TextUtils.isEmpty(videoAuthorName)) {
+            tvName.setText(videoAuthorName);
+        }
     }
 
     @Override
