@@ -17,9 +17,9 @@ public class ImageLoaderUtils {
 
     static RequestOptions requestOptions = new RequestOptions()
             .centerCrop()
-            .placeholder(R.drawable.bingbing)
+            .placeholder(R.drawable.mq_ic_holder_avatar)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .error(R.drawable.bingbing);
+            .error(R.drawable.mq_ic_holder_avatar);
 
     /**
      * @param context   context
@@ -32,9 +32,9 @@ public class ImageLoaderUtils {
         }
         RequestOptions requestOptions = new RequestOptions()
                 .centerCrop()
-                .placeholder(R.drawable.bingbing)
+                .placeholder(R.drawable.default_icon)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.bingbing);
+                .error(R.drawable.ad_load_fail);
         if (url != null) {
             Glide.with(PandoraApplication.getInstance().getApplicationContext())
                     .load(url)

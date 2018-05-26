@@ -2,7 +2,6 @@ package com.pandora.core.utils.widget;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.AnimationDrawable;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,17 +39,11 @@ public class CustomLoadingUtil {
         TextView tipTextView = (TextView) v.findViewById(R.id.tv_text_loading);   // 提示文字
         imClose = (ImageView) v.findViewById(R.id.iv_close_loading);
 
-//
-//        // 加载动画
-//        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(context, R.anim.rotate_animation);
-//        // 使用ImageView显示动画
-//        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
 
-        AnimationDrawable frameAnim = (AnimationDrawable) context.getResources().getDrawable(R.drawable.animation_loding);
-        // 把AnimationDrawable设置为ImageView的背景
-        spaceshipImage.setBackgroundDrawable(frameAnim);
-        frameAnim.start();
-
+        // 加载动画
+        Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(context, R.anim.rotate_animation);
+        // 使用ImageView显示动画
+        spaceshipImage.startAnimation(hyperspaceJumpAnimation);
         if (!TextUtils.isEmpty(msg)) {
             tipTextView.setText(msg);// 设置加载信息
         }
@@ -77,7 +70,10 @@ public class CustomLoadingUtil {
             @Override
             public void onClick(View v) {
                 hideDialog();
-                iLoadingClose.loadingClose();
+                if (iLoadingClose != null) {
+                    iLoadingClose.loadingclose();
+
+                }
             }
         });
         return loadingDialog;
@@ -85,13 +81,13 @@ public class CustomLoadingUtil {
 
 
     public static Dialog showWaitDialog(Context context, boolean isCancelable, ILoadingClose iLoadingClose) {
-        return createLoading(context,
-                null, isCancelable, iLoadingClose);
+        return createLoading(context, null, isCancelable, iLoadingClose);
     }
 
     public static void showLoading() {
         if (loadingDialog != null) {
-            loadingDialog.isShowing();
+            showWaitDialog(PandoraApplication.getInstance().getApplicationContext(), false, null).isShowing();
+//            loadingDialog.isShowing();
         }
     }
 
@@ -124,7 +120,7 @@ public class CustomLoadingUtil {
         /**
          *
          */
-        void loadingClose();
+        void loadingclose();
     }
 
 }

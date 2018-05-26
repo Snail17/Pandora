@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.pandora.R;
+import com.pandora.core.utils.widget.CustomLoadingUtil;
 
 /**
  * Created by Administrator on 2018/5/8.
@@ -51,6 +52,13 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void showLoading() {
+        CustomLoadingUtil.showLoading();
+    }
+
+    public void hideLading() {
+        CustomLoadingUtil.hideDialog();
+    }
 
     /**
      *

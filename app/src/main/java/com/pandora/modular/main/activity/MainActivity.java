@@ -173,6 +173,29 @@ public class MainActivity extends BaseActivity {
         return deviceId;
     }
 
+
+    @Override
+    public void onBackPressed() {
+        CustomDialogUtils.showConfirmDialog(this,
+                R.drawable.back_error,
+                "温馨提示",
+                "您确定要退出吗？",
+                "取消",
+                "确定",
+                new CustomDialogUtils.OnDialogClick() {
+                    @Override
+                    public void cancelClick() {
+
+                    }
+
+                    @Override
+                    public void confirmClick() {
+                        MainActivity.super.onBackPressed();
+                    }
+                });
+
+    }
+
     MPermissionUtils.OnPermissionListener permissionListener = new MPermissionUtils.OnPermissionListener() {
         @Override
         public void onPermissionGranted() {
