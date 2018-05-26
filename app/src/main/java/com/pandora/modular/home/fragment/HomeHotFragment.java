@@ -3,11 +3,9 @@ package com.pandora.modular.home.fragment;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,11 +20,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
-import com.pandora.core.utils.FragmentUtil;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.MPermissionUtils;
-import com.pandora.core.utils.widget.CustomLoadingUtil;
-import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
@@ -38,6 +33,8 @@ import com.pandora.modular.home.prenster.HomePresenter;
 import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.widght.RecyclerBanner;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
+import com.pandora.modular.main.activity.WebViewActivity;
+import com.pandora.modular.movie.fragment.MovieFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +44,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +58,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     TextView adNoticeTV;
 
 
-    @BindView(R.id.recycler_home_view)
+    @BindView(R.id.recycler_home_hot_view)
     RecyclerView mRecyclerView;
 
     @BindView(R.id.banner_home)
@@ -94,11 +90,6 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         return view;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
     private void initData() {
         mHomeBean = new HomeBean();
         mHomeData = new ArrayList<>();
@@ -107,9 +98,10 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 3);
         gridLayoutManager.setSmoothScrollbarEnabled(true);
         gridLayoutManager.setAutoMeasureEnabled(true);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);
-        mRecyclerView.setLayoutManager(gridLayoutManager);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -121,38 +113,62 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
                 HomeHotFragment.this.getContext().startActivity(intent);
             }
         });
-        mRecyclerView.setAdapter(mAdapter);
-        HomeVO homeVO = new HomeVO("INIT", "fghjkl", "admin", "1.0");
-
-        mHomePresenter.getData(homeVO);
+        mAdapter.setNewData(mHomeData);
+        getData();
         initBanner();
     }
+
 
     private void initBanner() {
         mBanner.setOnPagerClickListener(new RecyclerBanner.OnPagerClickListener() {
             @Override
             public void onClick(RecyclerBanner.BannerEntity entity) {
-                Toast.makeText(HomeHotFragment.this.getContext(), entity.getUrl(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeHotFragment.this.getContext(), WebViewActivity.class);
+                intent.putExtra(WebViewActivity.WEB_URL, entity.getUrl());
+                startActivity(intent);
             }
         });
     }
 
     private void initClick() {
+        // 设置跑马灯滚动
         introduceText.setSelected(true);
+        mAdapter.setUpFetchEnable(false);
+        mAdapter.setEnableLoadMore(false);
+
+        //上拉刷新,如果上拉结束后,下拉刷新需要再次开启上拉监听，需要使用setNewData方法填充数据。
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+/*                //加载完成
+                homeAdapter.loadMoreComplete();
+                //加载失败
+                homeAdapter.loadMoreFail();
+                //加载结束
+                homeAdapter.loadMoreEnd();*/
+                getData();
+
+            }
+        }, mRecyclerView);
+        // 当列表滑动到倒数第N个Item的时候(默认是1)回调onLoadMoreRequested方法
+        mAdapter.setPreLoadNumber(5);
+//        mAdapter.setLoadMoreView(new CustomLoadMoreView());
     }
 
 
+    private void getData() {
+        HomeVO homeVO = new HomeVO("INIT", "fghjkl", "admin", "1.0");
+
+        mHomePresenter.getData(homeVO);
+    }
+
     public void updateBanner() {
-//        urls.add(new Entity("http://pic.58pic.com/58pic/12/46/13/03B58PICXxE.jpg"));
-//        urls.add(new Entity("http://www.jitu5.com/uploads/allimg/121120/260529-121120232T546.jpg"));
-//        urls.add(new Entity("http://pic34.nipic.com/20131025/2531170_132447503000_2.jpg"));
-//        urls.add(new Entity("http://img5.imgtn.bdimg.com/it/u=3462610901,3870573928&fm=206&gp=0.jpg"));
+        urls.clear();
         for (int i = 0; i < mHomeBean.getaUrl().size(); i++) {
             urls.add(new Entity(mHomeBean.getaUrl().get(i)));
         }
         mBanner.setDatas(urls);
         mAWords.addAll(mHomeBean.getaWords());
-//        mBanner.setWords(mHomeBean.getaWords());
     }
 
     public void appUpdate() {
@@ -208,6 +224,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         LogUtils.e("home" + homeJson);
         hideLoading();
         if (!TextUtils.isEmpty(homeJson)) {
+            // 加载完成
             Gson gson = new Gson();
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
             introduceText.setText(mHomeBean.getOnlineService());
@@ -216,10 +233,12 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
             mAdapter.notifyDataSetChanged();
             updateBanner();
             appUpdate();
+        } else {
+            mAdapter.loadMoreEnd(false);
         }
-
     }
 
-
-
+    @Override
+    public void onErrorData() {
+    }
 }

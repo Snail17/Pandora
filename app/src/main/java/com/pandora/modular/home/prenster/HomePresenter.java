@@ -33,7 +33,7 @@ public class HomePresenter implements HomeContract.Presenter, OnHomeFinishListen
 
     @Override
     public void onError() {
-
+        mView.onErrorData();
     }
 
     @Override

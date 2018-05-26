@@ -32,4 +32,6 @@ public class HomeViewHolder extends BaseViewHolder {
         ButterKnife.bind(this, view);
     }
 
+
+
 }

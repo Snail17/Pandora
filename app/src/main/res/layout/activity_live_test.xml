@@ -93,5 +93,11 @@
     </RelativeLayout>
 
 
+    <ImageView
+        android:id="@+id/ic_video_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+
 </FrameLayout>
 

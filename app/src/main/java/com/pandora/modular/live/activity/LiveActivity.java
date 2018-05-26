@@ -37,12 +37,15 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     ImageView ivTopClose;
     @BindView(R.id.iv_icon)
     ImageView icIcon;
+    @BindView(R.id.ic_video_error)
+    ImageView icVideoErrorIcon;
 
     @BindView(R.id.tv_list_name)
     TextView tvName;
 
     @BindView(R.id.play_video)
     SurfaceView mSurfaceView;
+    private String mVideoAuthorIcon;
 
 
     @Override
@@ -54,6 +57,7 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         setContentView(R.layout.activity_live_test);
         ButterKnife.bind(this);
         initIntent();
+        initClick();
         mIjkMediaPlayer = new IjkMediaPlayer();
         // 当播放器加载网络的视频资源时,会在内部进行网络访问
         mIjkMediaPlayer.setOnPreparedListener(this);
@@ -67,15 +71,25 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         startVideoPlay();
     }
 
+    private void initClick() {
+        mIjkMediaPlayer.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(IMediaPlayer mp, int what, int extra) {
+                ImageLoaderUtils.display(LiveActivity.this, icVideoErrorIcon, mVideoAuthorIcon);
+                return false;
+            }
+        });
+    }
+
     private void initIntent() {
         String videoPath = getIntent().getStringExtra("videoPath");
-        String videoAuthorIcon = getIntent().getStringExtra("videoAuthorIcon");
+        mVideoAuthorIcon = getIntent().getStringExtra("videoAuthorIcon");
         String videoAuthorName = getIntent().getStringExtra("videoAuthorName");
         if (!TextUtils.isEmpty(videoPath)) {
             path = videoPath;
         }
-        if (!TextUtils.isEmpty(videoAuthorIcon)) {
-            ImageLoaderUtils.displayRound(this, icIcon, videoAuthorIcon);
+        if (!TextUtils.isEmpty(mVideoAuthorIcon)) {
+            ImageLoaderUtils.displayRound(this, icIcon, mVideoAuthorIcon);
         }
         if (!TextUtils.isEmpty(videoAuthorName)) {
             tvName.setText(videoAuthorName);
