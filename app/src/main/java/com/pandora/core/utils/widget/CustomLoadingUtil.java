@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pandora.R;
+import com.pandora.modular.PandoraApplication;
 
 /**
  * Created by Administrator on 2018/5/9.
@@ -69,7 +70,10 @@ public class CustomLoadingUtil {
             @Override
             public void onClick(View v) {
                 hideDialog();
-                iLoadingClose.loadingclose();
+                if (iLoadingClose != null) {
+                    iLoadingClose.loadingclose();
+
+                }
             }
         });
         return loadingDialog;
@@ -82,7 +86,8 @@ public class CustomLoadingUtil {
 
     public static void showLoading() {
         if (loadingDialog != null) {
-            loadingDialog.isShowing();
+            showWaitDialog(PandoraApplication.getInstance().getApplicationContext(), false, null).isShowing();
+//            loadingDialog.isShowing();
         }
     }
 
