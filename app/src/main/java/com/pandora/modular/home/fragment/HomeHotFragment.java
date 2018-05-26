@@ -86,7 +86,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         ButterKnife.bind(this, view);
         initData();
         initClick();
-        showWaitLoading();
+        showLoading();
         return view;
     }
 
@@ -222,7 +222,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void setData(String homeJson) {
         LogUtils.e("home" + homeJson);
-        hideLoading();
+        hideLading();
         if (!TextUtils.isEmpty(homeJson)) {
             // 加载完成
             Gson gson = new Gson();
