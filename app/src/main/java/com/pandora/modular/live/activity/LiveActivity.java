@@ -68,6 +68,7 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         startVideoPlay();
     }
 
+
     private void initPlayer() {
         mIjkMediaPlayer = new IjkMediaPlayer();
         // 当播放器加载网络的视频资源时,会在内部进行网络访问
