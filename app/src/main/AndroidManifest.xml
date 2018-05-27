@@ -52,7 +52,7 @@
 
         <activity
             android:name=".modular.live.activity.LiveActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden" >
+            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

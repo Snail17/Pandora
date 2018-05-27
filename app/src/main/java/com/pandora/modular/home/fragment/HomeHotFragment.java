@@ -114,12 +114,17 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
             }
         });
         mAdapter.setNewData(mHomeData);
+        for (int i = 0; i < 4; i++) {
+            urls.add(new Entity(""));
+        }
         getData();
         initBanner();
     }
 
 
     private void initBanner() {
+        mBanner.setDatas(urls);
+
         mBanner.setOnPagerClickListener(new RecyclerBanner.OnPagerClickListener() {
             @Override
             public void onClick(RecyclerBanner.BannerEntity entity) {

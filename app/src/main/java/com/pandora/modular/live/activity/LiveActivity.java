@@ -6,23 +6,27 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pandora.R;
 import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
+import com.pandora.modular.live.view.PlayStateParams;
 
 import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
-public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnBufferingUpdateListener, SurfaceHolder.Callback {
+public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPreparedListener, IMediaPlayer.OnBufferingUpdateListener, SurfaceHolder.Callback, IMediaPlayer.OnInfoListener {
 
 
     String path = "http://www.modrails.com/videos/passenger_nginx.mov";
@@ -39,6 +43,8 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     ImageView icIcon;
     @BindView(R.id.ic_video_error)
     ImageView icVideoErrorIcon;
+    @BindView(R.id.pb_layout)
+    LinearLayout mPbLayout;
 
     @BindView(R.id.tv_list_name)
     TextView tvName;
@@ -56,19 +62,31 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_live_test);
         ButterKnife.bind(this);
+        initPlayer();
         initIntent();
         initClick();
+        startVideoPlay();
+    }
+
+    private void initPlayer() {
         mIjkMediaPlayer = new IjkMediaPlayer();
         // 当播放器加载网络的视频资源时,会在内部进行网络访问
         mIjkMediaPlayer.setOnPreparedListener(this);
         //
         mIjkMediaPlayer.setOnBufferingUpdateListener(this);
+        mIjkMediaPlayer.setOnInfoListener(this);
 
         // SurfaceView 准备视频的播放
         if (mSurfaceView != null) {
             mSurfaceView.getHolder().addCallback(this);
         }
-        startVideoPlay();
+        // 设置屏幕常亮
+        mIjkMediaPlayer.setScreenOnWhilePlaying(true);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     private void initClick() {
@@ -96,17 +114,8 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
         }
     }
 
-    @Override
-    public void onPrepared(IMediaPlayer iMediaPlayer) {
-        iMediaPlayer.start();
-    }
-
-    @Override
-    public void onBufferingUpdate(IMediaPlayer mp, int percent) {
-
-    }
-
     private void startVideoPlay() {
+        showStatus();
         if (path != null) {
             if (!path.isEmpty()) {
                 if (path != null) {
@@ -124,6 +133,31 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
                 }
             }
         }
+    }
+
+
+    @OnClick({R.id.iv_close_live_top, R.id.iv_close_live_bottom})
+    public void viewClick(View view) {
+        destroyPlayer();
+        finish();
+    }
+
+    @Override
+    public void onPrepared(IMediaPlayer iMediaPlayer) {
+        iMediaPlayer.start();
+        mPbLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onBufferingUpdate(IMediaPlayer mp, int percent) {
+        // 在这里可以计算视频缓冲区进度
+        hideStatus();
+    }
+
+    @Override
+    public boolean onInfo(IMediaPlayer mp, int what, int extra) {
+        setChange(what);
+        return false;
     }
 
     /**
@@ -154,12 +188,49 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
      */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        destroyPlayer();
+
+    }
+
+    /**
+     * 视频的状态处理，进行通知栏 缓冲progressbar 显示不显示
+     *
+     * @param newStatus
+     */
+    private void setChange(int newStatus) {
+        if (newStatus == PlayStateParams.MEDIA_INFO_VIDEO_RENDERING_START
+                || newStatus == PlayStateParams.STATE_PLAYING
+                || newStatus == PlayStateParams.STATE_PREPARED
+                || newStatus == PlayStateParams.MEDIA_INFO_BUFFERING_END
+                || newStatus == PlayStateParams.STATE_PAUSED) {
+            // 缓冲结束
+            hideStatus();
+        } else if (newStatus == PlayStateParams.STATE_PREPARING
+                || newStatus == PlayStateParams.MEDIA_INFO_BUFFERING_START) {
+            // 缓冲中
+            showStatus();
+        } else if (newStatus == PlayStateParams.STATE_COMPLETED) {
+            // 播放完毕
+
+        }
+    }
+
+    private void hideStatus() {
+        mPbLayout.setVisibility(View.GONE);
+    }
+
+    private void showStatus() {
+        mPbLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void destroyPlayer() {
         // 释放资源, 播放器停止 释放
         if (mIjkMediaPlayer.isPlaying()) {
             mIjkMediaPlayer.stop();
         }
         mIjkMediaPlayer.release();
         Log.d("TAG", "surfaceDestroyed: ");
-//        mIjkMediaPlayer = null;
     }
+
+
 }
