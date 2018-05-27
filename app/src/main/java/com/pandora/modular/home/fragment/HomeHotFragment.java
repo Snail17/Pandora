@@ -80,6 +80,9 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
 
     private int limitIndex = 1;
 
+    private boolean isLoadEnd = false;
+
+
     public HomeHotFragment() {
     }
 
@@ -114,7 +117,6 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
                 intent.putExtra("homeBH", mHomeData.get(position).getBh());
                 intent.putExtra("homeImage", mHomeData.get(position).getImage());
                 intent.putExtra("homeName", mHomeData.get(position).getName());
-
                 HomeHotFragment.this.getContext().startActivity(intent);
             }
         });
@@ -143,34 +145,38 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         // 设置跑马灯滚动
         introduceText.setSelected(true);
 
-//        mAdapter.bindToRecyclerView(mRecyclerView);
-
         mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY) {
+                    // 向下滑动
+                }
+                if (scrollY < oldScrollY) {
+                    // 向上滑动
+                }
+                if (scrollY == 0) {
+                    // 顶部
+                }
+
+
                 if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
-                    //底部加载
-                    limitIndex++;
-                    getData(limitIndex);
+                    // 上拉刷新实现
+                    if (!isLoadEnd) {
+                        limitIndex++;
+                        getData(limitIndex);
+                    }
                 }
             }
         });
 
-//        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-//            @Override
-//            public void onLoadMoreRequested() {
-//                mRecyclerView.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-////                        Toast.makeText(HomeHotFragment.this.getContext(), "fjasfd", Toast.LENGTH_SHORT).show();
-//                    }
-//                }, 1000);
-//            }
-//        }, mRecyclerView);
-//        mAdapter.setPreLoadNumber(5);
-//        mAdapter.disableLoadMoreIfNotFullPage();
-        // 当列表滑动到倒数第N个Item的时候(默认是1)回调onLoadMoreRequested方法
-//        mAdapter.setLoadMoreView(new CustomLoadMoreView());
+        mAdapter.bindToRecyclerView(mRecyclerView);
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+            }
+        }, mRecyclerView);
+
+
     }
 
 
@@ -246,14 +252,19 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
             if (mHomeBean == null | mHomeBean.getData().size() <= 0) {
                 mAdapter.loadMoreEnd();
+                isLoadEnd = true;
                 return;
             }
-            adNoticeTV.setText(mHomeBean.getaWords().get(0));
+            introduceText.setText(mHomeBean.getMainNotice());
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
             updateBanner();
             appUpdate();
             mAdapter.loadMoreComplete();
+            if (mHomeData.size() <= 50) {
+                mAdapter.disableLoadMoreIfNotFullPage();
+                isLoadEnd = true;
+            }
         } else {
             // 数据加载完毕
             mAdapter.loadMoreEnd();
