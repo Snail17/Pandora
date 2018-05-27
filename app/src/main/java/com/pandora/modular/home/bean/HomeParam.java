@@ -4,16 +4,16 @@ package com.pandora.modular.home.bean;
  * Created by Administrator on 2018/5/11.
  */
 
-public class HomeVO {
+public class HomeParam {
     private String head;
     private String userId;
     private String agentId;
     private String version;
 
-    public HomeVO() {
+    public HomeParam() {
     }
 
-    public HomeVO(String head, String userId, String agentId, String version) {
+    public HomeParam(String head, String userId, String agentId, String version) {
         this.head = head;
         this.userId = userId;
         this.agentId = agentId;

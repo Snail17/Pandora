@@ -27,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="热门" />
+                    android:text="主播" />
 
                 <TextView
                     android:id="@+id/tv_anchor"
@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="主播" />
+                    android:text="热门" />
             </LinearLayout>
 
         </android.support.v7.widget.Toolbar>

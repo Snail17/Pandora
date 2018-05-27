@@ -16,7 +16,7 @@ import com.pandora.core.http.ServiceGenerator;
 import com.pandora.core.utils.RxUtils;
 import com.pandora.modular.PandoraApplication;
 import com.pandora.modular.home.bean.HomeBean;
-import com.pandora.modular.home.bean.HomeVO;
+import com.pandora.modular.home.bean.HomeParam;
 import com.pandora.modular.home.fragment.HomeHotFragment;
 import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.util.ProgressResponseBody;
@@ -63,7 +63,7 @@ public class HomeAPIPModel {
         return sHomeModel;
     }
 
-    public Observable<HomeBean> getModelHomeData(HomeVO params) {
+    public Observable<HomeBean> getModelHomeData(HomeParam params) {
         Observable<HomeBean> observable = null;
         if (observable == null) {
             if (isDebugger) {

@@ -6,6 +6,6 @@ import com.pandora.core.base.OnFinishListener;
  * Created by Administrator on 2018/5/12.
  */
 
-public interface OnHomeFinishListener extends OnFinishListener {
+public interface OnHomeHotFinishListener extends OnFinishListener {
 
 }

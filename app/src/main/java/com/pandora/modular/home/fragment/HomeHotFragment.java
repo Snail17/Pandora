@@ -25,7 +25,7 @@ import com.pandora.core.utils.MPermissionUtils;
 import com.pandora.modular.home.adapter.HomeRecyclerAdapter;
 import com.pandora.modular.home.api.HomeAPIPModel;
 import com.pandora.modular.home.bean.HomeBean;
-import com.pandora.modular.home.bean.HomeVO;
+import com.pandora.modular.home.bean.HomeParam;
 import com.pandora.modular.home.prenster.DaggerHomeComponent;
 import com.pandora.modular.home.prenster.HomeContract;
 import com.pandora.modular.home.prenster.HomeModule;
@@ -34,7 +34,6 @@ import com.pandora.modular.home.util.ProgressListener;
 import com.pandora.modular.home.widght.RecyclerBanner;
 import com.pandora.modular.live.activity.LiveBroadcastActivity;
 import com.pandora.modular.main.activity.WebViewActivity;
-import com.pandora.modular.movie.fragment.MovieFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -145,24 +144,23 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-/*                //加载完成
-                homeAdapter.loadMoreComplete();
-                //加载失败
-                homeAdapter.loadMoreFail();
-                //加载结束
-                homeAdapter.loadMoreEnd();*/
-                getData();
-
+                mRecyclerView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getData();
+                    }
+                }, 1000);
             }
         }, mRecyclerView);
         // 当列表滑动到倒数第N个Item的时候(默认是1)回调onLoadMoreRequested方法
-        mAdapter.setPreLoadNumber(5);
+//        mAdapter.setPreLoadNumber(5);
 //        mAdapter.setLoadMoreView(new CustomLoadMoreView());
     }
 
 
     private void getData() {
-        HomeVO homeVO = new HomeVO("INIT", "fghjkl", "admin", "1.0");
+//        HomeParam homeVO = new HomeParam("INIT", "fghjkl", "admin", "1.0", "keyStr");
+        HomeParam homeVO = new HomeParam("INIT", "fghjkl", "admin", "1.0");
 
         mHomePresenter.getData(homeVO);
     }
@@ -228,22 +226,24 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     public void setData(String homeJson) {
         LogUtils.e("home" + homeJson);
         hideLoading();
-        if (!TextUtils.isEmpty(homeJson)) {
+        if (!TextUtils.isEmpty(homeJson) && !"null".equals(homeJson)) {
             // 加载完成
             Gson gson = new Gson();
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
-            introduceText.setText(mHomeBean.getOnlineService());
+//            introduceText.setText(mHomeBean.getOnlineService());
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
             updateBanner();
             appUpdate();
         } else {
-            mAdapter.loadMoreEnd(false);
+            // 数据加载完毕
+            mAdapter.loadMoreEnd();
         }
     }
 
     @Override
     public void onErrorData() {
+        mAdapter.loadMoreFail();
     }
 }

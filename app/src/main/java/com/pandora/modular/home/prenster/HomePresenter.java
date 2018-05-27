@@ -1,9 +1,6 @@
 package com.pandora.modular.home.prenster;
 
-import com.pandora.core.base.BasePresenter;
-import com.pandora.core.utils.LogUtils;
-import com.pandora.modular.home.bean.HomeBean;
-import com.pandora.modular.home.bean.HomeVO;
+import com.pandora.modular.home.bean.HomeParam;
 import com.pandora.modular.home.model.HomeModel;
 
 import javax.inject.Inject;
@@ -14,7 +11,7 @@ import javax.inject.Inject;
  * Date: 2018/5/11.
  */
 
-public class HomePresenter implements HomeContract.Presenter, OnHomeFinishListener {
+public class HomePresenter implements HomeContract.Presenter, OnHomeHotFinishListener {
 
     private HomeContract.View mView;
     private HomeModel mModel;
@@ -27,7 +24,7 @@ public class HomePresenter implements HomeContract.Presenter, OnHomeFinishListen
 
 
     @Override
-    public void getData(HomeVO homeVO) {
+    public void getData(HomeParam homeVO) {
         mModel.getData(homeVO, this);
     }
 

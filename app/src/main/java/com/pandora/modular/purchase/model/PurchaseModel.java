@@ -1,19 +1,9 @@
 package com.pandora.modular.purchase.model;
 
-import android.os.AsyncTask;
-
 import com.google.gson.Gson;
-import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.webservices.QueryAddressTask;
-import com.pandora.modular.home.bean.HomeBean;
-import com.pandora.modular.home.prenster.OnHomeFinishListener;
-import com.pandora.modular.purchase.bean.PurchaseBean;
 import com.pandora.modular.purchase.bean.PurchaseVO;
 import com.pandora.modular.purchase.fragment.PurchaseFragment;
-
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
 
 /**
  * Created by Administrator on 2018/5/13.

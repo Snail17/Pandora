@@ -1,8 +1,7 @@
 package com.pandora.modular.home.api;
 
 import com.pandora.modular.home.bean.HomeBean;
-import com.pandora.modular.home.bean.HomeVO;
-import com.pandora.modular.home.util.ProgressResponseBody;
+import com.pandora.modular.home.bean.HomeParam;
 
 import io.reactivex.Observable;
 
@@ -20,7 +19,7 @@ import retrofit2.http.Url;
 
 public interface HomeAPI {
     @POST("http://mj55.top/pandoraService/PrandoraPort?wsdl")
-    Observable<HomeBean> getHomeData(@Body HomeVO params);
+    Observable<HomeBean> getHomeData(@Body HomeParam params);
 
     @Streaming
     @GET
