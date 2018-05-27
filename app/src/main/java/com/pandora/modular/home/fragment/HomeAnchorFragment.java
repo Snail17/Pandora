@@ -10,14 +10,11 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.pandora.R;
-import com.pandora.core.base.BaseActivity;
 import com.pandora.core.base.BaseFragment;
-import com.pandora.core.utils.FragmentUtil;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.adapter.HomeAnchorRecyclerAdapter;
 import com.pandora.modular.home.bean.HomeBean;
@@ -27,9 +24,6 @@ import com.pandora.modular.home.prenster.HomeContract;
 import com.pandora.modular.home.prenster.HomeModule;
 import com.pandora.modular.home.prenster.HomePresenter;
 import com.pandora.modular.live.activity.LiveActivity;
-import com.pandora.modular.live.activity.LiveBroadcastActivity;
-import com.pandora.modular.live.adapter.LiveRecyclerAdapter;
-import com.pandora.modular.live.bean.LiveVO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +32,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +48,8 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
     @Inject
     HomePresenter mHomeAnchorPresenter;
 
+    private int limitIndex = 1;
+
     public HomeAnchorFragment() {
         // Required empty public constructor
     }
@@ -67,7 +62,7 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
         ButterKnife.bind(this, retView);
         initData();
         showWaitLoading();
-        getData();
+        getData(limitIndex);
         return retView;
     }
 
@@ -95,8 +90,8 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
         });
     }
 
-    private void getData() {
-        HomeParam homeParam = new HomeParam("INIT", "fghjkl", "admin", "1.0");
+    private void getData(int limit) {
+        HomeParam homeParam = new HomeParam("INIT", "fghjkl", "admin", "1.0", limit + "");
         mHomeAnchorPresenter.getData(homeParam);
     }
 

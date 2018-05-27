@@ -5,6 +5,6 @@ package com.pandora.core.globle;
  */
 
 public class PandoraContants {
-    public static final  String qqUrl = "mqqwpa://im/chat?chat_type=wpa&uin=2895143839&version=1";
+    public static final  String qqUrl = "mqqwpa://im/chat?chat_type=wpa&uin=1248853367&version=1";
 
 }

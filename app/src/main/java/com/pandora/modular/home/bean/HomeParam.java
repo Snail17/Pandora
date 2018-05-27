@@ -9,6 +9,8 @@ public class HomeParam {
     private String userId;
     private String agentId;
     private String version;
+    private String key;
+    private String limit;
 
     public HomeParam() {
     }
@@ -18,6 +20,31 @@ public class HomeParam {
         this.userId = userId;
         this.agentId = agentId;
         this.version = version;
+    }
+
+    public HomeParam(String head, String userId, String agentId, String version, String limit) {
+        this.head = head;
+        this.userId = userId;
+        this.agentId = agentId;
+        this.version = version;
+        this.limit = limit;
+    }
+
+    public HomeParam(String head, String userId, String agentId, String version, String key, String limit) {
+        this.head = head;
+        this.userId = userId;
+        this.agentId = agentId;
+        this.version = version;
+        this.key = key;
+        this.limit = limit;
+    }
+
+    public String getLimit() {
+        return limit;
+    }
+
+    public void setLimit(String limit) {
+        this.limit = limit;
     }
 
     public String getHead() {

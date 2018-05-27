@@ -50,13 +50,13 @@ Android7.0 以上安装失败 原因： 啊啊啊啊啊
 
 
 
-1. 主播页面显示
+1. 主播页面显示 OK
 2. 热门上拉加载
 3. H5 跳转处理
 4. 电影 VIP 处理
 5. 卡密处理
 6. 视频五分钟强制停止
-
+7. 电影列表加载
 
 1.Android报错：android.view.InflateException: Binary XML file line #0: Error inflating class TextView
  资源文件在drawable-v24 文件下，Android 6.0 以下找不到 ，移动到相应drawable文件下即可

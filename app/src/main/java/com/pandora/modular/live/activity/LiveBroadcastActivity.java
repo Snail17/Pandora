@@ -46,7 +46,6 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
     ImageView ivLiveIcon;
     @Inject
     LivePresenter mLivePresenter;
-
     private LiveBean mLiveBean;
     private LiveBoradBean mLiveBoardBean;
     private List<LiveBean.LiveData> mLiveData;
@@ -67,6 +66,7 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mCustomTitlebar.setAction(this);
         initIntent();
         initData();
+        initClick();
     }
 
     private void initIntent() {
@@ -103,6 +103,15 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mLivePresenter.getData(liveVO);
     }
 
+    private void initClick() {
+        mCustomTitlebar.setAction(new CustomTitlebar.TitleBarOnClickListener() {
+            @Override
+            public void performAction(View view) {
+
+            }
+        });
+
+    }
     @Override
     public void setData(String liveJson) {
         LogUtils.e("live" + liveJson);

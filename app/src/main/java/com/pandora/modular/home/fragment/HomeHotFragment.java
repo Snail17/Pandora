@@ -74,6 +74,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     private List<RecyclerBanner.BannerEntity> urls = new ArrayList<>();
     private List<String> mAWords = new ArrayList<>();
 
+    private int limitIndex = 1;
     public HomeHotFragment() {
     }
 
@@ -116,7 +117,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         for (int i = 0; i < 4; i++) {
             urls.add(new Entity(""));
         }
-        getData();
+        getData(limitIndex);
         initBanner();
     }
 
@@ -147,7 +148,8 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
                 mRecyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        getData();
+                        limitIndex++;
+                        getData(limitIndex);
                     }
                 }, 1000);
             }
@@ -158,11 +160,9 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     }
 
 
-    private void getData() {
-//        HomeParam homeVO = new HomeParam("INIT", "fghjkl", "admin", "1.0", "keyStr");
-        HomeParam homeVO = new HomeParam("INIT", "fghjkl", "admin", "1.0");
-
-        mHomePresenter.getData(homeVO);
+    private void getData(int limit) {
+        HomeParam homeParam = new HomeParam("INIT", "fghjkl", "admin", "1.0", limit + "");
+        mHomePresenter.getData(homeParam);
     }
 
     public void updateBanner() {

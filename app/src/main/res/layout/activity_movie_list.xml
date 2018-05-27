@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.pandora.modular.movie.activity.MovieListActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <com.pandora.core.utils.widget.CustomTitlebar
+        android:id="@+id/title_bar_movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:left_button_image="@drawable/back"
+        app:right_button_textColor="@color/red_ca"
+        app:title_background="@color/blue_00"
+        app:title_text="@string/app_name"
+        app:title_textSize="@dimen/default_sp_18" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_movie_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
