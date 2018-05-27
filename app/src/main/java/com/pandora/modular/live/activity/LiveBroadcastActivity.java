@@ -99,6 +99,10 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 mLivePresenter.getData(liveVO);
             }
         });
+        getData();
+    }
+
+    private void getData() {
         LiveVO liveVO = new LiveVO("PLATFORM", "Android", mFromBH);
         mLivePresenter.getData(liveVO);
     }
@@ -107,11 +111,19 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
         mCustomTitlebar.setAction(new CustomTitlebar.TitleBarOnClickListener() {
             @Override
             public void performAction(View view) {
-
+                finish();
             }
         });
+        mAdapter.bindToRecyclerView(mLiveView);
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                getData();
+            }
+        }, mLiveView);
 
     }
+
     @Override
     public void setData(String liveJson) {
         LogUtils.e("live" + liveJson);
@@ -119,8 +131,13 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
             Gson gson = new Gson();
             if (!isLiveUrl) {
                 mLiveBean = gson.fromJson(liveJson, LiveBean.class);//对于javabean直接给出class实例;
+                if (mLiveBean == null | mLiveBean.getData().size() <= 0) {
+                    mAdapter.loadMoreEnd();
+                    return;
+                }
                 mLiveData.addAll(mLiveBean.getData());
                 mAdapter.notifyDataSetChanged();
+                mAdapter.loadMoreComplete();
             } else {
                 mLiveBoardBean = gson.fromJson(liveJson, LiveBoradBean.class);//对于javabean直接给出class实例;
                 Intent intent = new Intent(LiveBroadcastActivity.this, LiveActivity.class);
@@ -129,11 +146,18 @@ public class LiveBroadcastActivity extends BaseActivity implements LiveContract.
                 intent.putExtra("videoAuthorName", mLiveBoardBean.getData().get(clickPosition).getTitle());
                 LiveBroadcastActivity.this.startActivity(intent);
             }
+        } else {
+            mAdapter.loadMoreEnd();
         }
     }
 
     @Override
-    public void performAction(View view) {
+    public void onError() {
+        mAdapter.loadMoreFail();
+    }
 
+    @Override
+    public void performAction(View view) {
+        finish();
     }
 }

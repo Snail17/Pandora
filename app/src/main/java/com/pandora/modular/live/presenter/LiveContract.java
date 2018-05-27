@@ -15,6 +15,7 @@ public interface LiveContract {
 
     interface View extends BaseView<LiveContract.Presenter> {
         void setData(String liveJson);
+        void onError();
     }
 
     interface Presenter extends BasePresenter<LiveContract.View> {

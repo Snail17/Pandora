@@ -2,7 +2,9 @@ package com.pandora.modular.home.fragment;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
 import com.pandora.core.utils.FragmentUtil;
+import com.pandora.core.utils.LogUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -70,17 +73,14 @@ public class HomeFragment extends BaseFragment {
         }
         switch (position) {
             case 1:
-
                 tvHot.setTextColor(getResources().getColor(R.color.blue_00));
                 tvAnchor.setTextColor(getResources().getColor(R.color.black));
                 FragmentUtil.switchPage(getChildFragmentManager(), R.id.home_container_layout, mHomeAnchorFragment, mHomeHotFragment);
                 break;
             case 2:
-
                 tvHot.setTextColor(getResources().getColor(R.color.black));
                 tvAnchor.setTextColor(getResources().getColor(R.color.blue_00));
                 FragmentUtil.switchPage(getChildFragmentManager(), R.id.home_container_layout, mHomeHotFragment, mHomeAnchorFragment);
-                break;
             default:
                 break;
         }

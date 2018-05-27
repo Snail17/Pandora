@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -75,6 +76,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     private List<String> mAWords = new ArrayList<>();
 
     private int limitIndex = 1;
+
     public HomeHotFragment() {
     }
 
@@ -113,7 +115,6 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
                 HomeHotFragment.this.getContext().startActivity(intent);
             }
         });
-        mAdapter.setNewData(mHomeData);
         for (int i = 0; i < 4; i++) {
             urls.add(new Entity(""));
         }
@@ -138,25 +139,36 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
     private void initClick() {
         // 设置跑马灯滚动
         introduceText.setSelected(true);
-        mAdapter.setUpFetchEnable(false);
-        mAdapter.setEnableLoadMore(false);
 
-        //上拉刷新,如果上拉结束后,下拉刷新需要再次开启上拉监听，需要使用setNewData方法填充数据。
+        mAdapter.bindToRecyclerView(mRecyclerView);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    limitIndex++;
+//                    getData(limitIndex);
+
+                }
+            }
+        });
+
         mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 mRecyclerView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        limitIndex++;
-                        getData(limitIndex);
+                        Toast.makeText(HomeHotFragment.this.getContext(), "fjasfd", Toast.LENGTH_SHORT).show();
                     }
                 }, 1000);
             }
         }, mRecyclerView);
+        mAdapter.setPreLoadNumber(5);
+        mAdapter.disableLoadMoreIfNotFullPage();
         // 当列表滑动到倒数第N个Item的时候(默认是1)回调onLoadMoreRequested方法
-//        mAdapter.setPreLoadNumber(5);
-//        mAdapter.setLoadMoreView(new CustomLoadMoreView());
+        mAdapter.setLoadMoreView(new CustomLoadMoreView());
     }
 
 
@@ -236,6 +248,7 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
             mAdapter.notifyDataSetChanged();
             updateBanner();
             appUpdate();
+
         } else {
             // 数据加载完毕
             mAdapter.loadMoreEnd();

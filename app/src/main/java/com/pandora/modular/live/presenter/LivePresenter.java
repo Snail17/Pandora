@@ -30,7 +30,7 @@ public class LivePresenter implements LiveContract.Presenter, OnLiveFinishListen
 
     @Override
     public void onError() {
-
+        mView.onError();
     }
 
     @Override

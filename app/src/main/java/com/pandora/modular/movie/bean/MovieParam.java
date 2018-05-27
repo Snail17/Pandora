@@ -8,6 +8,7 @@ public class MovieParam {
     private String head;
     private String movie_type;
     private String key;
+    private String limit;
 
     public MovieParam() {
     }
@@ -19,10 +20,13 @@ public class MovieParam {
     }
 
     // 电影列表的请求参数
-    public MovieParam(String head, String movie_type, String key) {
+
+
+    public MovieParam(String head, String movie_type, String key, String limit) {
         this.head = head;
         this.movie_type = movie_type;
         this.key = key;
+        this.limit = limit;
     }
 
     public String getHead() {

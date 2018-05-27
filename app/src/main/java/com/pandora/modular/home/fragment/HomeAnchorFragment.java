@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
@@ -62,7 +63,9 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
         View retView = inflater.inflate(R.layout.fragment_home_anchor, container, false);
         ButterKnife.bind(this, retView);
         initData();
+        initClick();
         showWaitLoading();
+
         return retView;
     }
 
@@ -89,6 +92,17 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
         getData(limitIndex);
     }
 
+    public void initClick() {
+        mAdapter.bindToRecyclerView(mRecyclerView);
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                limitIndex++;
+                getData(limitIndex);
+            }
+        }, mRecyclerView);
+    }
+
     private void getData(int limit) {
         HomeParam homeParam = new HomeParam("ANCHORSQUARE", "fghjkl", "admin", "1.0", limit + "");
         mHomeAnchorPresenter.getData(homeParam);
@@ -102,8 +116,13 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
             // 加载完成
             Gson gson = new Gson();
             mAnchorBean = gson.fromJson(homeJson, HomeAnchorBean.class);
+            if (mAnchorBean == null | mAnchorBean.getData().size() <= 0) {
+                mAdapter.loadMoreEnd();
+                return;
+            }
             mAnchorData.addAll(mAnchorBean.getData());
             mAdapter.notifyDataSetChanged();
+            mAdapter.loadMoreComplete();
         } else {
             // 数据加载完毕
             mAdapter.loadMoreEnd();

@@ -13,9 +13,12 @@ import com.pandora.R;
 import com.pandora.core.base.BaseActivity;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.core.utils.widget.CustomTitlebar;
+import com.pandora.modular.live.activity.LiveActivity;
+import com.pandora.modular.main.activity.WebViewActivity;
 import com.pandora.modular.movie.adapter.MovieListRecyclerAdapter;
 import com.pandora.modular.movie.bean.MovieListBean;
 import com.pandora.modular.movie.bean.MovieParam;
+import com.pandora.modular.movie.fragment.MovieFragment;
 import com.pandora.modular.movie.presenter.DaggerMovieListComponent;
 import com.pandora.modular.movie.presenter.MovieListContract;
 import com.pandora.modular.movie.presenter.MovieListModule;
@@ -40,8 +43,9 @@ public class MovieListActivity extends BaseActivity implements MovieListContract
     private List<MovieListBean.MovieListData> mListData;
     private MovieListRecyclerAdapter mAdapter;
 
-    private String  movie_type = "CHN";
+    private String movie_type = "CHN";
 
+    private int limit = 1;
     @Inject
     MovieListPresenter mPresenter;
 
@@ -70,10 +74,12 @@ public class MovieListActivity extends BaseActivity implements MovieListContract
         mAdapter = new MovieListRecyclerAdapter(R.layout.item_movie_list_layout, mListData);
         LinearLayoutManager manager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(manager);
-        mAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+        mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
-            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(MovieListActivity.this, LiveActivity.class);
+                intent.putExtra("videoPath", mListData.get(position).getMovie_url());
+                startActivity(intent);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -84,13 +90,22 @@ public class MovieListActivity extends BaseActivity implements MovieListContract
         mTitlebar.setAction(new CustomTitlebar.TitleBarOnClickListener() {
             @Override
             public void performAction(View view) {
-
+                finish();
             }
         });
+        mAdapter.bindToRecyclerView(mRecyclerView);
+        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                limit++;
+                getData();
+            }
+        }, mRecyclerView);
+
     }
 
     private void getData() {
-        MovieParam param = new MovieParam("MOVIE", movie_type, "keyStr");
+        MovieParam param = new MovieParam("MOVIE", movie_type, "keyStr", "" + limit);
         mPresenter.getData(param);
     }
 
@@ -101,13 +116,20 @@ public class MovieListActivity extends BaseActivity implements MovieListContract
         if (!TextUtils.isEmpty(movieJson) && !"null".equals(movieJson)) {
             Gson gson = new Gson();
             mListBean = gson.fromJson(movieJson, MovieListBean.class);
+            if (mListBean == null | mListBean.getData().size() <= 0) {
+                mAdapter.loadMoreEnd();
+                return;
+            }
             mListData.addAll(mListBean.getData());
             mAdapter.notifyDataSetChanged();
+            mAdapter.loadMoreComplete();
+        } else {
+            mAdapter.loadMoreEnd();
         }
     }
 
     @Override
     public void onErrorData() {
-
+        mAdapter.loadMoreFail();
     }
 }

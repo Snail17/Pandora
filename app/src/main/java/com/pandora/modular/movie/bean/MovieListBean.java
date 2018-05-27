@@ -18,19 +18,11 @@ public class MovieListBean {
     }
 
     public class MovieListData {
-        private String movie_list; // 电影列表数组
+        private String id;
         private String movie_name; // 电影名称
         private String movie_img; // 电影图片
         private String movie_url; // 电影URL
-        private String movie_comm; // 电影描述
 
-        public String getMovie_list() {
-            return movie_list;
-        }
-
-        public void setMovie_list(String movie_list) {
-            this.movie_list = movie_list;
-        }
 
         public String getMovie_name() {
             return movie_name;
@@ -56,12 +48,5 @@ public class MovieListBean {
             this.movie_url = movie_url;
         }
 
-        public String getMovie_comm() {
-            return movie_comm;
-        }
-
-        public void setMovie_comm(String movie_comm) {
-            this.movie_comm = movie_comm;
-        }
     }
 }

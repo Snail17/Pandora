@@ -78,10 +78,6 @@ public class WebViewActivity extends BaseActivity {
                 return true;
             }
         }
-        if (mWebView.canGoForward()) {
-            mWebView.goForward();
-            return true;
-        }
         return super.onKeyDown(keyCode, event);
     }
 }
