@@ -83,9 +83,9 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(HomeAnchorFragment.this.getContext(), LiveActivity.class);
-                intent.putExtra("videoPath", mAnchorBean.getData().get(position).getUrl());
-                intent.putExtra("videoAuthorIcon", mAnchorBean.getData().get(position).getImg());
-                intent.putExtra("videoAuthorName", mAnchorBean.getData().get(position).getTitle());
+                intent.putExtra("videoPath",mAnchorData.get(position).getUrl());
+                intent.putExtra("videoAuthorIcon", mAnchorData.get(position).getImg());
+                intent.putExtra("videoAuthorName", mAnchorData.get(position).getTitle());
                 HomeAnchorFragment.this.startActivity(intent);
             }
         });

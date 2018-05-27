@@ -7,8 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -63,6 +63,9 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
 
     @BindView(R.id.banner_home)
     RecyclerBanner mBanner;
+
+    @BindView(R.id.home_scroll_view)
+    NestedScrollView mScrollView;
 
 
     @Inject
@@ -140,35 +143,34 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
         // 设置跑马灯滚动
         introduceText.setSelected(true);
 
-        mAdapter.bindToRecyclerView(mRecyclerView);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//        mAdapter.bindToRecyclerView(mRecyclerView);
+
+        mScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-//                    limitIndex++;
-//                    getData(limitIndex);
-
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY == (v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight())) {
+                    //底部加载
+                    limitIndex++;
+                    getData(limitIndex);
                 }
             }
         });
 
-        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-            @Override
-            public void onLoadMoreRequested() {
-                mRecyclerView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(HomeHotFragment.this.getContext(), "fjasfd", Toast.LENGTH_SHORT).show();
-                    }
-                }, 1000);
-            }
-        }, mRecyclerView);
-        mAdapter.setPreLoadNumber(5);
-        mAdapter.disableLoadMoreIfNotFullPage();
+//        mAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+//            @Override
+//            public void onLoadMoreRequested() {
+//                mRecyclerView.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+////                        Toast.makeText(HomeHotFragment.this.getContext(), "fjasfd", Toast.LENGTH_SHORT).show();
+//                    }
+//                }, 1000);
+//            }
+//        }, mRecyclerView);
+//        mAdapter.setPreLoadNumber(5);
+//        mAdapter.disableLoadMoreIfNotFullPage();
         // 当列表滑动到倒数第N个Item的时候(默认是1)回调onLoadMoreRequested方法
-        mAdapter.setLoadMoreView(new CustomLoadMoreView());
+//        mAdapter.setLoadMoreView(new CustomLoadMoreView());
     }
 
 
@@ -242,13 +244,16 @@ public class HomeHotFragment extends BaseFragment implements HomeContract.View {
             // 加载完成
             Gson gson = new Gson();
             mHomeBean = gson.fromJson(homeJson, HomeBean.class);//对于javabean直接给出class实例;
-//            introduceText.setText(mHomeBean.getOnlineService());
+            if (mHomeBean == null | mHomeBean.getData().size() <= 0) {
+                mAdapter.loadMoreEnd();
+                return;
+            }
             adNoticeTV.setText(mHomeBean.getaWords().get(0));
             mHomeData.addAll(mHomeBean.getData());
             mAdapter.notifyDataSetChanged();
             updateBanner();
             appUpdate();
-
+            mAdapter.loadMoreComplete();
         } else {
             // 数据加载完毕
             mAdapter.loadMoreEnd();

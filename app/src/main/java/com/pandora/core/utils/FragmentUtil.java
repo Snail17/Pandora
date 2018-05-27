@@ -63,12 +63,13 @@ public class FragmentUtil {
                     .commit();
         } else {
             FragmentTransaction transaction = fragmentManager.beginTransaction();
-            if (oldFragment != fragment) {
-                transaction.hide(oldFragment);
-            }
             transaction
                     .add(containerViewId, fragment, fragment.getClass().getName())
                     .commit();
+//            if (oldFragment != fragment) {
+//                fragmentManager.beginTransaction().hide(oldFragment).show(fragment).commit();
+//            }
+
         }
     }
 
