@@ -27,6 +27,8 @@
         android:supportsRtl="true"
         android:theme="@style/BaseAppTheme"
         tools:node="replace"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         tools:replace="allowBackup,icon,theme,label">
         <activity android:name=".modular.main.activity.MainActivity">
             <intent-filter>

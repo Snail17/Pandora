@@ -50,11 +50,9 @@ public class HomeFragment extends BaseFragment {
         switch (view.getId()) {
             case R.id.tv_hot:
                 switchFragment(1);
-
                 break;
             case R.id.tv_anchor:
                 switchFragment(2);
-
                 break;
             default:
                 break;
@@ -62,6 +60,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void switchFragment(int position) {
+
         // 切换Fragment 以及 tab
         if (mHomeHotFragment == null) {
             mHomeHotFragment = new HomeHotFragment();
@@ -71,11 +70,13 @@ public class HomeFragment extends BaseFragment {
         }
         switch (position) {
             case 1:
+
                 tvHot.setTextColor(getResources().getColor(R.color.blue_00));
                 tvAnchor.setTextColor(getResources().getColor(R.color.black));
                 FragmentUtil.switchPage(getChildFragmentManager(), R.id.home_container_layout, mHomeAnchorFragment, mHomeHotFragment);
                 break;
             case 2:
+
                 tvHot.setTextColor(getResources().getColor(R.color.black));
                 tvAnchor.setTextColor(getResources().getColor(R.color.blue_00));
                 FragmentUtil.switchPage(getChildFragmentManager(), R.id.home_container_layout, mHomeHotFragment, mHomeAnchorFragment);

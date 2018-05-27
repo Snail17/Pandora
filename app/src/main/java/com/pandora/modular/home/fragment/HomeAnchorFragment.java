@@ -15,8 +15,10 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.google.gson.Gson;
 import com.pandora.R;
 import com.pandora.core.base.BaseFragment;
+import com.pandora.core.utils.FragmentUtil;
 import com.pandora.core.utils.LogUtils;
 import com.pandora.modular.home.adapter.HomeAnchorRecyclerAdapter;
+import com.pandora.modular.home.bean.HomeAnchorBean;
 import com.pandora.modular.home.bean.HomeBean;
 import com.pandora.modular.home.bean.HomeParam;
 import com.pandora.modular.home.prenster.DaggerHomeAnchorComponent;
@@ -42,8 +44,8 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
 
     private HomeAnchorRecyclerAdapter mAdapter;
 
-    private HomeBean mHomeBean;
-    private List<HomeBean.HomeData> mHomeData;
+    private HomeAnchorBean mAnchorBean;
+    private List<HomeAnchorBean.AnchorData> mAnchorData;
 
     @Inject
     HomePresenter mHomeAnchorPresenter;
@@ -51,7 +53,6 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
     private int limitIndex = 1;
 
     public HomeAnchorFragment() {
-        // Required empty public constructor
     }
 
 
@@ -62,36 +63,34 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
         ButterKnife.bind(this, retView);
         initData();
         showWaitLoading();
-        getData(limitIndex);
         return retView;
     }
 
     private void initData() {
-        mHomeBean = new HomeBean();
-        mHomeData = new ArrayList<>();
+        mAnchorBean = new HomeAnchorBean();
+        mAnchorData = new ArrayList<>();
         DaggerHomeAnchorComponent.builder().homeModule(new HomeModule(this)).build().inject(this);
-        mAdapter = new HomeAnchorRecyclerAdapter(R.layout.item_card_live_layout, mHomeData);
+        mAdapter = new HomeAnchorRecyclerAdapter(R.layout.item_card_live_layout, mAnchorData);
         GridLayoutManager manager = new GridLayoutManager(HomeAnchorFragment.this.getContext(), 2);
-        manager.setSmoothScrollbarEnabled(true);
-        manager.setAutoMeasureEnabled(true);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setNestedScrollingEnabled(false);
         mRecyclerView.setLayoutManager(manager);
+        // 加上此句，RecyclerView请求到数据之后就展示
+        mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Intent intent = new Intent(HomeAnchorFragment.this.getContext(), LiveActivity.class);
-                intent.putExtra("videoPath", mHomeBean.getData().get(position).getBh());
-                intent.putExtra("videoAuthorIcon", mHomeBean.getData().get(position).getImage());
-                intent.putExtra("videoAuthorName", mHomeBean.getData().get(position).getName());
+                intent.putExtra("videoPath", mAnchorBean.getData().get(position).getUrl());
+                intent.putExtra("videoAuthorIcon", mAnchorBean.getData().get(position).getImg());
+                intent.putExtra("videoAuthorName", mAnchorBean.getData().get(position).getTitle());
                 HomeAnchorFragment.this.startActivity(intent);
             }
         });
+        getData(limitIndex);
     }
 
     private void getData(int limit) {
-        HomeParam homeParam = new HomeParam("INIT", "fghjkl", "admin", "1.0", limit + "");
+        HomeParam homeParam = new HomeParam("ANCHORSQUARE", "fghjkl", "admin", "1.0", limit + "");
         mHomeAnchorPresenter.getData(homeParam);
     }
 
@@ -102,8 +101,8 @@ public class HomeAnchorFragment extends BaseFragment implements HomeContract.Vie
         if (!TextUtils.isEmpty(homeJson) && !"null".equals(homeJson)) {
             // 加载完成
             Gson gson = new Gson();
-            mHomeBean = gson.fromJson(homeJson, HomeBean.class);
-            mHomeData.addAll(mHomeBean.getData());
+            mAnchorBean = gson.fromJson(homeJson, HomeAnchorBean.class);
+            mAnchorData.addAll(mAnchorBean.getData());
             mAdapter.notifyDataSetChanged();
         } else {
             // 数据加载完毕
