@@ -15,8 +15,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.pandora.R;
+import com.pandora.core.utils.CustomDialogUtils;
 import com.pandora.core.utils.GlideLoader.ImageLoaderUtils;
 import com.pandora.modular.live.view.PlayStateParams;
+import com.pandora.modular.main.activity.MainActivity;
 
 import java.io.IOException;
 
@@ -52,6 +54,8 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     @BindView(R.id.play_video)
     SurfaceView mSurfaceView;
     private String mVideoAuthorIcon;
+    // 记录视频当前播放的时间
+    private long mCurrentPosition = 0;
 
 
     @Override
@@ -146,6 +150,7 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     @Override
     public void onPrepared(IMediaPlayer iMediaPlayer) {
         iMediaPlayer.start();
+        iMediaPlayer.seekTo(mCurrentPosition);
         mPbLayout.setVisibility(View.GONE);
     }
 
@@ -158,6 +163,12 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     @Override
     public boolean onInfo(IMediaPlayer mp, int what, int extra) {
         setChange(what);
+//        获取当前的时间点。
+        mCurrentPosition = mp.getCurrentPosition();
+        if (mCurrentPosition >= 5 * 60 * 1000) {
+            mIjkMediaPlayer.pause();
+            showDialog();
+        }
         return false;
     }
 
@@ -194,6 +205,17 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
     }
 
     /**
+     * 时长格式化显示
+     */
+    private String generateTime(long time) {
+        int totalSeconds = (int) (time / 1000);
+        int seconds = totalSeconds % 60;
+        int minutes = (totalSeconds / 60) % 60;
+        int hours = totalSeconds / 3600;
+        return hours > 0 ? String.format("%02d:%02d:%02d", hours, minutes, seconds) : String.format("%02d:%02d", minutes, seconds);
+    }
+
+    /**
      * 视频的状态处理，进行通知栏 缓冲progressbar 显示不显示
      *
      * @param newStatus
@@ -211,8 +233,7 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
             // 缓冲中
             showStatus();
         } else if (newStatus == PlayStateParams.STATE_COMPLETED) {
-            // 播放完毕
-
+            // TODO: 播放完毕
         }
     }
 
@@ -222,6 +243,27 @@ public class LiveActivity extends AppCompatActivity implements IMediaPlayer.OnPr
 
     private void showStatus() {
         mPbLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void showDialog() {
+        CustomDialogUtils.showConfirmDialog(this,
+                R.drawable.back_error,
+                "温馨提示",
+                "软件以后永久免费，分享两次就可以使用一整天",
+                "取消",
+                "分享",
+                new CustomDialogUtils.OnDialogClick() {
+                    @Override
+                    public void cancelClick() {
+                        LiveActivity.super.finish();
+                    }
+
+                    @Override
+                    public void confirmClick() {
+                        //　从固定时间点开始播放视频
+                        startVideoPlay();
+                    }
+                });
     }
 
     private void destroyPlayer() {
